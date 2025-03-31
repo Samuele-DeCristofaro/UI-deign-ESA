@@ -47,11 +47,11 @@ Button:pressed {
 TextField {
     -fx-background-color: rgba(100, 100, 100, 0.7);  /* Sfumatura grigia al nero */
     -fx-text-fill: white; /* Colore del testo */
-    -fx-font-size: 16px;  /* Dimensione del font */
+    -fx-font-size: 15px;  /* Dimensione del font */
     -fx-border-radius: 10px; /* Angoli arrotondati */
     -fx-border-width: 2px; /* Bordo sottile */
     -fx-border-color: black; /* Colore del bordo */
-    -fx-pref-width: 250px; /* Larghezza preferita */
+    -fx-max-width: 250px; /* Larghezza preferita */
     -fx-padding: 10px;  /* Padding interno */
     -fx-background-radius: 10px;
 }
@@ -70,7 +70,7 @@ PasswordField {
     -fx-border-radius: 10px; /* Angoli arrotondati */
     -fx-border-width: 2px; /* Bordo sottile */
     -fx-border-color: black; /* Colore del bordo */
-    -fx-pref-width: 250px; /* Larghezza preferita */
+    -fx-max-width: 250px; /* Larghezza preferita */
     -fx-padding: 10px;  /* Padding interno */
     -fx-background-radius: 10px;
 
