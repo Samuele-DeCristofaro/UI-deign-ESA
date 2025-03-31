@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.register2.HelloController">
+    <!-- VBox centered in StackPane -->
+    <VBox alignment="TOP_CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
+
+        <!-- Label at the top of the VBox -->
+        <Label styleClass="welcome-text" text="LOGIN" />
+
+        <!-- TextField for username -->
+        <TextField fx:id="usernameField" promptText="Username" />
+
+        <!-- PasswordField for password -->
+        <PasswordField fx:id="passwordField" promptText="Password" />
+
+        <!-- Button to submit -->
+        <Button fx:id="access" alignment="CENTER" styleClass="welcome-text" text="Accedi" />
+    </VBox>
+</StackPane>

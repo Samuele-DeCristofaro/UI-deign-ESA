@@ -1,0 +1,92 @@
+/* Sfondo principale */
+.vbox-background {
+    -fx-background-color: transparent; /* Rende il background trasparente */
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-alignment: center;
+}
+
+/* Sfondo generale */
+StackPane {
+    -fx-background-color: linear-gradient(to bottom right, #4b0082, #222222);  /* Viola scuro (indigo) a nero */
+}
+
+/* Stile per il bottone */
+Button {
+    -fx-background-color:
+        linear-gradient(to bottom right, rgba(100, 100, 100, 0.7), rgba(0, 0, 0, 0.5)); /* Sfumatura grigia al nero */
+    -fx-text-fill: white;  /* Colore del testo bianco */
+    -fx-font-size: 18px;  /* Dimensione del font */
+    -fx-font-weight: bold;  /* Font in grassetto */
+    -fx-border-radius: 10px; /* Arrotondare gli angoli */
+    -fx-border-width: 2px; /* Impostare la larghezza del bordo */
+    -fx-border-color: black; /* Colore del bordo */
+    -fx-background-radius: 10px; /* Arrotondare il background */
+    -fx-pref-width: 200px;  /* Larghezza preferita */
+    -fx-pref-height: 40px;  /* Altezza preferita */
+
+}
+
+/* Cambia il colore del bottone quando il mouse passa sopra (hover) */
+Button:hover {
+    -fx-background-color:
+        linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(50, 50, 50, 0.6)); /* Cambia il gradiente per hover */
+    -fx-text-fill: black;  /* Colore del testo per hover */
+}
+
+/* Cambia il colore del bottone quando viene premuto (clicked) */
+Button:pressed {
+    -fx-background-color:
+        linear-gradient(to bottom right, rgba(60, 60, 60, 0.9), rgba(0, 0, 0, 0.7)); /* Cambia il gradiente per il click */
+    -fx-text-fill: white;  /* Colore del testo per pressed */
+}
+
+/* Stile per le TextField */
+TextField {
+    -fx-background-color: rgba(100, 100, 100, 0.7);  /* Sfumatura grigia al nero */
+    -fx-text-fill: white; /* Colore del testo */
+    -fx-font-size: 16px;  /* Dimensione del font */
+    -fx-border-radius: 10px; /* Angoli arrotondati */
+    -fx-border-width: 2px; /* Bordo sottile */
+    -fx-border-color: black; /* Colore del bordo */
+    -fx-pref-width: 250px; /* Larghezza preferita */
+    -fx-padding: 10px;  /* Padding interno */
+    -fx-background-radius: 10px;
+}
+
+/* Cambia il colore quando la TextField è attiva (focus) */
+TextField:focused {
+    -fx-border-color: #4b0082;  /* Colore viola per il focus */
+    -fx-background-color: linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(60, 60, 60, 0.7)); /* Sfondo più chiaro quando in focus */
+}
+
+/* Stile per la PasswordField */
+PasswordField {
+    -fx-background-color: rgba(100, 100, 100, 0.7);  /* Sfumatura grigia al nero */
+    -fx-text-fill: white; /* Colore del testo */
+    -fx-font-size: 16px;  /* Dimensione del font */
+    -fx-border-radius: 10px; /* Angoli arrotondati */
+    -fx-border-width: 2px; /* Bordo sottile */
+    -fx-border-color: black; /* Colore del bordo */
+    -fx-pref-width: 250px; /* Larghezza preferita */
+    -fx-padding: 10px;  /* Padding interno */
+    -fx-background-radius: 10px;
+
+}
+
+/* Cambia il colore quando la PasswordField è attiva (focus) */
+PasswordField:focused {
+    -fx-border-color: #4b0082;  /* Colore viola per il focus */
+    -fx-background-color: linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(60, 60, 60, 0.7)); /* Sfondo più chiaro quando in focus */
+}
+
+/* Stile per le Label */
+Label {
+    -fx-text-fill: white;  /* Colore del testo delle Label */
+    -fx-font-size: 25px;  /* Dimensione del font */
+    -fx-font-weight: bold;  /* Font in grassetto */
+    -fx-padding: 5px;
+    -fx-alignment: center;
+}
