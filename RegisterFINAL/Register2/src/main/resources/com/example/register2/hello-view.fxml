@@ -5,18 +5,23 @@
 
 <StackPane prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.register2.HelloController">
     <!-- VBox centered in StackPane -->
-    <VBox alignment="TOP_CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
+    <VBox  maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
 
         <!-- Label at the top of the VBox -->
-        <Label fx:id="welcomeText" styleClass="welcome-text" text="LOGIN" />
+        <Label fx:id="welcomeText" styleClass="welcome-text" text="MOVIESTAR" />
 
         <!-- TextField for username -->
         <TextField fx:id="emailField" promptText="Email" />
 
         <!-- PasswordField for password -->
         <PasswordField fx:id="passwordField" promptText="Password" />
+        <Label fx:id="warning1" styleClass="warnings-text" text="Password di almeno 8 caratteri" />
+        <Label fx:id="warning2" styleClass="warnings-text" text="Password con almeno 1 carattere speciale" />
+
 
         <!-- Button to submit -->
+        <Button fx:id="register" alignment="CENTER" styleClass="welcome-text" text="Registrati" />
+
         <Button fx:id="access" alignment="CENTER" styleClass="welcome-text" text="Accedi" />
     </VBox>
 </StackPane>

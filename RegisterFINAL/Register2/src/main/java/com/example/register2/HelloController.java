@@ -12,20 +12,28 @@ public class HelloController {
     @FXML
     private Label welcomeText;
     @FXML
+    private Button register;
+    @FXML
     private Button access;
     @FXML
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Label warning1;
+    @FXML
+    private Label warning2;
+
     private UserDatabase userDatabase;
 
     private String email_regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     private String password_regex = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-])[A-Za-z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-]{8,}$";
 
+
     @FXML
     public void initialize() {
         userDatabase = new UserDatabase();
-        access.setOnAction(event -> saveUser());
+        register.setOnAction(event -> saveUser());
     }
 
     public void saveUser() {
