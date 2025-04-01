@@ -1,0 +1,148 @@
+ Utente (CodUtente, Nome, DataNascita, CodPiano ,DataRegistrazione)
+ Account (Email, Password, CodUtente)
+ PianoAbbonamenti (CodPiano, NomePiano, Prezzo, Durata,DataRinnovo)
+ Contenuto (CodContenuto, Nome, TipoContenuto, Anno, Durata, Trama, NomeRegista)
+ Generi (CodGenere, NomeGenere)
+ Contenuti_Generi (CodContenuto, CodGenere)  
+ ContenutiGuardati (CodUtente, CodContenuto, DataVisione) 
+ ContenutiPreferiti (CodUtente, CodContenuto, DataAggiunta)
+ RecensioniContenuti (CodRecensione, CodUtente, CodContenuto, Valutazione, Commento, Data, Like)
+
+//CodUtente in guardati, preferiti e in recensioni serve per la distinzione di chi ha guardato,preferito e recensito il contenuto
+
+//Primary key 
+
+Utente = CodUtente
+Account = Email
+PianoAbbonamenti = CodPiano
+Contenuto = CodContenuto
+Generi = CodGenere
+Contenuti_Generi = composta--> CodContenuto,CodGenere , per gestire la relazione molti a molti tra contenuti e generi
+ContenutiGuardati = composta --> CodUtente,CodContenuto
+ContenutiPreferiti = composta -->CodUtente,CodContenuto
+RecensioneContenuti = CodRecensione
+
+//Foreign key
+
+Utente = CodPiano (si riferisce alla connesione che ce tra utente e il suo piano di abbonamento)  
+Account = CodUtente (si riferisce alla connesione che c'è tra un account e l'utente)
+ContenutiGeneri= CodContenuto , CodGenere
+ContenutiGuardati=CodUtente, CodContenuto
+ContenutiPreferiti=CodUtente, CodContenuto
+RecensioneContenuti = CodUtente, CodContenuto
+ 
+
+statement sqlLite
+
+ACCOUNT:
+CREATE TABLE "Account" (
+	"Email"	TEXT,
+	"Password"	TEXT,
+	"CodUtente"	INTEGER,   //Foreign key
+	FOREIGN KEY("CodUtente") REFERENCES "Utente"("CodUtente"),
+	PRIMARY KEY("Email")
+)
+
+
+
+CONTENUTIGUARDATI :
+CREATE TABLE "ContenutiGuardati" (
+	"CodUtente"	INTEGER,  //Foreign key
+	"CodContenuto"	INTEGER,  //Foreign key
+	"DataVisione"	TEXT,
+	FOREIGN KEY("CodUtente") REFERENCES "Utente"("CodUtente"),
+	FOREIGN KEY("CodContenuto") REFERENCES "Contenuto"("CodContenuto"),
+	PRIMARY KEY("CodUtente","CodContenuto")
+)
+
+
+
+CONTENUTIPREFERITI : 
+CREATE TABLE "ContenutiPreferiti" (
+	"CodUtente"	INTEGER,  //Foreign key
+	"CodContenuto"	INTEGER,  //Foreign key
+	"DataAggiunta"	TEXT,
+	FOREIGN KEY("CodUtente") REFERENCES "Utente"("CodUtente"),
+	FOREIGN KEY("CodContenuto") REFERENCES "Contenuto"("CodContenuto"),
+	PRIMARY KEY("CodUtente","CodContenuto")
+)
+
+
+
+CONTENUTIGENERI : 
+CREATE TABLE "Contenuti_Generi" (
+	"CodContenuto"	INTEGER, //Foreign key
+	"CodGenere"	INTEGER, //Foreign key
+	FOREIGN KEY("CodContenuto") REFERENCES "Contenuto"("CodContenuto"),
+	FOREIGN KEY("CodGenere") REFERENCES "Generi"("CodGenere"),
+	PRIMARY KEY("CodContenuto","CodGenere")
+)
+
+
+
+CONTENUTO :
+CREATE TABLE "Contenuto" (
+	"CodContenuto"	INTEGER,
+	"Nome"	TEXT,
+	"TipoContenuto"	TEXT,
+	"Anno"	INTEGER,
+	"Durata"	REAL,
+	"NomeRegista"	TEXT,
+	"Trama"	TEXT,
+	PRIMARY KEY("CodContenuto")
+)
+
+
+
+GENERI :
+CREATE TABLE "Generi" (
+	"CodGenere"	INTEGER,
+	"NomeGenere"	TEXT,
+	PRIMARY KEY("CodGenere")
+)
+
+
+
+
+PIANOABBONAMENTI :
+CREATE TABLE "PianoAbbonamenti" (
+	"CodPiano"	INTEGER,
+	"NomePiano"	TEXT,
+	"Prezzo"	REAL,
+	"DurataPiano"	TEXT,
+	"DataRinnovo"	TEXT,
+	PRIMARY KEY("CodPiano")
+)
+
+
+
+RECENSIONECONTENUTI :
+CREATE TABLE "RecensioneContenuti" (
+	"CodRecensione"	INTEGER,
+	"CodUtente"	INTEGER, //Foreign key
+	"CodContenuto"	INTEGER, //Foreign key
+	"Valutazione"	INTEGER,
+	"Commento"	TEXT,
+	"Data"	TEXT,
+	"Like"	TEXT,
+	FOREIGN KEY("CodUtente") REFERENCES "Utente"("CodUtente"),
+	FOREIGN KEY("CodContenuto") REFERENCES "Contenuto"("CodContenuto"),
+	PRIMARY KEY("CodRecensione")
+)
+
+
+
+
+UTENTE : 
+CREATE TABLE "Utente" (
+	"CodUtente"	INTEGER,
+	"Nome"	TEXT,
+	"DataNascita"	TEXT,
+	"CodPiano"	INTEGER, //Foreign key
+	"DataRegistrazione"	TEXT,
+	FOREIGN KEY("CodPiano") REFERENCES "PianoAbbonamenti"("CodPiano"),
+	PRIMARY KEY("CodUtente" AUTOINCREMENT)
+)
+
+
+//Modifiche da fare in seguito = AGGIUNGERE I ("ON DELETE") , AGGIUNGERE I VINCOLI
