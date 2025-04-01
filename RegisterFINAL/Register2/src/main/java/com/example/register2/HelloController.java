@@ -44,7 +44,7 @@ public class HelloController {
         passwordField.setPromptText("Password");
         // Set event handler for the register button
         register.setOnAction(event -> saveUser());
-        /*access.setOnAction(event -> usersInterface());
+        /*access.setOnAction(event -> usersInterface());*/
     }
 
     /**
