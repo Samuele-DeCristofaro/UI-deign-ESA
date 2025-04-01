@@ -83,10 +83,22 @@ PasswordField:focused {
 }
 
 /* Stile per le Label */
-Label {
+.welcome-text{
     -fx-text-fill: white;  /* Colore del testo delle Label */
     -fx-font-size: 25px;  /* Dimensione del font */
     -fx-font-weight: bold;  /* Font in grassetto */
     -fx-padding: 5px;
     -fx-alignment: center;
+}
+.warnings-text2{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment:center-left;
+}
+.warnings-text1{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-width: 200px;
 }
