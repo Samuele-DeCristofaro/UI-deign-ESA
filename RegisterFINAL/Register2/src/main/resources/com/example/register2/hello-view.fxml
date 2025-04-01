@@ -3,21 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.register2.HelloController">
+<?import javafx.geometry.Insets?>
+<StackPane prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.HelloController">
     <!-- VBox centered in StackPane -->
-    <VBox  maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
+    <VBox alignment="CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
 
         <!-- Label at the top of the VBox -->
-        <Label fx:id="welcomeText" styleClass="welcome-text" text="MOVIESTAR" />
+        <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="MOVIESTAR" />
 
         <!-- TextField for username -->
-        <TextField fx:id="emailField" promptText="Email" />
+        <TextField fx:id="emailField"  />
 
         <!-- PasswordField for password -->
-        <PasswordField fx:id="passwordField" promptText="Password" />
-        <Label fx:id="warning1" styleClass="warnings-text" text="Password di almeno 8 caratteri" />
-        <Label fx:id="warning2" styleClass="warnings-text" text="Password con almeno 1 carattere speciale" />
+        <PasswordField fx:id="passwordField" />
+        <HBox prefWidth="250" alignment="CENTER_LEFT">
+            <padding>
+                <Insets left="80" />
+            </padding>
+            <Label fx:id="warning1" styleClass="warnings-text1" text="Password di almeno 8 caratteri" />
+        </HBox>
 
+        <HBox prefWidth="250" alignment="CENTER_LEFT">
+            <padding>
+                <Insets left="80" />
+            </padding>
+            <Label fx:id="warning2" styleClass="warnings-text2" text="Password con almeno 1 carattere speciale o numero" />
+        </HBox>
 
         <!-- Button to submit -->
         <Button fx:id="register" alignment="CENTER" styleClass="welcome-text" text="Registrati" />

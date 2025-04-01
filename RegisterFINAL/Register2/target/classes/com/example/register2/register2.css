@@ -90,8 +90,15 @@ PasswordField:focused {
     -fx-padding: 5px;
     -fx-alignment: center;
 }
-.warning-text{
+.warnings-text2{
     -fx-text-fill: white;
-    -fx-font-size: 25px;
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-alignment:center-left;
+}
+.warnings-text1{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-width: 200px;
 }
