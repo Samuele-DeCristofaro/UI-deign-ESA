@@ -8,7 +8,7 @@
     <VBox alignment="TOP_CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
 
         <!-- Label at the top of the VBox -->
-        <Label styleClass="welcome-text" text="LOGIN" />
+        <Label fx:id="welcomeText" styleClass="welcome-text" text="LOGIN" />
 
         <!-- TextField for username -->
         <TextField fx:id="usernameField" promptText="Username" />
