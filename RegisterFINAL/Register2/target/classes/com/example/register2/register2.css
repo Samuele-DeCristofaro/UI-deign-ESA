@@ -10,7 +10,7 @@
 
 /* Sfondo generale */
 StackPane {
-    -fx-background-color: linear-gradient(to bottom right, #4b0082, #222222);  /* Viola scuro (indigo) a nero */
+    -fx-background-color: radial-gradient(focus-angle 120deg , focus-distance 50% , center 50% 50% , radius 60% , #5c388f,#111 );  /* Nero intenso a viola leggermente più chiaro (dal basso verso l'alto) */
 }
 
 /* Stile per il bottone */

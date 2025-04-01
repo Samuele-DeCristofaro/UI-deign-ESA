@@ -11,7 +11,7 @@
         <Label fx:id="welcomeText" styleClass="welcome-text" text="LOGIN" />
 
         <!-- TextField for username -->
-        <TextField fx:id="usernameField" promptText="Username" />
+        <TextField fx:id="emailField" promptText="Email" />
 
         <!-- PasswordField for password -->
         <PasswordField fx:id="passwordField" promptText="Password" />
