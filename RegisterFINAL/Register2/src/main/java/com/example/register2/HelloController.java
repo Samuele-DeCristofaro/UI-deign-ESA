@@ -13,8 +13,7 @@ public class HelloController {
     private Label welcomeText;
     @FXML
     private Button register;
-    @FXML
-    private Button access; // Note: Access button logic is not implemented in this snippet
+ // Note: Access button logic is not implemented in this snippet
     @FXML
     private TextField emailField;
     @FXML
@@ -72,8 +71,8 @@ public class HelloController {
         }
         // Validate password using regex
         if (!Pattern.matches(password_regex, password)) {
-            emailField.setPromptText("Email non valida"); // Set error prompt
-            emailField.setText("");  // Clear the field
+            passwordField.setPromptText("Password non valida"); // Set error prompt
+            passwordField.setText("");  // Clear the field
             return; // Exit the method if validation fails
         }
 

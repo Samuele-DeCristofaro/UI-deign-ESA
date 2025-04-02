@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/register2/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/com/example/register2/register2.css").toExternalForm());
-        stage.setTitle("RegisterUser");
+        stage.setTitle("MOVIESTAR");
         stage.setScene(scene);
         stage.show();
     }

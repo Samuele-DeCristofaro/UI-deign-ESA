@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
 <StackPane prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.HelloController">
-    <!-- VBox centered in StackPane -->
-    <VBox alignment="CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background">
-
-        <!-- Label at the top of the VBox -->
-        <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="MOVIESTAR" />
-
-        <!-- TextField for username -->
-        <TextField fx:id="emailField"  />
-
-        <!-- PasswordField for password -->
-        <PasswordField fx:id="passwordField" />
-        <HBox prefWidth="250" alignment="CENTER_LEFT">
-            <padding>
-                <Insets left="80" />
-            </padding>
-            <Label fx:id="warning1" styleClass="warnings-text1" text="Password di almeno 8 caratteri" />
-        </HBox>
-
-        <HBox prefWidth="250" alignment="CENTER_LEFT">
-            <padding>
-                <Insets left="80" />
-            </padding>
-            <Label fx:id="warning2" styleClass="warnings-text2" text="Password con almeno 1 carattere speciale o numero" />
-        </HBox>
-
-        <!-- Button to submit -->
-        <Button fx:id="register" alignment="CENTER" styleClass="welcome-text" text="Registrati" />
-
-        <Button fx:id="access" alignment="CENTER" styleClass="welcome-text" text="Accedi" />
-    </VBox>
+    <HBox alignment="CENTER" spacing="20">
+        <VBox alignment="TOP_LEFT" styleClass="vbox-title" HBox.hgrow="ALWAYS">
+            <ImageView  fitHeight="100" fitWidth="350">
+                <Image  requestedHeight="100" requestedWidth="350" url="@TITLE2.png" />
+            </ImageView>
+        </VBox>
+        <VBox alignment="CENTER" maxHeight="400" maxWidth="500" spacing="20" styleClass="vbox-background" HBox.hgrow="ALWAYS">
+            <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="CREA UN ACCOUNT" />
+            <TextField fx:id="emailField" />
+            <PasswordField fx:id="passwordField" />
+            <HBox alignment="CENTER_LEFT" prefWidth="250">
+                <padding>
+                    <Insets left="60" />
+                </padding>
+                <Label fx:id="warning1" styleClass="warnings-text1" text="Password di almeno 8 caratteri" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefWidth="250">
+                <padding>
+                    <Insets left="60" />
+                </padding>
+                <Label fx:id="warning2" styleClass="warnings-text2" text="Password con almeno 1 carattere speciale e un numero" />
+            </HBox>
+            <Button fx:id="register" alignment="CENTER" styleClass="button-text" text="Registrati">
+                <VBox.margin>
+                    <Insets top="50" />
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </HBox>
 </StackPane>
