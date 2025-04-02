@@ -55,6 +55,15 @@ public class HelloController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
+        if (!Pattern.matches(email_regex, email) && !Pattern.matches(password_regex, password) ){
+            emailField.setPromptText("Email non valida"); // Set error prompt
+            emailField.setText("");
+            passwordField.setPromptText("Password non valida"); // Set error prompt
+            passwordField.setText("");
+            return;
+
+        }
+
         // Validate email using regex
         if (!Pattern.matches(email_regex, email)) {
             emailField.setPromptText("Email non valida"); // Set error prompt
@@ -63,8 +72,8 @@ public class HelloController {
         }
         // Validate password using regex
         if (!Pattern.matches(password_regex, password)) {
-            passwordField.setPromptText("Password non valida"); // Set error prompt
-            passwordField.setText(""); // Clear the field
+            emailField.setPromptText("Email non valida"); // Set error prompt
+            emailField.setText("");  // Clear the field
             return; // Exit the method if validation fails
         }
 
