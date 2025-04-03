@@ -1,3 +1,4 @@
+
 /* Sfondo principale */
 .vbox-background {
     -fx-background-color: transparent; /* Rende il background trasparente */
@@ -8,16 +9,17 @@
     -fx-alignment: center;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0); /* Aggiunge l'ombra */
 }
+
 .vbox-title{
-    -fx-background-color: transparent; /* Rende il background trasparente */
     -fx-padding: 20px;
     -fx-border-radius: 10px;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
 }
+
 /* Sfondo generale */
 StackPane {
-    -fx-background-color: radial-gradient(focus-angle 120deg , focus-distance 50% , center 50% 50% , radius 60% , #5c388f,#111 );  /* Nero intenso a viola leggermente più chiaro (dal basso verso l'alto) */
+    -fx-background-image: url("sfondo.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 
 /* Stile per il bottone */

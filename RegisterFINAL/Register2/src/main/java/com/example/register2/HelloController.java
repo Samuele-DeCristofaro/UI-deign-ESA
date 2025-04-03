@@ -5,24 +5,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+
 import java.util.regex.Pattern;
 
 public class HelloController {
     // FXML injected UI components
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private Button register;
+    @FXML private Label welcomeText;
+    @FXML private Button register;
  // Note: Access button logic is not implemented in this snippet
-    @FXML
-    private TextField emailField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Label warning1; // Note: Warnings are not used in this simplified logic
-    @FXML
-    private Label warning2; // Note: Warnings are not used in this simplified logic
-
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
+    @FXML private Label warning1; // Note: Warnings are not used in this simplified logic
+    @FXML private Label warning2; // Note: Warnings are not used in this simplified logic
+    @FXML private StackPane ContenitorePadre;
     // Database access
     private UserDatabase userDatabase;
 
@@ -36,7 +38,9 @@ public class HelloController {
      */
     @FXML
     public void initialize() {
+
         // Initialize the database connection
+
         userDatabase = new UserDatabase();
         // Set default prompts for email and password fields
         emailField.setPromptText("Email");
