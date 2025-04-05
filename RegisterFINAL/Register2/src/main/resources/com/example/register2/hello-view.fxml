@@ -4,47 +4,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <StackPane fx:id="ContenitorePadre" prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.HelloController">
-    <HBox alignment="CENTER" prefHeight="734.0" prefWidth="1142.0" spacing="20">
-        <VBox alignment="TOP_LEFT" prefHeight="600.0" prefWidth="439.0" styleClass="vbox-title" HBox.hgrow="ALWAYS">
-            <ImageView fitHeight="351.0" fitWidth="442.0">
-                <Image requestedHeight="240" requestedWidth="350" url="@TITLE.png" />
-            </ImageView>
-            <padding>
-                <Insets left="20" />
-            </padding>
-        </VBox>
-        <VBox alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="177.0" spacing="20" styleClass="vbox-background" HBox.hgrow="ALWAYS">
-            <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="CREA UN ACCOUNT" />
-            <TextField fx:id="emailField" prefHeight="25.0" prefWidth="270.0" />
-            <PasswordField fx:id="passwordField" />
-            <HBox alignment="CENTER_LEFT" prefWidth="250">
-                <padding>
-                    <Insets left="60" />
-                </padding>
-                <Label fx:id="warning1" styleClass="warnings-text1" text="Password di almeno 8 caratteri" />
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="250">
-                <padding>
-                    <Insets left="60" />
-                </padding>
-                <Label fx:id="warning2" styleClass="warnings-text2" text="Password con almeno 1 carattere speciale e un numero" />
-            </HBox>
-            <Button fx:id="register" alignment="CENTER" styleClass="button-text" text="Registrati">
-                <VBox.margin>
-                    <Insets top="50" />
-                </VBox.margin>
-            </Button>
-            <HBox.margin>
-                <Insets />
-            </HBox.margin>
-        </VBox>
-        <StackPane.margin>
-            <Insets />
-        </StackPane.margin>
-        <padding>
-            <Insets right="100.0" />
-        </padding>
-    </HBox>
+   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Hbox-Padre" />
+      <ImageView fitHeight="100.0" fitWidth="375.0" StackPane.alignment="TOP_LEFT">
+          <Image requestedHeight="240" requestedWidth="350" url="@TITLE2.png" />
+      <StackPane.margin>
+         <Insets left="30.0" top="30.0" />
+      </StackPane.margin>
+      </ImageView>
+     <VBox alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="336.0" spacing="10.0" styleClass="vbox-background" StackPane.alignment="CENTER_RIGHT">
+         <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO" />
+         <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" />
+         <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308" />
+         <Label fx:id="warning1" maxWidth="1.7976931348623157E308" prefHeight="18.0" styleClass="warnings-text1" text="Password con almeno :" textAlignment="CENTER" />
+         <Label maxWidth="1.7976931348623157E308" styleClass="warnings-text2" text="1 carattere speciale o numero" />
+         <Label fx:id="warning2" maxWidth="1.7976931348623157E308" prefHeight="13.0" styleClass="warnings-text2" text="8 caratteri" />
+         <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi" />
+         <Button fx:id="register" alignment="CENTER" styleClass="register-text" text="Non hai un account? Registrati">
+             <VBox.margin>
+                 <Insets top="5" />
+             </VBox.margin>
+         <font>
+            <Font size="7.0" />
+         </font>
+         </Button>
+      <padding>
+         <Insets left="60.0" right="60.0" top="10.0" />
+      </padding>
+      <StackPane.margin>
+         <Insets right="150.0" />
+      </StackPane.margin>
+     </VBox>
 </StackPane>

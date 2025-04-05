@@ -19,7 +19,7 @@ public class HelloController {
     // FXML injected UI components
     @FXML private Label welcomeText;
     @FXML private Button register;
- // Note: Access button logic is not implemented in this snippet
+  // Note: Access button logic is not implemented in this snippet
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private Label warning1; // Note: Warnings are not used in this simplified logic
