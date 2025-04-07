@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1920" maxWidth="1080" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="872.0" style="    -fx-background-color: linear-gradient(to bottom, #0f0f0f, #313131 60%, #a145a1); " xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tonioan.fastmacro.HelloController">
+<ScrollPane fx:id="root" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="body" alignment="CENTER" maxWidth="${root.width}" spacing="16.0" style=" -fx-background-color: transparent;">
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+
+            <VBox fx:id="scrollViewContainer" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #0f0f0f; -fx-background-radius: 64; " VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+               </padding>
+               <effect>
+                  <DropShadow color="rgba(0,0,0,0.2)" height="10" radius="4.5" width="10" />
+               </effect>
+            </VBox>
+
+      </VBox>
+
+</ScrollPane>
+</AnchorPane>

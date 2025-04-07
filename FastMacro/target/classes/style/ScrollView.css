@@ -1,0 +1,67 @@
+/* ScrollView.css */
+.scroll-view {
+    -fx-max-width: Infinity;
+    -fx-min-height: 0;
+    -fx-background-radius: 32;
+   -fx-padding: 10;
+   -fx-fit-to-width: true;
+}
+
+/* Title styling */
+.title-label {
+    -fx-background-color: transparent;
+    -fx-max-height: Infinity;
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Cards container styling */
+.cards-container {
+    -fx-alignment: CENTER_LEFT;
+    -fx-margin: 0,20,0,20;
+}
+
+
+
+/* ScrollPane styling */
+.scroll-view .scroll-pane {
+    -fx-background-color: transparent;
+
+}
+
+.scroll-view .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+
+/* Navigation button styling */
+.scroll-view .nav-button {
+    -fx-max-width: 60;
+    -fx-min-width: 40;
+    -fx-background-color: transparent;
+}
+
+/* Arrow button styling */
+
+.arrow-button {
+    -fx-background-color: transparent; /* Or your default background */
+    -fx-background-radius: 35%;/* Circular button shape */
+    -fx-border-radius: 50%;
+    -fx-font-size: 1em;
+    -fx-padding: 8px; /* Adjust padding as needed */
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-transition: -fx-background-color 0.2s ease-in-out;
+}
+
+.arrow-button:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.1);
+}
+.arrow-button:pressed {
+    -fx-background-color: rgba(128, 128, 128, 0.2);
+}
+
+.scroll-view .nav-button SVGPath {
+
+}
+
