@@ -1,30 +1,38 @@
 package com.example.register2;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
-import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
-public class HelloController {
+public class Register {
     // FXML injected UI components
-    @FXML private Label welcomeText;
-    @FXML private Button register;
-  // Note: Access button logic is not implemented in this snippet
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label warning1; // Note: Warnings are not used in this simplified logic
-    @FXML private Label warning2; // Note: Warnings are not used in this simplified logic
-    @FXML private StackPane ContenitorePadre;
+    @FXML
+    private Label welcomeText;
+    @FXML
+    private Button register;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Label warning1;
+    @FXML
+    private Label warning2;
+    @FXML
+    private StackPane ContenitorePadre;
+    @FXML
+    private Button backToLogin;
+
     // Database access
     private UserDatabase userDatabase;
 
@@ -38,17 +46,43 @@ public class HelloController {
      */
     @FXML
     public void initialize() {
-
         // Initialize the database connection
-
         userDatabase = new UserDatabase();
+
         // Set default prompts for email and password fields
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
+
         // Set event handler for the register button
         register.setOnAction(event -> saveUser());
-        /*access.setOnAction(event -> usersInterface());*/
+
+        // Set event handler for the back to login button
+        backToLogin.setOnAction(event -> switchToLoginPage());
+
+        // Display password requirements
+        warning1.setText("Password con almeno :");
+        warning2.setText("8 caratteri");
     }
+
+    /**
+     * Update the current page with login content
+     */
+    private void switchToLoginPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent loginContent = loader.load();
+
+            // 👇 AGGIUNGI QUESTO
+            loginContent.getStylesheets().add(getClass().getResource("/com/example/register2/access.css").toExternalForm());
+
+            ContenitorePadre.getChildren().clear();
+            ContenitorePadre.getChildren().add(loginContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            welcomeText.setText("Errore di caricamento: " + e.getMessage());
+        }
+    }
+
 
     /**
      * Saves a new user to the database after validating the email and password.
@@ -58,13 +92,12 @@ public class HelloController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        if (!Pattern.matches(email_regex, email) && !Pattern.matches(password_regex, password) ){
+        if (!Pattern.matches(email_regex, email) && !Pattern.matches(password_regex, password)) {
             emailField.setPromptText("Email non valida"); // Set error prompt
             emailField.setText("");
             passwordField.setPromptText("Password non valida"); // Set error prompt
             passwordField.setText("");
             return;
-
         }
 
         // Validate email using regex
@@ -73,6 +106,7 @@ public class HelloController {
             emailField.setText(""); // Clear the field
             return; // Exit the method if validation fails
         }
+
         // Validate password using regex
         if (!Pattern.matches(password_regex, password)) {
             passwordField.setPromptText("Password non valida"); // Set error prompt
@@ -93,10 +127,9 @@ public class HelloController {
         }
     }
 }
-
-/**
- * Represents a user in the system with email and password.
- */
+    /**
+     * Represents a user in the system with email and password.
+     */
 class User {
     // User attributes
     private final String email;
