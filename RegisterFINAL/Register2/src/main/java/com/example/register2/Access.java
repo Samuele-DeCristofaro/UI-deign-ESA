@@ -83,30 +83,25 @@ public class Access {
             return;
         }
 
-        // Create a user object to validate against the database
         try {
-            // Try to validate user credentials
+            // Verifica le credenziali
             if (userDatabase.validateUser(email, password)) {
-                // Get the current stage
-                Stage currentStage = (Stage) access.getScene().getWindow();
+                // Carica la nuova schermata (es. home.fxml)
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                Parent homeContent = loader.load();
 
-                // Create a new blank stage and scene
-                Stage newStage = new Stage();
-                StackPane blankLayout = new StackPane();
-                Scene blankScene = new Scene(blankLayout, 800, 600);
+                // Applica il CSS se necessario
+                homeContent.getStylesheets().add(getClass().getResource("/com/example/register2/home.css").toExternalForm());
 
-                // Set the blank scene on the new stage
-                newStage.setScene(blankScene);
-
-                // Close the current stage
-                currentStage.close();
-
-                // Show the new stage
-                newStage.setTitle("Home Page");
-                newStage.show();
+                // Sostituisci il contenuto del contenitore padre
+                ContenitorePadre.getChildren().clear();
+                ContenitorePadre.getChildren().add(homeContent);
             } else {
                 warningText.setText("Account inesistente");
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            warningText.setText("Errore di caricamento: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             warningText.setText("Errore durante l'accesso");

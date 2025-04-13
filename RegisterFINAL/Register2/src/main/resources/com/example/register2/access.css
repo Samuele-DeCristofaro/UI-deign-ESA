@@ -15,7 +15,7 @@
 StackPane {
     -fx-background-image: url("sfondo.jpg");
     -fx-background-size: cover;
-    -fx-background-position: center center;
+    -fx-background-position: center ;
 }
 .Hbox-Padre{
     -fx-background-color:

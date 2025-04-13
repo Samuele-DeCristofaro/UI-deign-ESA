@@ -1,79 +1,57 @@
 package com.example.register2;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * A simple in-memory database for user information.
+ */
 public class UserDatabase {
-    private ArrayList<User> users;
-
-    public UserDatabase() {
-        users = new ArrayList<>();
-    }
+    // Storage for users, with email as the key
+    private final Map<String, User> users = new HashMap<>();
 
     /**
-     * Adds a new user to the database if they don't already exist
+     * Adds a new user to the database if the email doesn't already exist.
      *
-     * @param user The user to add
-     * @return true if the user was added successfully, false if the user already exists
+     * @param user The User object to add.
+     * @return true if the user was added successfully, false if the email already exists.
      */
     public boolean addUser(User user) {
-        if (!users.contains(user)) {
-            users.add(user);
-            return true;
+        // Check if the user already exists
+        if (users.containsKey(user.getEmail())) {
+            return false; // User already exists
         }
-        return false;
+
+        // Add the user to the database
+        users.put(user.getEmail(), user);
+        return true; // User added successfully
     }
 
     /**
-     * Checks if a user exists in the database
+     * Validates a user's credentials.
      *
-     * @param user The user to check
-     * @return true if the user exists, false otherwise
-     */
-    public boolean containsUser(User user) {
-        return users.contains(user);
-    }
-
-    /**
-     * Validates user credentials against the database
-     *
-     * @param email The email to validate
-     * @param password The password to validate
-     * @return true if credentials are valid, false otherwise
+     * @param email    The email to check.
+     * @param password The password to validate.
+     * @return true if the credentials are valid, false otherwise.
      */
     public boolean validateUser(String email, String password) {
-        User userToValidate = new User(email, password);
-
-        for (User user : users) {
-            // Check if email matches
-            if (user.getEmail().equals(email)) {
-                // Check if password matches
-                return user.getPassword().equals(password);
-            }
+        // Check if the user exists
+        User user = users.get(email);
+        if (user == null) {
+            return false; // User doesn't exist
         }
 
-        // User not found or password doesn't match
-        return false;
+        // Validate the password
+        return user.getPassword().equals(password);
     }
 
     /**
-     * Validates a user object against the database
+     * Gets a user by their email.
      *
-     * @param user The user object to validate
-     * @return true if the user exists and passwords match, false otherwise
+     * @param email The email of the user to retrieve.
+     * @return The User object, or null if not found.
      */
-    public boolean validateUser(User user) {
-        // First check if the user exists
-        if (!users.contains(user)) {
-            return false;
-        }
-
-        // Then check if the passwords match
-        for (User existingUser : users) {
-            if (existingUser.getEmail().equals(user.getEmail())) {
-                return existingUser.getPassword().equals(user.getPassword());
-            }
-        }
-
-        return false;
+    public User getUser(String email) {
+        return users.get(email);
     }
 }

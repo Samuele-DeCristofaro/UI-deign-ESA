@@ -10,8 +10,8 @@
 
     <VBox alignment="TOP_CENTER" spacing="20">
         <!-- Immagine in alto -->
-        <ImageView fitHeight="100.0" fitWidth="375.0">
-            <Image url="@TITLE2.png" />
+        <ImageView fitHeight="138.0" fitWidth="375.0">
+            <Image url="@TITLE.png" />
         </ImageView>
 
         <!-- VBox Centrale trasparente -->
