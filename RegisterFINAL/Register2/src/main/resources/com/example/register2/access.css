@@ -73,18 +73,7 @@ TextField:focused, PasswordField:focused {
     -fx-padding: 5px;
     -fx-alignment: center;
 }
-.warnings-text2{
-    -fx-text-fill: white;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-alignment:center-left;
-}
-.warnings-text1{
-    -fx-text-fill: white;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-width: 200px;
-}
+
 .button-text{
     -fx-text-fill: white;  /* Colore del testo delle Label */
     -fx-font-size: 25px;  /* Dimensione del font */
@@ -110,4 +99,12 @@ TextField:focused, PasswordField:focused {
     -fx-font-weight: bold;  /* Font in grassetto */
     -fx-padding: 5px;
     -fx-font-family: "Arial";
+}
+.warningText {
+    -fx-text-fill: #ff3333;  /* Colore rosso brillante per il testo */
+    -fx-font-size: 14px;     /* Dimensione del font */
+    -fx-font-weight: bold;   /* Font in grassetto per enfatizzare l'avviso */
+    -fx-padding: 5px 0px;    /* Padding verticale per spaziatura */
+    -fx-alignment: center;   /* Allineamento centrato */
+    -fx-opacity: 0.9;        /* Leggera trasparenza */
 }

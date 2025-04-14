@@ -8,7 +8,7 @@
 
 <StackPane fx:id="ContenitorePadre" prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Access">
     <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Hbox-Padre" />
-    <ImageView fitHeight="100.0" fitWidth="375.0" StackPane.alignment="TOP_LEFT">
+    <ImageView fitHeight="149.0" fitWidth="391.0" StackPane.alignment="TOP_LEFT">
         <Image requestedHeight="240" requestedWidth="350" url="@TITLE.png" />
         <StackPane.margin>
             <Insets left="30.0" top="30.0" />
@@ -27,12 +27,12 @@
                 <Font size="7.0" />
             </font>
         </Button>
-        <Label fx:id="warningText" alignment="CENTER" />
+        <Label fx:id="warningText" alignment="CENTER" styleClass="warningText" />
         <padding>
             <Insets left="60.0" right="60.0" top="10.0" />
         </padding>
+        <StackPane.margin>
+            <Insets right="150.0" />
+        </StackPane.margin>
     </VBox>
-    <StackPane.margin>
-        <Insets right="150.0" />
-    </StackPane.margin>
 </StackPane>

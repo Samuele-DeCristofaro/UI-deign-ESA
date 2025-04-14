@@ -6,3 +6,15 @@
     -fx-background-color: transparent; /* Sfondo trasparente */
     -fx-alignment: center;
 }
+.warnings-text2{
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment:center-left;
+}
+.warnings-text1{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-width: 200px;
+}

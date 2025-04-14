@@ -97,6 +97,8 @@ public class Access {
                 ContenitorePadre.getChildren().clear();
                 ContenitorePadre.getChildren().add(homeContent);
             } else {
+                emailField.setText("");
+                passwordField.setText("");
                 warningText.setText("Account inesistente");
             }
         } catch (IOException e) {
