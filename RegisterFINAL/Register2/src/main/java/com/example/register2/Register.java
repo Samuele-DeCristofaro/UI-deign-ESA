@@ -2,6 +2,7 @@ package com.example.register2;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,7 +45,6 @@ public class Register {
      * Initializes the controller. This method is automatically called after the FXML
      * has been loaded and the controller is fully initialized.
      */
-    @FXML
     public void initialize() {
         // Initialize the database connection
         userDatabase = new UserDatabase();
@@ -62,6 +62,10 @@ public class Register {
         // Display password requirements
         warning1.setText("Password con almeno :");
         warning2.setText("8 caratteri");
+
+        // Apply animations sequentially
+        Node[] formElements = {welcomeText, emailField, passwordField, warning1, warning2, register, backToLogin};
+        AnimationUtils.animateSimultaneously(formElements, 1); // Use slideInFromRight with 100ms delay between each
     }
 
     /**
@@ -93,26 +97,33 @@ public class Register {
         String password = passwordField.getText();
 
         if (!Pattern.matches(email_regex, email) && !Pattern.matches(password_regex, password)) {
-            emailField.setPromptText("Email non valida"); // Set error prompt
+            AnimationUtils.shake(emailField);
+            AnimationUtils.shake(passwordField);
+            emailField.setPromptText("Email non valida");
             emailField.setText("");
-            passwordField.setPromptText("Password non valida"); // Set error prompt
+            passwordField.setPromptText("Password non valida");
             passwordField.setText("");
             return;
         }
 
         // Validate email using regex
         if (!Pattern.matches(email_regex, email)) {
-            emailField.setPromptText("Email non valida"); // Set error prompt
-            emailField.setText(""); // Clear the field
-            return; // Exit the method if validation fails
+            AnimationUtils.shake(emailField);
+            emailField.setPromptText("Email non valida");
+            emailField.setText("");
+            return;
         }
 
         // Validate password using regex
         if (!Pattern.matches(password_regex, password)) {
-            passwordField.setPromptText("Password non valida"); // Set error prompt
-            passwordField.setText("");  // Clear the field
-            return; // Exit the method if validation fails
+            AnimationUtils.shake(passwordField);
+            passwordField.setPromptText("Password non valida");
+            passwordField.setText("");
+            return;
         }
+
+        // Show pulse animation on register button to indicate processing
+        AnimationUtils.pulse(register);
 
         // Create a new User object
         User user = new User(email, password);
@@ -121,9 +132,11 @@ public class Register {
         if (!userDatabase.addUser(user)) {
             // Display error message if user already exists
             welcomeText.setText("Utente già esistente");
+            AnimationUtils.shake(welcomeText);
         } else {
-            // Display success message if user is successfully registered
+            // Display success message with animation if user is successfully registered
             welcomeText.setText("Utente registrato con successo!");
+            AnimationUtils.pulse(welcomeText);
         }
     }
 }

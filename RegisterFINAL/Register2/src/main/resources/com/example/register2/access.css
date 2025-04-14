@@ -68,7 +68,7 @@ TextField:focused, PasswordField:focused {
 /* Stile per le Label */
 .welcome-text{
     -fx-text-fill: white;  /* Colore del testo delle Label */
-    -fx-font-size: 35px;  /* Dimensione del font */
+    -fx-font-size: 30px;  /* Dimensione del font */
     -fx-font-weight: bold;  /* Font in grassetto */
     -fx-padding: 5px;
     -fx-alignment: center;
