@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="ContenitorePadre" prefHeight="600" prefWidth="800" styleClass="StackPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Access">
+<StackPane fx:id="ContenitorePadre" prefHeight="600" prefWidth="800" styleClass="MainPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Access">
     <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Hbox-Padre" />
-    <ImageView fitHeight="149.0" fitWidth="391.0" StackPane.alignment="TOP_LEFT">
+    <ImageView fitHeight="187.0" fitWidth="296.0" preserveRatio="true" StackPane.alignment="TOP_LEFT">
         <Image requestedHeight="240" requestedWidth="350" url="@TITLE.png" />
         <StackPane.margin>
             <Insets left="30.0" top="30.0" />

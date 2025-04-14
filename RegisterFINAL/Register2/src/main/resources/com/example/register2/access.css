@@ -12,7 +12,7 @@
 }
 
 /* Sfondo generale */
-StackPane {
+.MainPane {
     -fx-background-image: url("sfondo.jpg");
     -fx-background-size: cover;
     -fx-background-position: center ;
@@ -26,8 +26,8 @@ Button {
     -fx-text-fill: white;  /* Colore del testo bianco */
     -fx-font-size: 18px;  /* Dimensione del font */
     -fx-font-weight: bold;  /* Font in grassetto */
-    -fx-border-radius: 10px; /* Arrotondare gli angoli */
-    -fx-background-radius: 10px; /* Arrotondare il background */
+    -fx-border-radius: 24px; /* Arrotondare gli angoli */
+    -fx-background-radius: 24px; /* Arrotondare il background */
     -fx-pref-height: 40px;  /* Altezza preferita */
 
 }
@@ -107,4 +107,8 @@ TextField:focused, PasswordField:focused {
     -fx-padding: 5px 0px;    /* Padding verticale per spaziatura */
     -fx-alignment: center;   /* Allineamento centrato */
     -fx-opacity: 0.9;        /* Leggera trasparenza */
+}
+VBox {
+    -fx-background-radius: 24px;
+    -fx-border-radius: 24px;
 }
