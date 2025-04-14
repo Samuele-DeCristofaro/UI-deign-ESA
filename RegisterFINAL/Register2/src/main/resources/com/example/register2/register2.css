@@ -3,7 +3,7 @@
 }
 
 .main-vbox {
-    -fx-background-color: transparent; /* Sfondo trasparente */
+    -fx-background-color: radial-gradient(focus-angle 54deg , focus-distance 10% , center 50% 50% , radius 250% , transparent, rgba(255,255,255,0.3));
     -fx-alignment: center;
 }
 .warnings-text2{
