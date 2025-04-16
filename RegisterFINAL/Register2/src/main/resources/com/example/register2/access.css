@@ -41,11 +41,12 @@ TextField:focused, PasswordField:focused {
     -fx-background-color: linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(60, 60, 60, 0.7));
 }
 
-/* Testo di benvenuto */
-.welcome-text {
-    -fx-text-fill: white;
-    -fx-font-size: 32px;
-    -fx-font-weight: bold;
+=======
+/* Stile per le Label */
+.welcome-text{
+    -fx-text-fill: white;  /* Colore del testo delle Label */
+    -fx-font-size: 30px;  /* Dimensione del font */
+    -fx-font-weight: bold;  /* Font in grassetto */
     -fx-padding: 5px;
     -fx-alignment: center;
 }

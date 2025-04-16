@@ -10,18 +10,27 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import javafx.scene.Node;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class Access {
     // FXML injected UI components
-    @FXML private Label welcomeText;
-    @FXML private Label warningText;
-    @FXML private Button register;
-    @FXML private Button access;
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private StackPane ContenitorePadre;
+    @FXML
+    private Label welcomeText;
+    @FXML
+    private Label warningText;
+    @FXML
+    private Button register;
+    @FXML
+    private Button access;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private StackPane ContenitorePadre;
 
     // Database access
     private UserDatabase userDatabase;
@@ -47,6 +56,8 @@ public class Access {
 
         // Set event handler for the access button
         access.setOnAction(event -> loginUser());
+        Node[] formElements = {welcomeText, emailField, passwordField, access, register};
+        AnimationUtils.animateSimultaneously(formElements, 1); // Use slideInFromRight with 100ms delay between each
     }
 
     /**
@@ -80,10 +91,14 @@ public class Access {
 
         if (email.isEmpty() || password.isEmpty()) {
             warningText.setText("Inserisci email e password");
+            AnimationUtils.shake(warningText); // Add shake animation
             return;
         }
 
         try {
+            // Show pulse animation on access button to indicate processing
+            AnimationUtils.pulse(access);
+
             // Verifica le credenziali
             if (userDatabase.validateUser(email, password)) {
                 // Carica la nuova schermata (es. home.fxml)
@@ -93,13 +108,26 @@ public class Access {
                 // Applica il CSS se necessario
                 homeContent.getStylesheets().add(getClass().getResource("/com/example/register2/home.css").toExternalForm());
 
-                // Sostituisci il contenuto del contenitore padre
-                ContenitorePadre.getChildren().clear();
-                ContenitorePadre.getChildren().add(homeContent);
+                // Fade out current content
+                Node currentContent = ContenitorePadre.getChildren().get(0);
+                AnimationUtils.fadeOut(currentContent, 500);
+
+                // Wait for fade out to complete before replacing content
+                PauseTransition pause = new PauseTransition(Duration.millis(500));
+                pause.setOnFinished(e -> {
+                    // Sostituisci il contenuto del contenitore padre
+                    ContenitorePadre.getChildren().clear();
+                    ContenitorePadre.getChildren().add(homeContent);
+
+                    // Fade in new content
+                    AnimationUtils.fadeIn(homeContent, 500);
+                });
+                pause.play();
             } else {
                 emailField.setText("");
                 passwordField.setText("");
                 warningText.setText("Account inesistente");
+                AnimationUtils.shake(warningText); // Add shake animation
             }
         } catch (IOException e) {
             e.printStackTrace();
