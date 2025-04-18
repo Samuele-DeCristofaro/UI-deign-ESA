@@ -3,7 +3,7 @@
     -fx-background-color: rgba(51, 51, 51, 0); /* Grigi scuro con leggera trasparenza per l'effetto blur */
     -fx-border-radius: 10px;
     -fx-background-radius: 10px; /* Arrotonda gli angoli del background */
-    -fx-alignment: center;
+
 }
 
 .vbox-title{
