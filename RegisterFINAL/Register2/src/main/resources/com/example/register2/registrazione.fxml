@@ -11,7 +11,7 @@
     <VBox alignment="TOP_CENTER" spacing="20.0">
         <!-- Immagine in alto -->
         <ImageView fitHeight="107.0" fitWidth="353.0" nodeOrientation="INHERIT">
-            <Image url="@TITLE2.png" />
+            <Image url="@TITLE.png" />
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>

@@ -7,78 +7,40 @@
 <?import javafx.scene.text.*?>
 
 <StackPane fx:id="ContenitorePadre" prefHeight="600" prefWidth="800" styleClass="MainPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Access">
-    <GridPane>
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" percentWidth="60" />
-            <ColumnConstraints hgrow="SOMETIMES" percentWidth="40" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints vgrow="ALWAYS" />
-        </rowConstraints>
-
-        <!-- Colonna sinistra con logo e copy -->
-        <VBox alignment="TOP_LEFT" maxWidth="500" prefHeight="603.0" prefWidth="483.0" GridPane.columnIndex="0">
-            <ImageView fitHeight="111.0" fitWidth="432.0" smooth="false">
-                <Image requestedHeight="240" requestedWidth="350" url="@TITLE2.png" />
-                <VBox.margin>
-                    <Insets left="60.0" top="60.0" />
-                </VBox.margin>
-            </ImageView>
-            <padding>
-                <Insets bottom="20.0" />
-            </padding>
-        </VBox>
-
-        <!-- Colonna destra con form di accesso -->
-        <StackPane GridPane.columnIndex="1">
-            <VBox alignment="CENTER" maxHeight="450" maxWidth="350" minWidth="250" styleClass="vbox-background">
-                <padding>
-                    <Insets bottom="50.0" top="50.0" />
-                </padding>
-
-                <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO">
-                    <VBox.margin>
-                        <Insets bottom="50.0" />
-                    </VBox.margin>
-               <font>
-                  <Font size="22.0" />
-               </font>
-                </Label>
-
-                <TextField fx:id="emailField" maxWidth="300.0" promptText="Email">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </TextField>
-
-                <PasswordField fx:id="passwordField" maxWidth="300" promptText="Password">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </PasswordField>
-
-                <Button fx:id="access" alignment="CENTER" maxWidth="200" prefHeight="25.0" styleClass="button-text" text="Accedi">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Button fx:id="register" alignment="CENTER" maxWidth="250" styleClass="register-text" text="Non hai un account? Registrati">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Label fx:id="warningText" alignment="CENTER" maxWidth="300" styleClass="warningText" />
-            <StackPane.margin>
-               <Insets />
-            </StackPane.margin>
-            </VBox>
-
-            <!-- Sposta la VBox verso sinistra -->
-            <StackPane.margin>
-                <Insets left="-40.0" />
-            </StackPane.margin>
-        </StackPane>
-    </GridPane>
+    <HBox prefHeight="100.0" prefWidth="200.0" styleClass="Hbox-Padre">
+      <children>
+          <ImageView fitHeight="252.0" fitWidth="366.0" preserveRatio="true" smooth="false">
+              <Image requestedHeight="240" requestedWidth="350" url="@TITLE2.png" />
+            <HBox.margin>
+               <Insets left="40.0" top="40.0" />
+            </HBox.margin>
+          </ImageView>
+      </children></HBox>
+    <VBox alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="360.0" spacing="10.0" styleClass="vbox-background" StackPane.alignment="CENTER_RIGHT">
+        <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO">
+         <VBox.margin>
+            <Insets bottom="40.0" />
+         </VBox.margin></Label>
+        <TextField fx:id="emailField" maxWidth="1.7976931348623157E308">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></TextField>
+        <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></PasswordField>
+        <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi" />
+        <Button fx:id="register" alignment="CENTER" styleClass="register-text" text="Non hai un account? Registrati">
+            <VBox.margin>
+                <Insets top="5" />
+            </VBox.margin>
+            <font>
+                <Font size="7.0" />
+            </font>
+        </Button>
+        <Label fx:id="warningText" alignment="CENTER" styleClass="warningText" />
+        <padding>
+            <Insets left="60.0" right="60.0" top="10.0" />
+        </padding>
+    </VBox>
 </StackPane>
