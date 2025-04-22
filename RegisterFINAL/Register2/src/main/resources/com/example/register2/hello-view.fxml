@@ -17,11 +17,20 @@
             </ImageView>
         </children>
     </HBox>
-    <VBox fx:id="loginBox" alignment="CENTER" minHeight="300.0" minWidth="280.0" prefHeight="459.0" prefWidth="433.0" styleClass="vbox-background" StackPane.alignment="CENTER">
+    <VBox fx:id="loginBox" alignment="CENTER" fillWidth="false" styleClass="vbox-background" StackPane.alignment="CENTER">
         <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO" />
-        <TextField fx:id="emailField" />
-        <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308" />
-        <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi" />
+        <TextField fx:id="emailField">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin></TextField>
+        <PasswordField fx:id="passwordField">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></PasswordField>
+        <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi">
+         <StackPane.margin>
+            <Insets bottom="15.0" />
+         </StackPane.margin></Button>
         <Button fx:id="register" alignment="CENTER" styleClass="register-text" text="Non hai un account? Registrati">
             <font>
                 <Font size="7.0" />

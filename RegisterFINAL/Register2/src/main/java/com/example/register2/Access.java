@@ -60,6 +60,8 @@ public class Access {
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
         warningText.setText("");
+        emailField.setMinWidth(200);  // Larghezza minima
+        passwordField.setMinWidth(200);
         register.setOnAction(event -> switchToRegistrationPage());
         access.setOnAction(event -> loginUser());
         Node[] formElements = {welcomeText, emailField, passwordField, access, register};
@@ -82,7 +84,6 @@ public class Access {
     private void adjustLayout(double width, double height) {
         // Fattore di scala basato sulla dimensione MINORE
         double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
-
         // Gestione dell'immagine
         if (titleImage != null) {
             boolean showImage = width > IMAGE_VISIBILITY_THRESHOLD;
@@ -103,11 +104,8 @@ public class Access {
             if (showLoginBox) {
                 boolean compactMode = width < COMPACT_MODE_THRESHOLD;
 
-                double loginWidth = compactMode ? Math.min(width * 0.9, REFERENCE_LOGIN_WIDTH) : REFERENCE_LOGIN_WIDTH * scale;
-                double loginHeight = compactMode ? Math.min(height * 0.9, REFERENCE_LOGIN_HEIGHT) : REFERENCE_LOGIN_HEIGHT * scale;
-
-                loginWidth = Math.max(loginWidth, 280.0);
-                loginHeight = Math.max(loginHeight, 300.0);
+                double loginWidth = compactMode ? 280 : REFERENCE_LOGIN_WIDTH * scale;
+                double loginHeight = compactMode ? 300: REFERENCE_LOGIN_HEIGHT * scale;
 
                 loginBox.setPrefWidth(loginWidth);
                 loginBox.setPrefHeight(loginHeight);
@@ -125,16 +123,24 @@ public class Access {
                 StackPane.setMargin(loginBox, compactMode ? new Insets(0) : new Insets(0, Math.max(50, 200 * scale), 0, 0));
 
                 // Dimensioni font dinamiche
-                double baseFontSize = 12 * scale;
-                welcomeText.setStyle("-fx-font-size: " + (baseFontSize * 2) + "px;");
-                warningText.setStyle("-fx-font-size: " + baseFontSize + "px;");
-                access.setStyle("-fx-font-size: " + (baseFontSize * 1.25) + "px;");
-                register.setStyle("-fx-font-size: " + baseFontSize + "px;");
+                double baseFontSize = 15 * scale;
+                double welcomeTextScale = Math.max(scale, 0.7); // Non scende mai sotto il 70% della dimensione originale
+                double accessButtonScale = Math.max(scale, 0.7); // Non scende mai sotto il 70% della dimensione originale
+                double warningTextScale = Math.max(baseFontSize,0.7);
+                double registerScale = Math.max(baseFontSize  , 0.7);
 
-                // Dimensione campi
-                double fieldHeight = Math.max(30, 40 * scale);
-                emailField.setPrefHeight(fieldHeight);
-                passwordField.setPrefHeight(fieldHeight);
+                welcomeText.setStyle("-fx-font-size: " + ((15 * welcomeTextScale * 2) + 2) + "px;");
+                access.setStyle("-fx-font-size: " + ((15 * accessButtonScale * 2) + 2) + "px;");
+
+                warningText.setStyle("-fx-font-size: " + (warningTextScale + 2) + "px;");
+                register.setStyle("-fx-font-size: " + (registerScale + 5) + "px;");
+
+                // Imposta una larghezza proporzionale che si adatta al contenitore
+                double fieldWidth = Math.min(loginWidth - padding * 2, loginWidth * 0.9);
+                emailField.setPrefWidth(fieldWidth);
+                passwordField.setPrefWidth(fieldWidth);
+                emailField.setMaxWidth(fieldWidth);
+                passwordField.setMaxWidth(fieldWidth);
 
                 // Margini dinamici
                 double verticalMargin = 10 * scale;

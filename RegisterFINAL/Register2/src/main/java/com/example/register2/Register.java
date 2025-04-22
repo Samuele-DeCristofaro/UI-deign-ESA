@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Register {
+
     // FXML injected UI components
     @FXML
     private Label welcomeText;
@@ -52,7 +53,7 @@ public class Register {
     private final double REFERENCE_WIDTH = 1720.0;
     private final double REFERENCE_HEIGHT = 980.0;
     private final double REFERENCE_REGISTER_WIDTH = 433.0;
-    private final double REFERENCE_REGISTER_HEIGHT = 459.0;
+    private final double REFERENCE_REGISTER_HEIGHT = 560.0;
     private final double REFERENCE_IMAGE_WIDTH = 700.0;
     private final double REFERENCE_IMAGE_HEIGHT = 194.0;
     private final double MIN_SCREEN_WIDTH = 600.0;
@@ -65,7 +66,6 @@ public class Register {
     public void initialize() {
         // Initialize the database connection
         userDatabase = new UserDatabase();
-
         // Set default prompts for email and password fields
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
@@ -100,57 +100,110 @@ public class Register {
     }
 
     private void adjustLayout(double width, double height) {
-        // Calcola il fattore di scala basato sulla dimensione della finestra
-        double scaleWidth = Math.max(width / REFERENCE_WIDTH, MIN_SCREEN_WIDTH / REFERENCE_WIDTH);
-        double scaleHeight = Math.max(height / REFERENCE_HEIGHT, MIN_SCREEN_HEIGHT / REFERENCE_HEIGHT);
-        double scale = Math.min(scaleWidth, scaleHeight);
+        // Fattore di scala basato sulla dimensione MINORE
+        double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
 
-        // Ridimensiona l'immagine del titolo
-        titleImage.setFitWidth(REFERENCE_IMAGE_WIDTH * scale);
-        titleImage.setFitHeight(REFERENCE_IMAGE_HEIGHT * scale);
+        // Gestione dell'immagine (invariato)
+        if (titleImage != null) {
+            boolean showImage = width > MIN_SCREEN_WIDTH;
+            titleImage.setVisible(showImage);
+            titleImage.setManaged(showImage);
+            if (showImage) {
+                titleImage.setFitWidth(REFERENCE_IMAGE_WIDTH * scale);
+                titleImage.setFitHeight(REFERENCE_IMAGE_HEIGHT * scale);
+            }
+        }
 
-        // Ridimensiona la VBox di registrazione
-        double registerBoxWidth = REFERENCE_REGISTER_WIDTH * scale;
-        double registerBoxHeight = REFERENCE_REGISTER_HEIGHT * scale;
+        // Gestione del registerBox
+        if (registerBox != null) {
+            boolean showRegisterBox = width > MIN_SCREEN_WIDTH / 2;
+            registerBox.setVisible(showRegisterBox);
+            registerBox.setManaged(showRegisterBox);
 
-        registerBox.setPrefWidth(registerBoxWidth);
-        registerBox.setPrefHeight(registerBoxHeight);
-        registerBox.setMaxWidth(registerBoxWidth);
-        registerBox.setMaxHeight(registerBoxHeight);
+            if (showRegisterBox) {
+                boolean compactMode = width < MIN_SCREEN_WIDTH;
+                double registerWidth = compactMode ? 280 : REFERENCE_REGISTER_WIDTH * scale;
 
-        // Aggiorna padding e spaziatura
-        double padding = 20 * scale;
-        double spacing = 10 * scale;
-        registerBox.setPadding(new Insets(padding));
-        registerBox.setSpacing(spacing);
+                // Altezza minima di BASE (percentuale fissa dell'altezza di riferimento)
+                double baseMinHeightPercentage = 0.75; // Prova con 75%
+                double baseMinRegisterHeight = REFERENCE_REGISTER_HEIGHT * baseMinHeightPercentage;
 
-        // Aggiorna la dimensione dei font
-        double baseFontSize = 12 * scale;
-        welcomeText.setStyle("-fx-font-size: " + (baseFontSize * 2) + "px;");
-        warning1.setStyle("-fx-font-size: " + baseFontSize + "px;");
-        warning2.setStyle("-fx-font-size: " + baseFontSize + "px;");
-        warningSpecial.setStyle("-fx-font-size: " + baseFontSize + "px;");
-        register.setStyle("-fx-font-size: " + (baseFontSize * 1.25) + "px;");
-        backToLogin.setStyle("-fx-font-size: " + baseFontSize + "px;");
+                // BLOCCO Altezza per larghezza stretta
+                double narrowWidthThreshold = 700.0; // Soglia di larghezza per attivare il blocco
+                double lockedMinRegisterHeight = 500.0; // Altezza minima fissa quando la larghezza è stretta
 
-        // Aggiorna la dimensione dei campi di input
-        double fieldHeight = 40 * scale;
-        emailField.setPrefHeight(fieldHeight);
-        passwordField.setPrefHeight(fieldHeight);
-        register.setPrefHeight(fieldHeight);
+                double calculatedRegisterHeight = REFERENCE_REGISTER_HEIGHT * scale;
 
-        // Aggiorna i margini
-        double marginSmall = 10 * scale;
-        double marginMedium = 20 * scale;
-        double marginLarge = 30 * scale;
+                double registerHeight;
+                if (width < narrowWidthThreshold) {
+                    registerHeight = Math.max(calculatedRegisterHeight, lockedMinRegisterHeight);
+                } else {
+                    registerHeight = Math.max(calculatedRegisterHeight, baseMinRegisterHeight);
+                }
 
-        VBox.setMargin(welcomeText, new Insets(0, 0, marginMedium, 0));
-        VBox.setMargin(emailField, new Insets(0, 0, marginMedium, 0));
-        VBox.setMargin(passwordField, new Insets(0, 0, marginMedium, 0));
-        VBox.setMargin(warning2, new Insets(0, 0, marginMedium, 0));
-        VBox.setMargin(backToLogin, new Insets(marginSmall, 0, 0, 0));
-        VBox.setMargin(titleImage, new Insets(marginLarge, 0, 0, 0));
-        VBox.setMargin(registerBox, new Insets(marginLarge, 0, 0, 0));
+                registerBox.setPrefWidth(registerWidth);
+                registerBox.setPrefHeight(registerHeight);
+                registerBox.setMaxWidth(registerWidth);
+                registerBox.setMaxHeight(registerHeight);
+
+                // Padding e Spacing dinamici
+                double paddingValue = Math.max(10, 20 * scale); // Rinominato per chiarezza
+                double spacing = Math.max(5, 10 * scale);
+                registerBox.setPadding(new Insets(paddingValue));
+                registerBox.setSpacing(spacing);
+
+                // --- IMPOSTAZIONE FONT (prima di usarli per calcoli) ---
+                double welcomeTextScale = Math.max(scale, 0.7);
+                double registerButtonScale = Math.max(scale, 0.6);
+                double warningTextScale = Math.max(scale, 0.7);
+                double backToLoginScale = Math.max(scale, 0.7);
+
+                // Imposta stile per welcomeText PRIMA di calcolarne la larghezza
+                String welcomeTextStyle = "-fx-font-size: " + ((15 * welcomeTextScale * 2) + 2) + "px;";
+                welcomeText.setStyle(welcomeTextStyle);
+
+                // Imposta stile per bottone register
+                String registerButtonStyle = "-fx-font-size: " + ((15 * registerButtonScale * 2) + 2) + "px;";
+                register.setStyle(registerButtonStyle);
+
+                // Imposta stili per altri elementi
+                warning1.setStyle("-fx-font-size: " + (warningTextScale * 12 + 2) + "px;");
+                warning2.setStyle("-fx-font-size: " + (warningTextScale * 12 + 2) + "px;");
+                warningSpecial.setStyle("-fx-font-size: " + (warningTextScale * 12 + 2) + "px;");
+                backToLogin.setStyle("-fx-font-size: " + (backToLoginScale * 12 + 2) + "px;");
+
+                // Calcola la larghezza disponibile per gli elementi
+                double availableWidth = registerWidth - paddingValue * 2; // Larghezza interna al padding
+                double fieldWidth = Math.min(availableWidth, registerWidth * 0.9); // Larghezza massima dei campi
+
+                emailField.setPrefWidth(fieldWidth);
+                passwordField.setPrefWidth(fieldWidth);
+                emailField.setMaxWidth(fieldWidth);
+                passwordField.setMaxWidth(fieldWidth);
+
+                // --- NUOVA LOGICA PER LA LARGHEZZA DEL BOTTONE REGISTER ---
+                double buttonWidth = Math.min(availableWidth, registerWidth * 0.6);
+                buttonWidth = Math.max(buttonWidth, 100);
+
+                register.setPrefWidth(buttonWidth);
+                register.setMaxWidth(buttonWidth);
+                // --- FINE NUOVA LOGICA PER LA LARGHEZZA DEL BOTTONE REGISTER ---
+
+                backToLogin.setMaxWidth(availableWidth);
+                backToLogin.setWrapText(true);
+
+                // Margini dinamici
+                double verticalMargin = 10 * scale;
+                VBox.setMargin(welcomeText, new Insets(0, 0, verticalMargin * 3, 0));
+                VBox.setMargin(emailField, new Insets(0, 0, verticalMargin * 2, 0));
+                VBox.setMargin(passwordField, new Insets(0, 0, verticalMargin * 2, 0));
+                VBox.setMargin(warning1, new Insets(0, 0, verticalMargin, 0));
+                VBox.setMargin(warning2, new Insets(0, 0, verticalMargin, 0));
+                VBox.setMargin(warningSpecial, new Insets(0, 0, verticalMargin * 2, 0));
+                VBox.setMargin(register, new Insets(0, 0, verticalMargin * 3, 0));
+                VBox.setMargin(backToLogin, new Insets(verticalMargin, 0, 0, 0));
+            }
+        }
     }
 
     /**
