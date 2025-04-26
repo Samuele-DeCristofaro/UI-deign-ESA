@@ -44,6 +44,17 @@ public class UserDatabase {
         // Validate the password
         return user.getPassword().equals(password);
     }
+    public boolean validateEmail(String email){
+        User user = users.get(email);
+        return user != null;
+    }
+    public String getPasswordByEmail(String email){
+        User user = users.get(email);
+        if (user == null) {
+            return ""; // User doesn't exist
+        }
+        return user.getPassword();
+    }
 
     /**
      * Gets a user by their email.

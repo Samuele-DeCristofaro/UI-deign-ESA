@@ -36,6 +36,12 @@
                 <Font size="7.0" />
             </font>
         </Button>
+        <Button fx:id="recuperoPassword" alignment="CENTER" styleClass="register-text" text="Password dimenticata? Recuperala">
+            <font>
+                <Font size="7.0" />
+            </font>
+        </Button>
+
         <Label fx:id="warningText" alignment="CENTER" styleClass="warningText" />
     </VBox>
 </StackPane>

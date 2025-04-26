@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Access {
 
@@ -40,7 +41,11 @@ public class Access {
     @FXML
     private VBox loginBox;
     @FXML
+    private Button recuperoPassword;
+
+    @FXML
     private HBox imageContainer; // Se hai un HBox che contiene l'immagine
+    private EmailService emailService;
 
     // Valori di riferimento
     private final double REFERENCE_WIDTH = 1720.0; // Usa la larghezza definita nel FXML
@@ -57,6 +62,7 @@ public class Access {
 
     public void initialize() {
         userDatabase = new UserDatabase();
+        emailService = new EmailService();
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
         warningText.setText("");
@@ -64,6 +70,7 @@ public class Access {
         passwordField.setMinWidth(200);
         register.setOnAction(event -> switchToRegistrationPage());
         access.setOnAction(event -> loginUser());
+        recuperoPassword.setOnAction(event -> invioCredenziali());
         Node[] formElements = {welcomeText, emailField, passwordField, access, register};
         AnimationUtils.animateSimultaneously(formElements, 1);
 
@@ -132,8 +139,9 @@ public class Access {
                 welcomeText.setStyle("-fx-font-size: " + ((15 * welcomeTextScale * 2) + 2) + "px;");
                 access.setStyle("-fx-font-size: " + ((15 * accessButtonScale * 2) + 2) + "px;");
 
-                warningText.setStyle("-fx-font-size: " + (warningTextScale + 2) + "px;");
-                register.setStyle("-fx-font-size: " + (registerScale + 5) + "px;");
+                warningText.setStyle("-fx-font-size: " + (warningTextScale) + "px;");
+                register.setStyle("-fx-font-size: " + (registerScale) + "px;");
+                recuperoPassword.setStyle("-fx-font-size: " + (registerScale) + "px;");
 
                 // Imposta una larghezza proporzionale che si adatta al contenitore
                 double fieldWidth = Math.min(loginWidth - padding * 2, loginWidth * 0.9);
@@ -162,16 +170,49 @@ public class Access {
             warningText.setText("Errore di caricamento: " + e.getMessage());
         }
     }
+    private boolean check_access(String _email, String _password){
+        if (_email.isEmpty() || _password.isEmpty()) {
+            warningText.setText("Inserisci email e password");
+            AnimationUtils.shake(warningText);
+            return false;
+        }
+        return true;
+    }
+    private void invioCredenziali() {
+        String email = emailField.getText();
+
+        if (!userDatabase.validateEmail(email)) {
+            warningText.setText("Inserisci una email valida.");
+            AnimationUtils.shake(warningText);
+            return;
+        }
+
+        String password = userDatabase.getPasswordByEmail(email);
+
+        if (Objects.equals(password, "")) {
+            warningText.setText("Nessun account trovato per questa email.");
+            AnimationUtils.shake(warningText);
+            return;
+        }
+
+        boolean success = emailService.inviaPassword(email, password);
+
+        if (success) {
+            warningText.setText("Password inviata alla tua email.");
+        } else {
+            warningText.setText("Errore durante l'invio dell'email.");
+        }
+    }
+
 
     private void loginUser() {
         String email = emailField.getText();
         String password = passwordField.getText();
+        if (!check_access(email, password)){
 
-        if (email.isEmpty() || password.isEmpty()) {
-            warningText.setText("Inserisci email e password");
-            AnimationUtils.shake(warningText);
             return;
         }
+
 
         try {
             AnimationUtils.pulse(access);

@@ -39,7 +39,7 @@
                         </VBox.margin>
                     </PasswordField>
                     <Label fx:id="warning1" maxWidth="1.7976931348623157E308" styleClass="warnings-text1" text="Password con almeno :" textAlignment="CENTER" />
-                    <Label fx:id="warningSpecial" maxWidth="1.7976931348623157E308" styleClass="warnings-text2" text="1 carattere speciale o numero" />
+                    <Label fx:id="warningSpecial" maxWidth="1.7976931348623157E308" styleClass="warnings-text2" text="1 carattere speciale e 1 numero" />
                     <Label fx:id="warning2" maxWidth="1.7976931348623157E308" styleClass="warnings-text2" text="8 caratteri">
                         <VBox.margin>
                             <Insets bottom="20.0" />
