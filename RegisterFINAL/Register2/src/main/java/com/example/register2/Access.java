@@ -195,13 +195,13 @@ public class Access {
             return;
         }
 
-        boolean success = emailService.inviaPassword(email, password);
+      //  boolean success = emailService.inviaPassword(email, password);
 
-        if (success) {
-            warningText.setText("Password inviata alla tua email.");
-        } else {
-            warningText.setText("Errore durante l'invio dell'email.");
-        }
+     //   if (success) {
+      //      warningText.setText("Password inviata alla tua email.");
+      //  } else {
+       //     warningText.setText("Errore durante l'invio dell'email.");
+       // }
     }
 
 
