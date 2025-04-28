@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="ContenitorePadre" prefHeight="980" prefWidth="1720" styleClass="MainPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Access">
-    <HBox prefHeight="250.0" prefWidth="200.0" styleClass="Hbox-Padre" HBox.hgrow="ALWAYS" StackPane.alignment="TOP_LEFT">
-        <children>
-            <ImageView fx:id="titleImage" fitHeight="194.0" fitWidth="700.0" preserveRatio="true" smooth="false">
-                <Image url="@TITLE2.png" />
-                <HBox.margin>
-                    <Insets left="60.0" top="60.0" />
-                </HBox.margin>
-            </ImageView>
-        </children>
-    </HBox>
-    <VBox fx:id="loginBox" alignment="CENTER" fillWidth="false" styleClass="vbox-background" StackPane.alignment="CENTER">
-        <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO" />
-        <TextField fx:id="emailField">
-         <StackPane.margin>
-            <Insets />
-         </StackPane.margin></TextField>
-        <PasswordField fx:id="passwordField">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin></PasswordField>
-        <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi">
-         <StackPane.margin>
-            <Insets bottom="15.0" />
-         </StackPane.margin></Button>
-        <Button fx:id="register" alignment="CENTER" styleClass="register-text" text="Non hai un account? Registrati">
-            <font>
-                <Font size="7.0" />
-            </font>
-        </Button>
-        <Button fx:id="recuperoPassword" alignment="CENTER" styleClass="register-text" text="Password dimenticata? Recuperala">
-            <font>
-                <Font size="7.0" />
-            </font>
-        </Button>
+<StackPane fx:id="ContenitorePadre" xmlns="http://javafx.com/javafx/17.0.12"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.prove.HelloController">
 
-        <Label fx:id="warningText" alignment="CENTER" styleClass="warningText" />
+    <VBox alignment="CENTER"
+          prefHeight="425.0"
+          prefWidth="569.0"
+          spacing="20.0"
+          style="-fx-background-color: rgb(27,28,29);">
+
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+
+
+        <Label fx:id="testo"
+               alignment="TOP_CENTER"
+               text="Label"
+               textAlignment="CENTER"
+               textFill="WHITE"
+               wrapText="true">
+            <font>
+                <Font name="Arial Bold" size="28.0" />
+            </font>
+        </Label>
+
+        <HBox fx:id="griglia"
+              alignment="CENTER"
+              prefHeight="100.0"
+              prefWidth="200.0"
+              style="-fx-background-color: rgb(27,28,29);">
+
+        </HBox>
+
     </VBox>
 </StackPane>
