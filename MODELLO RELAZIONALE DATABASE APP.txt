@@ -3,14 +3,14 @@
  PianoAbbonamenti (CodPiano, NomePiano, Prezzo, Durata,DataRinnovo)
  Contenuto (CodContenuto, Nome, TipoContenuto, Anno, Durata, Trama, NomeRegista)
  Generi (CodGenere, NomeGenere)
- Contenuti_Generi (CodContenuto, CodGenere)  
- ContenutiGuardati (CodUtente, CodContenuto, DataVisione) 
+ Contenuti_Generi (CodContenuto, CodGenere)
+ ContenutiGuardati (CodUtente, CodContenuto, DataVisione)
  ContenutiPreferiti (CodUtente, CodContenuto, DataAggiunta)
  RecensioniContenuti (CodRecensione, CodUtente, CodContenuto, Valutazione, Commento, Data, Like)
 
 //CodUtente in guardati, preferiti e in recensioni serve per la distinzione di chi ha guardato,preferito e recensito il contenuto
 
-//Primary key 
+//Primary key
 
 Utente = CodUtente
 Account = Email
@@ -24,13 +24,13 @@ RecensioneContenuti = CodRecensione
 
 //Foreign key
 
-Utente = CodPiano (si riferisce alla connesione che ce tra utente e il suo piano di abbonamento)  
+Utente = CodPiano (si riferisce alla connesione che ce tra utente e il suo piano di abbonamento)
 Account = CodUtente (si riferisce alla connesione che c'è tra un account e l'utente)
 ContenutiGeneri= CodContenuto , CodGenere
 ContenutiGuardati=CodUtente, CodContenuto
 ContenutiPreferiti=CodUtente, CodContenuto
 RecensioneContenuti = CodUtente, CodContenuto
- 
+
 
 statement sqlLite
 
@@ -38,8 +38,6 @@ ACCOUNT:
 CREATE TABLE "Account" (
 	"Email"	TEXT,
 	"Password"	TEXT,
-	"CodUtente"	INTEGER,   //Foreign key
-	FOREIGN KEY("CodUtente") REFERENCES "Utente"("CodUtente"),
 	PRIMARY KEY("Email")
 )
 
@@ -57,7 +55,7 @@ CREATE TABLE "ContenutiGuardati" (
 
 
 
-CONTENUTIPREFERITI : 
+CONTENUTIPREFERITI :
 CREATE TABLE "ContenutiPreferiti" (
 	"CodUtente"	INTEGER,  //Foreign key
 	"CodContenuto"	INTEGER,  //Foreign key
@@ -69,7 +67,7 @@ CREATE TABLE "ContenutiPreferiti" (
 
 
 
-CONTENUTIGENERI : 
+CONTENUTIGENERI :
 CREATE TABLE "Contenuti_Generi" (
 	"CodContenuto"	INTEGER, //Foreign key
 	"CodGenere"	INTEGER, //Foreign key
@@ -133,16 +131,39 @@ CREATE TABLE "RecensioneContenuti" (
 
 
 
-UTENTE : 
+UTENTE :
 CREATE TABLE "Utente" (
 	"CodUtente"	INTEGER,
 	"Nome"	TEXT,
 	"DataNascita"	TEXT,
 	"CodPiano"	INTEGER, //Foreign key
 	"DataRegistrazione"	TEXT,
+	"Email" TEXT //----> Modifica fatta 25/04/2025
 	FOREIGN KEY("CodPiano") REFERENCES "PianoAbbonamenti"("CodPiano"),
+	FOREIGN KEY("Email") REFERENCES "Account"("Email"),//----> Modifica fatta25/04/2025
 	PRIMARY KEY("CodUtente" AUTOINCREMENT)
 )
+
+Modifiche
+modifiche fatte in data 25/04/2025:
+Rimozione del collegamento diretto tra Account e Utente
+
+Prima: La tabella Account conteneva un campo CodUtente come chiave esterna verso Utente.
+
+Ora: Il campo CodUtente è stato rimosso da Account. La relazione tra Account e Utente ora è indiretta, basata sull'email. Ogni profilo utente è associato ad un account tramite il campo Email.
+
+Aggiunta del campo Email nella tabella Utente
+
+È stato aggiunto un campo Email nella tabella Utente, che funge da chiave esterna verso la tabella Account. Ora ogni riga della tabella Utente è associata a un account tramite il campo Email, invece di un CodUtente in Account.
+
+Relazione uno-a-molti tra Account e Utente
+
+La modifica ha stabilito una relazione uno-a-molti tra Account e Utente, in cui un account può avere più profili utente. Questo è reso possibile dalla presenza del campo Email in Utente, che fa riferimento a Account. Il limite a 4 profili per account viene gestito a livello di applicazione, in quanto SQLite non supporta la gestione di vincoli di cardinalità massima direttamente nel database.
+
+Nessuna modifica alle altre tabelle (ContenutiGuardati, ContenutiPreferiti, RecensioneContenuti)
+
+Le tabelle che gestiscono i contenuti guardati, i preferiti e le recensioni non sono state modificate, in quanto già implementate per gestire i dati a livello di profilo utente (tramite il campo CodUtente). Queste tabelle continuano a funzionare correttamente senza alcuna modifica, con il CodUtente che identifica l'utente che ha guardato un contenuto, lo ha aggiunto ai preferiti o lo ha recensito.
+
 
 
 //Modifiche da fare in seguito = AGGIUNGERE I ("ON DELETE") , AGGIUNGERE I VINCOLI

@@ -40,7 +40,7 @@
                 “sqlite-jdbc” è il driver JDBC che permette a Java di leggere e scrivere su un database SQLite.
             -->
 
-            <version>3.36.0.1</version>
+            <version>3.2.1</version>
             <!--
                 Specifica la versione esatta dell’artefatto da scaricare.
                 La versione 3.36.0.1 garantisce compatibilità con funzionalità di SQLite e del driver di quell’epoca.

@@ -10,7 +10,7 @@
 
 <StackPane fx:id="ContenitorePadre" xmlns="http://javafx.com/javafx/17.0.12"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="org.example.prove.HelloController">
+           fx:controller="com.example.register2.HelloController">
 
     <VBox alignment="CENTER"
           prefHeight="425.0"
