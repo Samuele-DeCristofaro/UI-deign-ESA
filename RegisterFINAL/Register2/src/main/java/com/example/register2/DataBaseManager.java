@@ -1,10 +1,16 @@
-package org.example.prove;  // Dichiara il package in cui risiede questa classe
+package com.example.register2;  // Dichiara il package in cui risiede questa classe
 
 import java.sql.Connection; // Importa l’interfaccia Connection per gestire la connessione al database
 import java.sql.DriverManager; // Importa DriverManager per ottenere la connessione JDBC
 import java.sql.SQLException; // Importa SQLException per gestire gli errori SQL
 
 public class DataBaseManager {
+    private static final String URL = "jdbc:sqlite:src/main/resources/DatabaseProjectUID.db";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL);
+    }
+
     public static void main(String[] args) {
         // Definisce l’URL di connessione: indica il driver JDBC e il percorso del file .db
         String url = "jdbc:sqlite:src/main/resources/DatabaseProjectUID.db";

@@ -1,4 +1,4 @@
-package org.example.prove;
+package com.example.register2;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

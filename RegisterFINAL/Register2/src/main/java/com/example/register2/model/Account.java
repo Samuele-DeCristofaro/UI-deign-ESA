@@ -1,4 +1,4 @@
-package org.example.prove.model;
+package com.example.register2.model;
 
 public class Account {
 
