@@ -5,15 +5,14 @@ import java.sql.DriverManager; // Importa DriverManager per ottenere la connessi
 import java.sql.SQLException; // Importa SQLException per gestire gli errori SQL
 
 public class DataBaseManager {
-    private static final String URL = "jdbc:sqlite:src/main/resources/DatabaseProjectUID.db";
-
+    private static final String URL = "jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\example\\register2\\DatabaseProjectUID.db";
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
 
     public static void main(String[] args) {
         // Definisce l’URL di connessione: indica il driver JDBC e il percorso del file .db
-        String url = "jdbc:sqlite:src/main/resources/DatabaseProjectUID.db";
+        String url = "jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\example\\register2\\DatabaseProjectUID.db";
 
         // Prova ad aprire la connessione; try-with-resources chiude automaticamente conn al termine
         try (Connection conn = DriverManager.getConnection(url)) {
