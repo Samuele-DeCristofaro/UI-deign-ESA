@@ -9,4 +9,6 @@ module com.example.register2 {
     exports com.example.register2;
     exports com.example.register2.DAO;
     opens com.example.register2.DAO to javafx.fxml;
+    exports com.example.register2.Profile;
+    opens com.example.register2.Profile to javafx.fxml;
 }

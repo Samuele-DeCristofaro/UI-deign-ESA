@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="pageContainer" alignment="CENTER" prefHeight="578.0" prefWidth="745.0" spacing="30" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.ModifyCreateController">
+<VBox fx:id="pageContainer" alignment="CENTER" prefHeight="578.0" prefWidth="745.0" spacing="30" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.register2.Profile.ModifyCreateController">
     <children>
         <Label fx:id="titlePage" alignment="TOP_CENTER" text="MOVIESTAR" />
         <HBox fx:id="elementContainer" alignment="CENTER">

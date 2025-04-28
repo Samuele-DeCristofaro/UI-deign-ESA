@@ -1,5 +1,7 @@
 package com.example.register2.model;
 
+import com.example.register2.User;
+
 public class Account {
 
 
@@ -37,8 +39,19 @@ public class Account {
     public Utente[] getUtenti() {
         return utenti;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Account user = (Account) obj;
+        return email.equals(user.email);
+    }
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
 
-    public void verificaPassword() {
+    /*public void verificaPassword() {
         // Requisiti password:
         // 1) lunghezza minima di 8 caratteri
         // 2) almeno una lettera maiuscola
@@ -233,6 +246,6 @@ public class Account {
             System.out.println("Estensione non valida");
         }
 
-    }
+    }*/
 
 }
