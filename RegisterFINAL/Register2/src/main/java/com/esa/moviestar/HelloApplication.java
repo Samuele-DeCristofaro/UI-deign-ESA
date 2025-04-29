@@ -16,9 +16,8 @@ public class HelloApplication extends Application{
 
         Scene scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
-
         primaryStage.setTitle("Titolo della finestra");
-
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
