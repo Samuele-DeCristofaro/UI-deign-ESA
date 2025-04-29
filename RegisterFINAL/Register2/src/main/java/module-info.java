@@ -6,8 +6,8 @@ module com.esa.moviestar {
 
 
     opens com.esa.moviestar to javafx.fxml;
-    exports com.esa.moviestar.DAO;
-    opens com.esa.moviestar.DAO to javafx.fxml;
+    exports com.esa.moviestar.Database;
+    opens com.esa.moviestar.Database to javafx.fxml;
     exports com.esa.moviestar.Profile;
     opens com.esa.moviestar.Profile to javafx.fxml;
     exports com.esa.moviestar;

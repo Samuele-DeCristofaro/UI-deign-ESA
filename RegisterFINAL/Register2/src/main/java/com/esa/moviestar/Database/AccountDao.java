@@ -1,4 +1,4 @@
-package com.esa.moviestar.DAO;
+package com.esa.moviestar.Database;
 
 import com.esa.moviestar.model.Account;
 

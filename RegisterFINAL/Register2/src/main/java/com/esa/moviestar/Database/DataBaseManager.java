@@ -1,4 +1,4 @@
-package com.esa.moviestar.DAO;  // Dichiara il package in cui risiede questa classe
+package com.esa.moviestar.Database;  // Dichiara il package in cui risiede questa classe
 
 import java.sql.Connection; // Importa l’interfaccia Connection per gestire la connessione al database
 import java.sql.DriverManager; // Importa DriverManager per ottenere la connessione JDBC
