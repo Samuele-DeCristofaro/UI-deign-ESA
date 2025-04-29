@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="rootHeader" prefHeight="88.0" prefWidth="1362.0" styleClass="root-header" stylesheets="@../styles/Header.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.home.HeaderController">
+    <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="64.0" BorderPane.alignment="CENTER" StackPane.alignment="CENTER_LEFT">
+        <StackPane.margin>
+            <Insets bottom="8.0" top="8.0" />
+        </StackPane.margin>
+        <HBox fx:id="navContainer" alignment="CENTER_LEFT" prefHeight="72.0" prefWidth="512.0" spacing="5.0" styleClass="nav-container" HBox.hgrow="ALWAYS">
+            <!-- Home Button -->
+            <StackPane fx:id="homeButton" maxWidth="${homeButton.height}" minHeight="64.0" minWidth="64.0" prefHeight="64.0" prefWidth="${homeButton.height}" styleClass="nav-button, home-button">
+                <padding>
+                    <Insets bottom="8" left="8" right="8" top="8" />
+                </padding>
+                <SVGPath fx:id="homeIcon" content="M6 22H2C0 22 0 21 0 19.05V10C0 8 .5 7 2 6L9 1C11 0 12 0 14 1L21 6C22.5 7 23 8 23 10V19C23 21 23 22 21 22H17C16 22 14.5 22 14.5 19.05V17C14.5 14 14 14 11.5 14 9 14 8.5 14 8.5 17V19C8.5 22 8 22 6 22Z" styleClass="icon" />
+            </StackPane>
+
+            <!-- Film Button -->
+            <HBox fx:id="filmButton" alignment="CENTER" prefWidth="128.0" spacing="8.0" styleClass="nav-button, section-button">
+                <padding>
+                    <Insets bottom="8.0" left="8.0" right="16.0" top="8.0" />
+                </padding>
+                <SVGPath fx:id="filmIcon" content="M3 0 21 0C23.5 0 24 .5 24 3L24 13C24 15.5 23.5 16 21 16L3 16C.5 16 0 15.5 0 13L0 3C0 .5.5 0 3 0" styleClass="icon" />
+                <Text styleClass="nav-text" text="Film">
+                    <font>
+                        <Font name="Inter Regular" size="20.0" />
+                    </font>
+                </Text>
+            </HBox>
+
+            <!-- Series Button -->
+            <HBox fx:id="seriesButton" alignment="CENTER" prefWidth="128.0" spacing="8.0" styleClass="nav-button, section-button">
+                <padding>
+                    <Insets bottom="8.0" left="8.0" right="16.0" top="8.0" />
+                </padding>
+                <SVGPath fx:id="tvIcon" content="M3 3 21 3C23.5 3 24 3.5 24 6L24 13C24 15.5 23.5 16 21 16L3 16C.5 16 0 15.5 0 13L0 6C0 3.5.5 3 3 3M2 2 22 2C24 2 24 0 22 0L2 0C0 0 0 2 2 2" styleClass="icon" />
+                <Text styleClass="nav-text" text="Serie">
+                    <font>
+                        <Font name="Inter Regular" size="20.0" />
+                    </font>
+                </Text>
+            </HBox>
+
+            <!-- Search Button -->
+            <HBox fx:id="searchButton" alignment="CENTER" prefHeight="64.0" prefWidth="370.0" spacing="8.0" styleClass="nav-button, search-button">
+                <padding>
+                    <Insets bottom="8.0" left="8.0" right="16.0" top="8.0" />
+                </padding>
+                <SVGPath fx:id="searchIcon" content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" styleClass="icon" />
+                <TextField fx:id="tbxSearch" maxHeight="1.7976931348623157E308" promptText="Search" styleClass="search-field" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="Inter Regular" size="18.0" />
+                    </font>
+                </TextField>
+            </HBox>
+        </HBox>
+       <HBox fx:id="titleImageContainer" alignment="CENTER" HBox.hgrow="ALWAYS">
+           <ImageView fx:id="moviestarImage" fitHeight="178.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+               <Image url="@../images/imgtitle.png" />
+           </ImageView>
+       </HBox>
+        <HBox HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_RIGHT" prefHeight="${navContainer.width}" prefWidth="512.0" HBox.hgrow="ALWAYS">
+                <ImageView fx:id="profileImage" fitHeight="64" fitWidth="64" preserveRatio="true" StackPane.alignment="CENTER">
+                        <Image url="@../images/untitled.png" />
+                    <clip>
+                    <Rectangle arcHeight="48" arcWidth="48" height="${profileImage.fitHeight}" width="${profileImage.fitWidth}" />
+                </clip>
+                </ImageView>
+            </HBox>
+    </HBox>
+    </HBox>
+</StackPane>

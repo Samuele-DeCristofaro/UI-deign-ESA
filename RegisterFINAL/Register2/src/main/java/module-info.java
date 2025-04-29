@@ -15,4 +15,9 @@ module com.esa.moviestar {
     opens com.esa.moviestar.Login to javafx.fxml;
     exports com.esa.moviestar.bin;
     opens com.esa.moviestar.bin to javafx.fxml;
+    //aggiunto
+    exports com.esa.moviestar.movie_view;
+    opens com.esa.moviestar.movie_view to javafx.fxml;
+    exports com.esa.moviestar.home;
+    opens com.esa.moviestar.home to javafx.fxml;
 }

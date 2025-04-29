@@ -1,0 +1,37 @@
+.label{
+-fx-font-size: 16px;
+-fx-font-weight: bold;
+}
+.scroll-pane {
+    -fx-background-color:transparent;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-shape: null;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #151515;
+    -fx-background-radius: 5em;
+}
+
+.svg-container{
+    background-color: green;
+ /* background-image: url('/images/title.svg');*/
+}
