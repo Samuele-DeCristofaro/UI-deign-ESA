@@ -12,23 +12,36 @@ public class AccountDao {
 
     private Connection connection;
 
+
     public AccountDao(Connection connection){
-        this.connection=connection;
+        try{
+            this.connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db"); //  Ora ottiene davvero la connessione
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+
+
+
     //Metodo per inserire un Account
-    public void inserisciAccount(Account account) throws SQLException {
+    public boolean inserisciAccount(Account account) throws SQLException {
         String sql = "INSERT INTO account (email,password) Values (?,?);";
 
         try(PreparedStatement stmt = connection.prepareStatement(sql)){
             stmt.setString(1, account.getEmail());
             stmt.setString(2, account.getPassword());
             stmt.execute();
+            return true;
         }catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLException("Errore nell'inserire l'account", e);
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                // Email già esistente
+                return false;
+            } else {
+                e.printStackTrace();
+                return false;
+            }
         }
-
     }
 
     //Metodo per eliminare l'account
