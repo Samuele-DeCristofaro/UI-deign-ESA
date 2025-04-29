@@ -1,7 +1,10 @@
 package com.esa.moviestar.Login;
 
+import com.esa.moviestar.Database.AccountDao;
+import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.User;
 import com.esa.moviestar.bin.UserDatabase;
+import com.esa.moviestar.model.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -16,6 +19,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class Register {
@@ -45,7 +50,7 @@ public class Register {
     private ImageView titleImage;
 
     // Database access
-    private UserDatabase userDatabase;
+    //private UserDatabase userDatabase;
 
     // Regex patterns for email and password validation
     private String email_regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
@@ -67,7 +72,7 @@ public class Register {
      */
     public void initialize() {
         // Initialize the database connection
-        userDatabase = new UserDatabase();
+        //userDatabase = new UserDatabase();
         // Set default prompts for email and password fields
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
@@ -263,17 +268,23 @@ public class Register {
         AnimationUtils.pulse(register);
 
         // Create a new User object
-        User user = new User(email, password);
+
 
         // Attempt to add the user to the database
-        if (!userDatabase.addUser(user)) {
-            // Display error message if user already exists
-            welcomeText.setText("Utente già esistente");
-            AnimationUtils.shake(welcomeText);
-        } else {
-            // Display success message with animation if user is successfully registered
-            welcomeText.setText("Utente registrato con successo!");
-            AnimationUtils.pulse(welcomeText);
+        try {
+            Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+            Account account = new Account(email,password);
+            AccountDao dao = new AccountDao(connection);
+            if (dao.inserisciAccount(account)) {
+                welcomeText.setText("Utente registrato con successo!");
+                AnimationUtils.pulse(welcomeText);
+            } else {
+                welcomeText.setText("Utente già esistente");
+                AnimationUtils.shake(welcomeText);
+            }
+        } catch (SQLException e) {
+            welcomeText.setText("Errore durante la registrazione"+e.getMessage());
+            e.printStackTrace();
         }
-    }
+        }
 }
