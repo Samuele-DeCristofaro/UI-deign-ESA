@@ -1,5 +1,7 @@
 package com.esa.moviestar.Login;
 
+import com.esa.moviestar.Database.AccountDao;
+import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.UserDatabase;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -17,7 +19,11 @@ import javafx.scene.layout.*;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Objects;
+
+
 
 public class Access {
 
@@ -68,7 +74,13 @@ public class Access {
         emailField.setMinWidth(200);  // Larghezza minima
         passwordField.setMinWidth(200);
         register.setOnAction(event -> switchToRegistrationPage());
-        access.setOnAction(event -> loginUser());
+        access.setOnAction(event -> {
+            try {
+                loginUser();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         recuperoPassword.setOnAction(event -> invioCredenziali());
         Node[] formElements = {welcomeText, emailField, passwordField, access, register};
         AnimationUtils.animateSimultaneously(formElements, 1);
@@ -204,7 +216,7 @@ public class Access {
     }
 
 
-    private void loginUser() {
+    private void loginUser() throws SQLException {
         String email = emailField.getText();
         String password = passwordField.getText();
         if (!check_access(email, password)){
@@ -212,14 +224,15 @@ public class Access {
             return;
         }
 
-
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        AccountDao dao = new AccountDao(connection);
         try {
             AnimationUtils.pulse(access);
 
-            if (userDatabase.validateUser(email, password)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+            if (dao.cercaAccount(email)!=null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"));
                 Parent homeContent = loader.load();
-                homeContent.getStylesheets().add(getClass().getResource("/com/example/register2/home.css").toExternalForm());
+                homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
 
                 Node currentContent = ContenitorePadre.getChildren().get(0);
                 AnimationUtils.fadeOut(currentContent, 500);

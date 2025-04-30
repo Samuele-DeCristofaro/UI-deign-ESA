@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class AccountDao {
 
-    private Connection connection;
+    private static Connection connection;
 
 
     public AccountDao(Connection connection){
@@ -60,14 +60,12 @@ public class AccountDao {
     }
 
     //Metodo per cercare l'account dall'email
-    public Account cercaAccount(String email) throws SQLException {
-
+    public  Account cercaAccount(String email) throws SQLException {
         String query = "SELECT * FROM account WHERE email = ?;";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
-            System.out.println("Risultato : ");
             if (rs.next()) {
                 return new Account(
                         rs.getString("email"),
@@ -81,5 +79,6 @@ public class AccountDao {
             throw new SQLException("Errore nel cercare l'utente", e);
         }
     }
+
 
 }
