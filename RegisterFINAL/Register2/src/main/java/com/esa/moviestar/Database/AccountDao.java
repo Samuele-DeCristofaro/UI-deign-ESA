@@ -15,7 +15,7 @@ public class AccountDao {
 
     public AccountDao(Connection connection){
         try{
-            this.connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db"); //  Ora ottiene davvero la connessione
+            this.connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db"); //  Ora ottiene davvero la connessione
         } catch (SQLException e) {
             e.printStackTrace();
         }

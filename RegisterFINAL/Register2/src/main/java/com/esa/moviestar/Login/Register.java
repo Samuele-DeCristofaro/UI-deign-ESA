@@ -54,7 +54,7 @@ public class Register {
 
     // Regex patterns for email and password validation
     private String email_regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-    private String password_regex = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-])[A-Za-z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-]{8,}$";
+    private String password_regex = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?~\\-]{8,}$";
 
     // Valori di riferimento per il layout responsivo
     private final double REFERENCE_WIDTH = 1720.0;
@@ -166,11 +166,11 @@ public class Register {
                 double backToLoginScale = Math.max(scale, 0.7);
 
                 // Imposta stile per welcomeText PRIMA di calcolarne la larghezza
-                String welcomeTextStyle = "-fx-font-size: " + ((15 * welcomeTextScale * 2) + 2) + "px;";
+                String welcomeTextStyle = "-fx-font-size: " + (15 * welcomeTextScale * 2) + "px;";
                 welcomeText.setStyle(welcomeTextStyle);
 
                 // Imposta stile per bottone register
-                String registerButtonStyle = "-fx-font-size: " + ((15 * registerButtonScale * 2) + 2) + "px;";
+                String registerButtonStyle = "-fx-font-size: " + (15 * registerButtonScale * 2) + "px;";
                 register.setStyle(registerButtonStyle);
 
                 // Imposta stili per altri elementi
@@ -272,7 +272,7 @@ public class Register {
 
         // Attempt to add the user to the database
         try {
-            Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+            Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
             Account account = new Account(email,password);
             AccountDao dao = new AccountDao(connection);
             if (dao.inserisciAccount(account)) {

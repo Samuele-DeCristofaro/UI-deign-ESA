@@ -11,7 +11,7 @@ public class EmailService {
     private Session mailSession;
 
     public EmailService() {
-        senderEmail = "moviestar@gmail.com";
+        senderEmail = "moviestarclient@gmail.com";
         senderPassword = "eenu rbsi obnl hzha";
         this.emailProperties = new Properties();
 

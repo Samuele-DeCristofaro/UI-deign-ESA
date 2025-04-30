@@ -3,6 +3,7 @@ package com.esa.moviestar.Login;
 import com.esa.moviestar.Database.AccountDao;
 import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.UserDatabase;
+import jakarta.mail.MessagingException;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
-
+import java.util.Random;
 
 
 public class Access {
@@ -81,7 +81,13 @@ public class Access {
                 throw new RuntimeException(e);
             }
         });
-        recuperoPassword.setOnAction(event -> invioCredenziali());
+        recuperoPassword.setOnAction(event -> {
+            try {
+                invioCredenziali();
+            } catch (SQLException | IOException | MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Node[] formElements = {welcomeText, emailField, passwordField, access, register};
         AnimationUtils.animateSimultaneously(formElements, 1);
 
@@ -189,30 +195,49 @@ public class Access {
         }
         return true;
     }
-    private void invioCredenziali() {
+    private void invioCredenziali() throws SQLException, IOException, MessagingException {
         String email = emailField.getText();
 
-        if (!userDatabase.validateEmail(email)) {
-            warningText.setText("Inserisci una email valida.");
-            AnimationUtils.shake(warningText);
-            return;
-        }
+        //String password = userDatabase.getPasswordByEmail(email);
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        AccountDao dao = new AccountDao(connection);
 
-        String password = userDatabase.getPasswordByEmail(email);
-
-        if (Objects.equals(password, "")) {
+        if (dao.cercaAccount(email)==null) {
             warningText.setText("Nessun account trovato per questa email.");
             AnimationUtils.shake(warningText);
-            return;
+        }
+        else{
+            StringBuilder sb = new StringBuilder(6);
+            Random random = new Random();
+
+            String cifre = "0123456789";
+
+            for (int i = 0; i < 6; i++) {
+
+                int randomIndex = random.nextInt(cifre.length()); // random.nextInt(10)
+
+                char randomDigit = cifre.charAt(randomIndex);
+
+                sb.append(randomDigit);
+            }
+            //emailService.sendEmail(email, "Code to reset password", sb.toString());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
+            Parent homeContent = loader.load();
+            homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
+
+            Node currentContent = ContenitorePadre.getChildren().get(0);
+            AnimationUtils.fadeOut(currentContent, 500);
+
+            PauseTransition pause = new PauseTransition(Duration.millis(500));
+            pause.setOnFinished(e -> {
+                ContenitorePadre.getChildren().setAll(homeContent); // Usa setAll per una sostituzione più efficiente
+                AnimationUtils.fadeIn(homeContent, 500);
+            });
+            pause.play();
+
         }
 
-      //  boolean success = emailService.inviaPassword(email, password);
 
-     //   if (success) {
-      //      warningText.setText("Password inviata alla tua email.");
-      //  } else {
-       //     warningText.setText("Errore durante l'invio dell'email.");
-       // }
     }
 
 
@@ -220,11 +245,10 @@ public class Access {
         String email = emailField.getText();
         String password = passwordField.getText();
         if (!check_access(email, password)){
-
             return;
         }
 
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
         AccountDao dao = new AccountDao(connection);
         try {
             AnimationUtils.pulse(access);
