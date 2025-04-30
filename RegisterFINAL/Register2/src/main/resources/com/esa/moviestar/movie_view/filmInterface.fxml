@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="822.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ScrollPane fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox>
+                    <AnchorPane>
+                        <ImageView fitHeight="62.0" fitWidth="788.0" AnchorPane.bottomAnchor="-62.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0" />
+                    </AnchorPane>
+                <VBox prefWidth="771.0" spacing="16.0">
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="64.0" spacing="24.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ispsum dolor si amet" textAlignment="CENTER">
+                                    <font>
+                                        <Font name="Inter Regular" size="24.0" />
+                                    </font>
+                                </Text>
+                                <StackPane maxHeight="48.0" maxWidth="48.0" prefHeight="48.0" prefWidth="48.0">
+                                    <children>
+                                        <SVGPath />
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" spacing="24.0">
+                            <children>
+                        <AnchorPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                                      <Label alignment="TOP_LEFT" prefHeight="164.0" prefWidth="285.0" style="-fx-background-color: red;" text="plot" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" StackPane.alignment="CENTER">
+                                          <font>
+                                              <Font name="Inter Regular" size="16.0" />
+                                          </font>
+                                      </Label>
+                           </children>
+                        </AnchorPane>
+                                <AreaChart prefHeight="150.0" prefWidth="227.0" HBox.hgrow="ALWAYS">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </AreaChart>
+                            </children>
+                        </HBox>
+                        <VBox prefHeight="256.0" spacing="24.0" style="-fx-background-color: green;">
+                            <children>
+                                <Label text="Label" />
+                            </children>
+                        </VBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Attori">
+                            <font>
+                                <Font name="Inter Regular" size="20.0" />
+                            </font>
+                        </Text>
+                        <HBox minWidth="100.0" prefHeight="237.0" prefWidth="758.0">
+                            <children>
+                                <HBox prefHeight="160.0" prefWidth="256.0" style="-fx-background-color: yellow;" HBox.hgrow="ALWAYS" />
+                            </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+                            <font>
+                                <Font name="Inter Regular" size="20.0" />
+                            </font>
+                        </Text>
+                        <HBox minWidth="763.0" prefHeight="256.0" style="-fx-background-color: blue;" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Comments">
+                            <font>
+                                <Font name="Inter Regular" size="20.0" />
+                            </font>
+                        </Text>
+                        <VBox minWidth="100.0" prefHeight="100.0" style="-fx-background-color: red;" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Film simili:">
+                            <font>
+                                <Font name="Inter Regular" size="20.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+            <children>
+                <SVGPath />
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,70 @@
+/* Root header styles */
+.root-header {
+    -fx-background-radius: 0 0 20 20;
+    -fx-background-color: rgba(15,15,15,0.97);
+    -fx-background-radius: 0 0 32 32;
+    -fx-padding: 0 8 0 8;
+}
+
+/* Navigation container */
+.nav-container {
+    -fx-background-color: transparent;
+    -fx-background-radius: 24;
+    -fx-padding: 4;
+}
+
+/* Common button styling */
+.nav-button {
+     -fx-background-color: transparent;
+     -fx-background-radius: 24;
+     -fx-border-radius: 24;
+     -fx-border-color: #3f3f3f;
+}
+.nav-button:hover{
+    -fx-background-color: #3f3f3f;
+}
+.nav-button:pressed{
+    -fx-background-color: #1f1f1f;
+}
+.nav-button-active{
+    -fx-background-color: #6027B4;
+}
+.nav-button-active:hover{
+    -fx-background-color: #6027B4;
+}
+.nav-search-button-active{
+    -fx-background-color: #3f3f3f;
+}
+
+/* Section buttons (Film, Serie) */
+.section-button {
+
+}
+
+/* Search button */
+.search-button {}
+
+/* Search field */
+.search-field {
+    -fx-prompt-text-fill: #F0ECFD;
+    -fx-text-fill: #F0ECFD;
+    -fx-background-color: transparent;
+}
+
+/* Profile button */
+.profile-button {
+    -fx-background-color: #313131;
+    -fx-background-radius: 24;
+    -fx-border-radius: 24;
+    -fx-border-color: #3f3f3f;
+}
+
+/* Text styling */
+.nav-text {
+    -fx-fill: #F0ECFD;
+}
+
+/* Icon styling */
+.icon {
+    -fx-fill: #F0ECFD;
+}

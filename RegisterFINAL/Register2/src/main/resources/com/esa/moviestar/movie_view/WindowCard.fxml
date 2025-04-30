@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="windowCardRoot" maxHeight="445.0" maxWidth="766.0" prefHeight="407.0" prefWidth="653.0" stylesheets="@../styles/WindowCard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.movie_view.WindowCardController">
+    <StackPane fx:id="imgContainer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="imgView" fitHeight="${imgContainer.height}" fitWidth="${imgContainer.width}" StackPane.alignment="CENTER">
+            <clip>
+                <Rectangle arcHeight="48" arcWidth="48" height="${imgView.fitHeight}" width="${imgView.fitWidth}" />
+            </clip>
+        </ImageView>
+    </StackPane>
+    <HBox fx:id="controlsContainer" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+        <VBox alignment="BOTTOM_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+            <Text fx:id="titleLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="433.13671875" />
+            <Label fx:id="descriptionLabel" alignment="TOP_LEFT" maxHeight="256.0" prefWidth="422.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius metus quis vulputate ultrices. Proin ultricies ullamcorper gravida. Nulla eget ante sed diam ultrices scelerisque. Vivamus quis consectetur risus, a fermentum mi. Duis convallis diam non aliquam pulvinar. Donec et semper nibh. Vivamus vehicula, lorem nec rutrum faucibus, sapien magna suscipit est, eget porttitor libero augue vitae nunc. Curabitur sem neque, commodo nec fringilla nec, vulputate id diam. In neque lorem, interdum nec velit nec, sollicitudin bibendum nisl. Morbi suscipit eu eros aliquam sollicitudin. Duis ultrices leo sit amet justo porta, nec convallis turpis fringilla. In ut nisi vitae nulla hendrerit interdum." textOverrun="WORD_ELLIPSIS" wrapText="true" />
+
+            <HBox spacing="10">
+                <HBox fx:id="playButton" alignment="CENTER" prefHeight="48.0" prefWidth="128.0" spacing="8.0">
+                    <SVGPath content="M.5564 23.6246c.1632.0904.3434.1354.5236.1354.1989 0 .3976-.0549.5724-.1642l17.28-10.7999c.3158-.1974.5076-.5435.5076-.9158 0-.3724-.1918-.7185-.5076-.9158L1.6524.1642c-.333-.2082-.7526-.2191-1.096-.0288C.213.3257 0 .6874 0 1.08v21.6C0 23.0726.213 23.4343.5564 23.6246z" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Play" />
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="16.0" top="8.0" />
+                    </padding>
+                </HBox>
+                <HBox fx:id="btnInfo" alignment="CENTER" prefHeight="48.0" prefWidth="128.0" spacing="8.0">
+                    <SVGPath content="M10.8 18h2.4v-7.2h-2.4v7.2Zm1.2-9.6q.51 0 .855-.345T13.2 7.2q0-.51-.345-.855T12 6q-.51 0-.855.345T10.8 7.2q0 .51.345.855T12 8.4Zm0 15.6q-2.49 0-4.68-.945T3.51 20.49q-1.62-1.62-2.565-3.81T0 12q0-2.49.945-4.68T3.51 3.51q1.62-1.62 3.81-2.565T12 0q2.49 0 4.68.945T20.49 3.51q1.62 1.62 2.565 3.81T24 12q0 2.49-.945 4.68T20.49 20.49q-1.62 1.62-3.81 2.565T12 24Zm0-2.4q4.02 0 6.81-2.79t2.79-6.81q0-4.02-2.79-6.81t-6.81-2.79q-4.02 0-6.81 2.79t-2.79 6.81q0 4.02 2.79 6.81t6.81 2.79Zm0-9.6Z" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Info" />
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="16.0" top="8.0" />
+                    </padding>
+                </HBox>
+                <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
+
+                <HBox fx:id="ratingContainer" alignment="CENTER" prefWidth="92.0" scaleShape="false" spacing="8.0" styleClass="nav-button" HBox.hgrow="NEVER">
+                    <Text fx:id="ratingLabel" styleClass="nav-text" text="4/5" textAlignment="CENTER" />
+                    <SVGPath content="M12.8939 1.0166l3.1118 6.3053c.121.2449.3545.4145.6248.4539l6.9584 1.0111c.6804.0988.9523.935.4598 1.4151L19.0134 15.1097c-.1955.1906-.2848.4652-.2387.7344l1.1885 6.9301c.1164.6777-.5951 1.1945-1.2037.8745L12.5361 20.3769c-.2417-.1272-.5306-.1272-.7722 0L5.5401 23.6488c-.6086.32-1.32-.1968-1.2037-.8745l1.1885-6.9301c.0462-.2692-.0432-.5438-.2387-.7344L.2514 10.2017c-.4925-.4801-.2206-1.3162.4598-1.4151l6.9584-1.0111c.2703-.0391.5038-.209.6248-.4539L11.4062 1.0166C11.7104.3999 12.5896.3999 12.8939 1.0166zM12.8939 1.0166l3.1118 6.3053c.121.2449.3545.4145.6248.4539l6.9584 1.0111c.6804.0988.9523.935.4598 1.4151L19.0134 15.1097c-.1955.1906-.2848.4652-.2387.7344l1.1885 6.9301c.1164.6777-.5951 1.1945-1.2037.8745L12.5361 20.3769c-.2417-.1272-.5306-.1272-.7722 0L5.5401 23.6488c-.6086.32-1.32-.1968-1.2037-.8745l1.1885-6.9301c.0462-.2692-.0432-.5438-.2387-.7344L.2514 10.2017c-.4925-.4801-.2206-1.3162.4598-1.4151l6.9584-1.0111c.2703-.0391.5038-.209.6248-.4539L11.4062 1.0166C11.7104.3999 12.5896.3999 12.8939 1.0166z" />
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" top="8.0" />
+                    </padding>
+                </HBox>
+            </HBox>
+        </VBox>
+    </HBox>
+
+</AnchorPane>
