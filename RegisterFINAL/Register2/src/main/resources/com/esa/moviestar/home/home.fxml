@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1920" maxWidth="1080" minHeight="-Infinity" minWidth="-Infinity" prefHeight="851.0" prefWidth="1077.0" style=" -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 20% , center 50% 50% , radius 55% , #633bc5, #1f1f1f); " xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.home.HomeController">
+
+
+   <ScrollPane fx:id="root" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="TOP_CENTER">
+      <VBox fx:id="body" alignment="TOP_CENTER" spacing="16.0" style=" -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="16.0" top="16.0" />
+         </padding>
+         <Pane fx:id="pnl_separator" prefHeight="60.0" prefWidth="0.0" />
+
+         <VBox fx:id="scrollViewContainer" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , rgba(0,0,0,0.5), #101010); -fx-border-radius: 48px; -fx-background-radius: 48px;" VBox.vgrow="ALWAYS">
+            <padding>
+               <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+            </padding>
+            <effect>
+               <DropShadow color="rgba(0,0,0,0.3)" height="8" offsetY="2" radius="7.0" width="8" />
+            </effect>
+         </VBox>
+
+      </VBox>
+
+
+</ScrollPane>
+
+
+</AnchorPane>

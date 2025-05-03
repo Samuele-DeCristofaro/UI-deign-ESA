@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="cardContainer" maxHeight="400.0" maxWidth="600.0" prefHeight="300.0" prefWidth="400.0" styleClass="media-card" stylesheets="@../styles/FilmCard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.movie_view.FilmCardController">
+    <ImageView fx:id="imgView" fitHeight="300.0" fitWidth="400.0" pickOnBounds="true">         <clip>
+        <Rectangle arcHeight="48" arcWidth="48" height="${imgView.fitHeight}" width="${imgView.fitWidth}" />
+    </clip></ImageView>
+    <!-- The background image will be set programmatically -->
+
+    <!-- Gradient overlay -->
+    <Region fx:id="gradientOverlay" styleClass="gradient-overlay" />
+
+    <!-- Metadata pane (initially visible) -->
+    <HBox fx:id="metadataPane" spacing="10" styleClass="media-metadata" StackPane.alignment="BOTTOM_LEFT">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+
+        <!-- Time/Episodes metadata -->
+        <HBox fx:id="timeMetadata" alignment="BOTTOM_LEFT" spacing="5">
+            <SVGPath fx:id="durationIcon" fill="WHITE">
+            <HBox.margin>
+               <Insets bottom="8.0" left="8.0" right="4.0" top="8.0" />
+            </HBox.margin></SVGPath>
+            <Label fx:id="timeLabel" alignment="BOTTOM_LEFT" style="-fx-font-size: 24px;" textFill="WHITE">
+                <font>
+                    <Font size="10.0" />
+                </font></Label>
+        </HBox>
+
+        <!-- Spacer -->
+        <Region HBox.hgrow="ALWAYS" />
+
+        <!-- Rating metadata -->
+        <HBox fx:id="ratingMetadata" alignment="BOTTOM_RIGHT" spacing="5">
+            <Label fx:id="ratingLabel" alignment="BOTTOM_LEFT" style="-fx-font-size: 24;" textFill="WHITE">
+            <font>
+               <Font size="10.0" />
+            </font></Label>
+            <SVGPath content="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#ffc107" scaleX="1.5" scaleY="1.5">
+            <HBox.margin>
+               <Insets bottom="8.0" left="4.0" right="8.0" top="8.0" />
+            </HBox.margin></SVGPath>
+        </HBox>
+    </HBox>
+
+    <!-- Content pane (initially hidden) -->
+    <VBox fx:id="contentPane" alignment="BOTTOM_LEFT" opacity="0" prefHeight="306.0" prefWidth="300.0" spacing="5" styleClass="media-content" StackPane.alignment="BOTTOM_LEFT">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+
+        <Label fx:id="titleLabel" graphicTextGap="1.0" style="-fx-font-weight: bold; -fx-font-size: 24px;" textFill="WHITE" wrapText="true">
+            <font>
+                <Font name="Inter Regular" size="10.0" />
+            </font></Label>
+        <Label fx:id="descriptionLabel" graphicTextGap="1.0" style="-fx-font-size: 16px;" textFill="WHITE" wrapText="true">
+            <font>
+                <Font name="Inter Regular" size="10.0" />
+            </font>
+         <padding>
+            <Insets right="30.0" />
+         </padding></Label>
+    </VBox>
+</StackPane>
