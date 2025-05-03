@@ -80,5 +80,21 @@ public class AccountDao {
         }
     }
 
+    //metodo che serve ad aggiornare la password di un email specifica
+    public boolean aggiornaPassword(String email, String nuovaPassword) throws SQLException {
+        String query = "UPDATE account SET password = ? WHERE email = ?;";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nuovaPassword);
+            stmt.setString(2, email);
+            int righeModificate = stmt.executeUpdate();
+            return righeModificate > 0;  // ritorna true se almeno una riga è stata modificata
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Errore nell'aggiornamento della password per l'email: " + email, e);
+        }
+    }
+
+
 
 }
