@@ -3,6 +3,7 @@ package com.esa.moviestar.Login;
 import com.esa.moviestar.Database.AccountDao;
 import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.UserDatabase;
+import jakarta.mail.MessagingException;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
-
-
+import java.util.Random;
 
 public class Access {
 
@@ -48,8 +46,6 @@ public class Access {
     @FXML
     private Button recuperoPassword;
 
-    @FXML
-    private HBox imageContainer; // Se hai un HBox che contiene l'immagine
     private EmailService emailService;
 
     // Valori di riferimento
@@ -81,7 +77,13 @@ public class Access {
                 throw new RuntimeException(e);
             }
         });
-        recuperoPassword.setOnAction(event -> invioCredenziali());
+        recuperoPassword.setOnAction(event -> {
+            try {
+                invioCredenziali();
+            } catch (SQLException | IOException | MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Node[] formElements = {welcomeText, emailField, passwordField, access, register};
         AnimationUtils.animateSimultaneously(formElements, 1);
 
@@ -181,6 +183,7 @@ public class Access {
             warningText.setText("Errore di caricamento: " + e.getMessage());
         }
     }
+
     private boolean check_access(String _email, String _password){
         if (_email.isEmpty() || _password.isEmpty()) {
             warningText.setText("Inserisci email e password");
@@ -189,42 +192,64 @@ public class Access {
         }
         return true;
     }
-    private void invioCredenziali() {
+
+    private void invioCredenziali() throws SQLException, IOException, MessagingException {
         String email = emailField.getText();
 
-        if (!userDatabase.validateEmail(email)) {
-            warningText.setText("Inserisci una email valida.");
-            AnimationUtils.shake(warningText);
-            return;
-        }
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        AccountDao dao = new AccountDao(connection);
 
-        String password = userDatabase.getPasswordByEmail(email);
-
-        if (Objects.equals(password, "")) {
+        if (dao.cercaAccount(email)==null) {
             warningText.setText("Nessun account trovato per questa email.");
             AnimationUtils.shake(warningText);
-            return;
         }
+        else {
+            // Genera codice di verifica
+            StringBuilder sb = new StringBuilder(6);
+            Random random = new Random();
+            String cifre = "0123456789";
+            for (int i = 0; i < 6; i++) {
+                int randomIndex = random.nextInt(cifre.length());
+                char randomDigit = cifre.charAt(randomIndex);
+                sb.append(randomDigit);
+            }
+            String verificationCode = sb.toString();
 
-      //  boolean success = emailService.inviaPassword(email, password);
+            // Invia email con codice di verifica
+            // emailService.sendEmail(email, "Code to reset password", verificationCode);
 
-     //   if (success) {
-      //      warningText.setText("Password inviata alla tua email.");
-      //  } else {
-       //     warningText.setText("Errore durante l'invio dell'email.");
-       // }
+            // Carica la vista di reset password
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
+            Parent resetContent = loader.load();
+            resetContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/reset.css").toExternalForm());
+
+            // Ottieni il controller e prepara i dati necessari
+            ResetController resetController = loader.getController();
+            resetController.setUserEmail(email);
+            resetController.setVerificationCode(verificationCode);
+            resetController.setupResetButton();
+
+            // Animazione per la transizione
+            Node currentContent = ContenitorePadre.getChildren().getFirst();
+            AnimationUtils.fadeOut(currentContent, 300);
+
+            PauseTransition pause = new PauseTransition(Duration.millis(300));
+            pause.setOnFinished(e -> {
+                ContenitorePadre.getChildren().setAll(resetContent);
+                AnimationUtils.fadeIn(resetContent, 300);
+            });
+            pause.play();
+        }
     }
-
 
     private void loginUser() throws SQLException {
         String email = emailField.getText();
         String password = passwordField.getText();
         if (!check_access(email, password)){
-
             return;
         }
 
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
         AccountDao dao = new AccountDao(connection);
         try {
             AnimationUtils.pulse(access);
