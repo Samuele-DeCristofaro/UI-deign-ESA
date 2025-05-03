@@ -233,7 +233,12 @@ public class Register {
     /**
      * Saves a new user to the database after validating the email and password.
      */
-    public void saveUser() {
+
+    public String get_regex(){
+        return email_regex;
+    }
+
+    private void saveUser() {
         // Retrieve email and password from input fields
         String email = emailField.getText();
         String password = passwordField.getText();

@@ -1,5 +1,7 @@
 package com.esa.moviestar.Login;
 
+import com.esa.moviestar.Database.AccountDao;
+import com.esa.moviestar.Database.DataBaseManager;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,14 +10,20 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class ResetController {
+
+    @FXML
+    private TextField codeField;
 
     @FXML
     private PasswordField newPasswordField;
@@ -27,13 +35,17 @@ public class ResetController {
     private Button resetButton;
 
     @FXML
-    private VBox mainContainer; // Reference to the root VBox
+    private VBox mainContainer;
 
     @FXML
-    private Label statusMessage; // Feedback messages
+    private Label statusMessage;
 
     @FXML
-    private StackPane parentContainer; // For page transitions
+    private StackPane parentContainer;
+
+    // Attributi per il reset della password
+    private String userEmail;
+    private String verificationCode;
 
     public void initialize() {
         // Make sure statusMessage is empty at start
@@ -42,45 +54,100 @@ public class ResetController {
         }
 
         // Configure UI components
-        newPasswordField.setPromptText("Nuova Password");
-        confirmPasswordField.setPromptText("Conferma Nuova Password");
+        if (codeField != null) {
+            codeField.setPromptText("Codice di verifica");
+        }
 
-        // Set up action for reset button
-        resetButton.setOnAction(event -> validatePasswordReset());
+        if (newPasswordField != null) {
+            newPasswordField.setPromptText("Nuova Password");
+        }
+
+        if (confirmPasswordField != null) {
+            confirmPasswordField.setPromptText("Conferma Nuova Password");
+        }
 
         // Add subtle animation to the elements when loaded
-        if (resetButton != null && newPasswordField != null && confirmPasswordField != null) {
-            Node[] formElements = {newPasswordField, confirmPasswordField, resetButton};
+        if (resetButton != null && newPasswordField != null &&
+                confirmPasswordField != null && codeField != null) {
+            Node[] formElements = {codeField, newPasswordField, confirmPasswordField, resetButton};
             AnimationUtils.animateSimultaneously(formElements, 1);
         }
     }
 
+    // Setters per i valori necessari al reset
+    public void setUserEmail(String email) {
+        this.userEmail = email;
+    }
+
+    public void setVerificationCode(String code) {
+        this.verificationCode = code;
+    }
+
+    // Metodo per configurare il pulsante di reset con i relativi dati
+    public void setupResetButton() {
+        if (resetButton != null) {
+            //resetButton.setOnAction(event -> validatePasswordReset());
+        }
+    }
+
     private void validatePasswordReset() {
+        String inputCode = codeField.getText();
         String newPassword = newPasswordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Simple validation only - no actual reset functionality
-        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+        // Controllo se i campi sono vuoti
+        if (inputCode.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
             updateStatus("I campi non possono essere vuoti");
             AnimationUtils.shake(statusMessage);
             return;
         }
 
+        // Controllo se il codice di verifica corrisponde
+        if (!inputCode.equals(verificationCode)) {
+            updateStatus("Codice di verifica errato");
+            AnimationUtils.shake(statusMessage);
+            return;
+        }
+
+        // Controllo se le password corrispondono
         if (!newPassword.equals(confirmPassword)) {
             updateStatus("Le password non corrispondono");
             AnimationUtils.shake(statusMessage);
             return;
         }
 
-        // Show success message (no actual implementation)
-        updateStatus("Password cambiata con successo");
-        AnimationUtils.pulse(resetButton);
-
-        // Transition back to login screen after short delay
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(e -> navigateToLogin());
-        pause.play();
+        // Controllo la validità della password usando il pattern regex dal Register
+        Register tempRegister = new Register();
+        if (!Pattern.matches(tempRegister.get_regex(), newPassword)) {
+            updateStatus("La password non rispetta i requisiti di sicurezza");
+            AnimationUtils.shake(statusMessage);
+            return;
+        }
     }
+
+    /*    try {
+            // Aggiorna la password nel database
+            cambiaPassword(userEmail, newPassword);
+
+            // Mostra messaggio di successo
+            updateStatus("Password cambiata con successo");
+            AnimationUtils.pulse(resetButton);
+
+            // Torna alla schermata di login dopo un breve ritardo
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> navigateToLogin());
+            pause.play();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            updateStatus("Errore durante il reset della password: " + e.getMessage());
+        }
+    }
+
+    /*private void cambiaPassword(String email, String newPassword) throws SQLException {
+        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
+        AccountDao dao = new AccountDao(connection);
+        dao.updatePassword(email, newPassword);
+    }*/
 
     private void updateStatus(String message) {
         if (statusMessage != null) {
@@ -92,13 +159,13 @@ public class ResetController {
 
     private void navigateToLogin() {
         try {
-            // Load the login screen
+            // Carica la schermata di login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/login.fxml"));
             Parent loginContent = loader.load();
-            loginContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
+            loginContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
 
             if (parentContainer != null) {
-                // Get the current content for animation
+                // Ottieni il contenuto attuale per l'animazione
                 Node currentContent = mainContainer;
                 AnimationUtils.fadeOut(currentContent, 500);
 

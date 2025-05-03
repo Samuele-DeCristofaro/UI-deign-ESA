@@ -18,12 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Random;
-
 
 public class Access {
 
@@ -48,8 +46,6 @@ public class Access {
     @FXML
     private Button recuperoPassword;
 
-    @FXML
-    private HBox imageContainer; // Se hai un HBox che contiene l'immagine
     private EmailService emailService;
 
     // Valori di riferimento
@@ -187,6 +183,7 @@ public class Access {
             warningText.setText("Errore di caricamento: " + e.getMessage());
         }
     }
+
     private boolean check_access(String _email, String _password){
         if (_email.isEmpty() || _password.isEmpty()) {
             warningText.setText("Inserisci email e password");
@@ -195,10 +192,10 @@ public class Access {
         }
         return true;
     }
+
     private void invioCredenziali() throws SQLException, IOException, MessagingException {
         String email = emailField.getText();
 
-        //String password = userDatabase.getPasswordByEmail(email);
         Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
         AccountDao dao = new AccountDao(connection);
 
@@ -206,40 +203,44 @@ public class Access {
             warningText.setText("Nessun account trovato per questa email.");
             AnimationUtils.shake(warningText);
         }
-        else{
+        else {
+            // Genera codice di verifica
             StringBuilder sb = new StringBuilder(6);
             Random random = new Random();
-
             String cifre = "0123456789";
-
             for (int i = 0; i < 6; i++) {
-
-                int randomIndex = random.nextInt(cifre.length()); // random.nextInt(10)
-
+                int randomIndex = random.nextInt(cifre.length());
                 char randomDigit = cifre.charAt(randomIndex);
-
                 sb.append(randomDigit);
             }
-            //emailService.sendEmail(email, "Code to reset password", sb.toString());
+            String verificationCode = sb.toString();
+
+            // Invia email con codice di verifica
+            // emailService.sendEmail(email, "Code to reset password", verificationCode);
+
+            // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
-            Parent homeContent = loader.load();
-            homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
+            Parent resetContent = loader.load();
+            resetContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/reset.css").toExternalForm());
 
-            Node currentContent = ContenitorePadre.getChildren().get(0);
-            AnimationUtils.fadeOut(currentContent, 500);
+            // Ottieni il controller e prepara i dati necessari
+            ResetController resetController = loader.getController();
+            resetController.setUserEmail(email);
+            resetController.setVerificationCode(verificationCode);
+            resetController.setupResetButton();
 
-            PauseTransition pause = new PauseTransition(Duration.millis(500));
+            // Animazione per la transizione
+            Node currentContent = ContenitorePadre.getChildren().getFirst();
+            AnimationUtils.fadeOut(currentContent, 300);
+
+            PauseTransition pause = new PauseTransition(Duration.millis(300));
             pause.setOnFinished(e -> {
-                ContenitorePadre.getChildren().setAll(homeContent); // Usa setAll per una sostituzione più efficiente
-                AnimationUtils.fadeIn(homeContent, 500);
+                ContenitorePadre.getChildren().setAll(resetContent);
+                AnimationUtils.fadeIn(resetContent, 300);
             });
             pause.play();
-
         }
-
-
     }
-
 
     private void loginUser() throws SQLException {
         String email = emailField.getText();
