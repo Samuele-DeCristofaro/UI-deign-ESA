@@ -13,6 +13,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
     </properties>
+    <!-- 👇 CONFIGURAZIONE RISORSE (importante per includere il file .db nel classpath) -->
+    <build>
+        <resources>
+            <!-- Include normalmente tutte le risorse da src/main/resources -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+
+            <!-- Include anche i file .db dalla cartella src/main/db -->
+            <!-- E li copia nella cartella di output (target/classes), che è il classpath -->
+            <resource>
+                <directory>src/main/db</directory>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+                <includes>
+                    <include>**/*.db</include> <!-- Solo i file con estensione .db -->
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
     <dependencies>
         <dependency>

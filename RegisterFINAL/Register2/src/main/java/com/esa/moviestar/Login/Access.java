@@ -219,17 +219,22 @@ public class Access {
     private void loginUser() throws SQLException {
         String email = emailField.getText();
         String password = passwordField.getText();
-        if (!check_access(email, password)){
 
+        // Verifica le credenziali dell'utente (ad esempio con un altro metodo di controllo)
+        if (!check_access(email, password)) {
             return;
         }
 
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
-        AccountDao dao = new AccountDao(connection);
         try {
+
+            AccountDao dao = new AccountDao();
+
+            // Animazione per il pulsante
             AnimationUtils.pulse(access);
 
-            if (dao.cercaAccount(email)!=null) {
+            // Verifica se l'account esiste nel database
+            if (dao.cercaAccount(email) != null) {
+                // Carica la scena successiva se l'account esiste
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"));
                 Parent homeContent = loader.load();
                 homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
@@ -244,11 +249,15 @@ public class Access {
                 });
                 pause.play();
             } else {
+                // Se l'account non esiste, resetta i campi e mostra un messaggio di errore
                 emailField.setText("");
                 passwordField.setText("");
                 warningText.setText("Account inesistente");
                 AnimationUtils.shake(warningText);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            warningText.setText("Errore di connessione al database: " + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
             warningText.setText("Errore di caricamento: " + e.getMessage());
@@ -257,4 +266,6 @@ public class Access {
             warningText.setText("Errore durante l'accesso");
         }
     }
+
+
 }

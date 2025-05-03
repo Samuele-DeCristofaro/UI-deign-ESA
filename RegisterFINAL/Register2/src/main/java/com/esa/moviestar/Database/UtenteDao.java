@@ -7,9 +7,9 @@ import java.sql.*;
 public class UtenteDao {
     private Connection connection;
 
-    public UtenteDao(Connection connection){  //Costruttore
+    public UtenteDao(){  //Costruttore
         try{
-            this.connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\greco\\Desktop\\user interface design\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db"); //  Ora ottiene davvero la connessione
+            this.connection = DataBaseManager.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
