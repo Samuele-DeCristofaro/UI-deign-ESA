@@ -1,7 +1,3 @@
-.label{
--fx-font-size: 16px;
--fx-font-weight: bold;
-}
 .scroll-pane {
     -fx-background-color:transparent;
 }
@@ -27,11 +23,83 @@
 
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #151515;
+    -fx-background-color: #1F1F1F;
     -fx-background-radius: 5em;
 }
 
-.svg-container{
-    background-color: green;
- /* background-image: url('/images/title.svg');*/
+.primary {
+    -fx-background-color: #7341BE;
+}
+.primary-border{
+    -fx-border-color: #7341BE;
+}
+.on-primary{
+    -fx-text-fill: #F0ECFD;
+    -fx-fill: #F0ECFD;
+}
+.texture-gold{
+    -fx-fill: linear-gradient(
+              	to bottom right,
+              	#f6e27a 33%,
+              	#cb9b51 66%,
+              	#462523 100%
+              	);
+}
+.chips{
+     -fx-padding: 4 20 4 12;
+     -fx-spacing: 12;
+}
+
+.bg-color{
+    -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 20% , center 50% 50% , radius 55% , #633bc5, #101010);
+}
+.surface-gradient{
+    -fx-background-color:  radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , rgba(0,0,0,0.5), #101010);
+}
+.surface-opaque{
+    -fx-background-color:  rgba(15,15,15,0.97);
+}
+.surface-solid{
+    -fx-background-color: #101010;
+}
+.surface-dim{
+    -fx-background-color: #1f1f1f;
+}
+.surface-dim-border{
+    -fx-border-color: #1f1f1f;
+}
+.surface-transparent {
+    -fx-background-color: transparent;
+}
+
+.small-item{
+    -fx-border-radius: 16px;
+    -fx-background-radius:16px;
+}
+.medium-item{
+    -fx-border-radius: 24px;
+    -fx-background-radius:24px;
+}
+.large-item{
+    -fx-border-radius: 32px;
+    -fx-background-radius:32px;
+}
+.very-large-item{
+    -fx-border-radius: 48px;
+    -fx-background-radius:48px;
+}
+.small-text{
+    -fx-font-size: 12px;
+}
+.medium-text{
+    -fx-font-size: 16px;
+}
+.large-text{
+   -fx-font-size: 24px;
+}
+.very-large-text{
+    -fx-font-size: 32px;
+}
+.bold-text{
+    -fx-font-weight: bold;
 }

@@ -57,7 +57,7 @@ public class HeaderController {
 //            titleImageContainer.setVisible(!(newValue.doubleValue() < 1080));
 //        });
         List<Node> l = new ArrayList<>();
-       Region n = new Region();
+        Region n = new Region();
         l.add(n);
         setupPopupMenu(l);
     }
@@ -66,9 +66,9 @@ public class HeaderController {
         if(currentActive == searchButton)
             return;
         if (currentActive != null) {
-                currentActive.getStyleClass().remove("nav-button-active");
+            currentActive.getStyleClass().remove("nav-button-active");
         }
-        searchButton.getStyleClass().add("nav-search-button-active");
+        searchButton.getStyleClass().add("nav-search.svg-button-active");
         currentActive = searchButton;
     }
 
@@ -78,7 +78,7 @@ public class HeaderController {
         // Remove active class from previous button
         if (currentActive != null) {
             if (currentActive == searchButton)
-                currentActive.getStyleClass().remove("nav-search-button-active");
+                currentActive.getStyleClass().remove("nav-search.svg-button-active");
             currentActive.getStyleClass().remove("nav-button-active");
         }
         // Add active class to new button

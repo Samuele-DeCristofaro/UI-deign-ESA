@@ -3,8 +3,6 @@ package com.esa.moviestar.home;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,20 +10,17 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
-import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Popup;
+
+import java.util.ResourceBundle;
 
 public class PopupMenu {
 
     private final Popup popup;
     private final VBox menuBox;
     private MenuCallback callback;
-
-    // Material Colors
-    private final Color surfaceColor = Color.rgb(15, 15, 15);
-    private final Color onSurfaceColor = Color.rgb(232, 232, 232);
-    private final Color primaryColor = Color.rgb(232, 232, 232);
-    private final Color outlineColor = Color.rgb(31, 31, 31);
+    private final ResourceBundle resourceBundle =ResourceBundle.getBundle("com.esa.moviestar.images.svg-paths.general-svg");
     private final double width = 256;
     public interface MenuCallback {
         void onMenuItemSelected(String item);
@@ -36,7 +31,7 @@ public class PopupMenu {
 
         // Create menu content container
         this.menuBox = new VBox(4);
-        menuBox.setPadding(new Insets(8, 0, 8, 0));
+        menuBox.setPadding(new Insets(16, 0, 0, 0));
         menuBox.setMaxWidth(width);
         menuBox.setMinWidth(width);
 
@@ -45,11 +40,7 @@ public class PopupMenu {
         shadow.setRadius(10.0);
         shadow.setOffsetY(3.0);
         shadow.setColor(Color.rgb(0, 0, 0, 0.2));
-
-        menuBox.setBackground(new Background(new BackgroundFill(
-                surfaceColor, new CornerRadii(16), Insets.EMPTY)));
-        menuBox.setBorder(new Border(new BorderStroke(
-                outlineColor, BorderStrokeStyle.SOLID, new CornerRadii(16), new BorderWidths(1))));
+        menuBox.getStyleClass().addAll("surface-opaque", "medium-item","surface-dim-border");
         menuBox.setEffect(shadow);
 
         // Create container
@@ -63,26 +54,26 @@ public class PopupMenu {
         this.callback = callback;
     }
 
-    public void addHeaderItem(String text, String id) {
-        HBox item = new HBox(8);
+    public void addHeaderItem(String txt, String id) {
+        HBox item = new HBox();
+        item.setMinHeight(40.0);
+
         item.setAlignment(Pos.CENTER_LEFT);
-        item.setPadding(new Insets(8, 8, 8, 16));
+        item.getStyleClass().add("chips");
         item.setId(id);
 
-        // Material Design avatar
         SVGPath profileIcon = new SVGPath();
-        profileIcon.setContent("M26 31 6 31V23C6 20 9 20 9 20H23C23 20 26 20 26 23V31M16 7C23 7 23 17 16 17 9 17 9 7 16 7M16 0C0 0 0 0 0 16 0 32 0 32 16 32 32 32 32 32 32 16 32 0 31.992 0 16 0L16 1C31 1 31 1 31 16 31 31 31 31 16 31 1 31 1 31 1 16 1 1 1 1 16 1");
-        profileIcon.setFill(this.primaryColor);
+        profileIcon.setContent(resourceBundle.getString("user"));
+        profileIcon.getStyleClass().add("on-primary");
 
-        Label nameLabel = new Label(text);
-        nameLabel.setTextFill(onSurfaceColor);
-        nameLabel.setFont(Font.font("Inter Regular", 14));
+        Text text = new Text(txt);
+        text.getStyleClass().addAll("medium-text","on-primary");
 
-        item.getChildren().addAll(profileIcon, nameLabel);
+        item.getChildren().addAll(profileIcon, text);
 
         // Material Design state layer
-        item.setOnMouseEntered(e -> item.setStyle("-fx-background-color:" + toCssCode(surfaceColor.brighter()) +";"));
-        item.setOnMouseExited(e -> item.setStyle("-fx-background-color: transparent;"));
+        item.setOnMouseEntered(e -> item.getStyleClass().add("surface-dim"));
+        item.setOnMouseExited(e -> item.getStyleClass().remove("surface-dim"));
 
         // Item click handling moved to controller via callback
         item.setOnMouseClicked(e -> {
@@ -92,22 +83,14 @@ public class PopupMenu {
             }
         });
         menuBox.getChildren().add(item);
-    }
 
-    public void addSeparator() {
-        Region separator = new Region();
-        separator.setPrefHeight(1);
-        separator.setBackground(new Background(new BackgroundFill(
-                outlineColor, CornerRadii.EMPTY, Insets.EMPTY)));
-        separator.setMaxWidth(Double.MAX_VALUE);
-
-        menuBox.getChildren().add(separator);
     }
 
     public void addProfileItem(String name, Image img, String id) {
-        HBox item = new HBox(8);
+        HBox item = new HBox();
+        item.setMinHeight(40.0);
         item.setAlignment(Pos.CENTER_LEFT);
-        item.setPadding(new Insets(8, 8, 8, 16));
+        item.getStyleClass().add("chips");
         item.setId(id);
 
         // Material Design avatar
@@ -118,15 +101,14 @@ public class PopupMenu {
         clip.setArcWidth(16);
         clip.setArcHeight(16);
         imgView.setClip(clip);
-        Label nameLabel = new Label(name);
-        nameLabel.setTextFill(onSurfaceColor);
-        nameLabel.setFont(Font.font("Inter Regular", 14));
+        Text text = new Text(name);
+        text.getStyleClass().addAll("medium-text","on-primary");
 
-        item.getChildren().addAll(imgView, nameLabel);
+        item.getChildren().addAll(imgView, text);
 
         // Material Design state layer
-        item.setOnMouseEntered(e -> item.setStyle("-fx-background-color:" + toCssCode(surfaceColor.brighter()) +"; "));
-        item.setOnMouseExited(e -> item.setStyle("-fx-background-color: transparent;"));
+        item.setOnMouseEntered(e -> item.getStyleClass().add("surface-dim"));
+        item.setOnMouseExited(e -> item.getStyleClass().remove("surface-dim"));
 
         // Item click handling moved to controller via callback
         item.setOnMouseClicked(e -> {
@@ -138,51 +120,33 @@ public class PopupMenu {
         menuBox.getChildren().add(item);
     }
 
-    public void addFooterItem(String text, Runnable action) {
-        HBox buttonContainer = new HBox();
-        buttonContainer.setPadding(new Insets(2,16,2,16));
-        buttonContainer.setAlignment(Pos.CENTER);
-        Button actionBtn = new Button(text);
-        actionBtn.setMaxWidth(Double.MAX_VALUE);
-        actionBtn.setStyle(
-                "-fx-background-color:" + toCssCode(surfaceColor) +"; " +
-                        "-fx-text-fill:" + toCssCode(onSurfaceColor) +";"+
-                        "-fx-background-radius: 24px; " +
-                        "-fx-font-size: 1.3em; " +
-                        "-fx-font-weight: bold;"
-        );
-        actionBtn.setAlignment(Pos.CENTER);
-        actionBtn.setOnMouseEntered(e ->
-                actionBtn.setStyle(
-                        "-fx-background-color: " + toCssCode(surfaceColor.brighter()) +"; " +
-                                "-fx-text-fill:" + toCssCode(onSurfaceColor) +"; " +
-                                "-fx-background-radius: 24px; " +
-                                "-fx-font-size: 1.3em; " +
-                                "-fx-font-weight: bold;"
-                )
-        );
+    public void addFooterItem(String txt, Runnable action) {
+        HBox button = new HBox();
+        button.setMinHeight(40.0);
+        button.setAlignment(Pos.CENTER);
+        SVGPath profileIcon = new SVGPath();
+        profileIcon.setContent(resourceBundle.getString("email"));
+        profileIcon.getStyleClass().add("on-primary");
 
-        actionBtn.setOnMouseExited(e ->
-                actionBtn.setStyle(
-                        "-fx-background-color: " + toCssCode(surfaceColor) +"; " +
-                                "-fx-text-fill:" + toCssCode(onSurfaceColor) +"; " +
-                                "-fx-background-radius: 24px; " +
-                                "-fx-font-size: 1.3em; " +
-                                "-fx-font-weight: bold;"
-                )
-        );
+        Text text = new Text(txt);
+        text.getStyleClass().addAll("medium-text","on-primary");
 
-        actionBtn.setOnAction(e -> {
+        button.getStyleClass().addAll("small-item","surface-dim-border","chips","surface-transparent");
+        button.setOnMouseEntered(e -> {button.getStyleClass().remove("surface-transparent");button.getStyleClass().add("surface-dim");});
+
+        button.setOnMouseExited(e ->{button.getStyleClass().remove("surface-dim");button.getStyleClass().remove("surface-transparent");});
+
+        button.setOnMouseClicked(e -> {
             if (action != null) {
                 action.run();
             }
             popup.hide();
         });
 
-        buttonContainer.getChildren().add(actionBtn);
-        HBox.setHgrow(actionBtn, Priority.ALWAYS);
+        button.getChildren().addAll(profileIcon,text);
 
-        menuBox.getChildren().add(buttonContainer);
+        menuBox.getChildren().add(button);
+        VBox.setMargin(button, new Insets(6));
     }
 
     public void show(Node anchor) {

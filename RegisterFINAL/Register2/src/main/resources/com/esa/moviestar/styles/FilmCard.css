@@ -1,17 +1,7 @@
-.media-card {
-    -fx-background-color: white;
-    -fx-background-radius: 24;
-}
-
 .media-card:hover {
-    -fx-background-radius: 24;
     -fx-transition: all 0.3s ease;
 }
 
-.gradient-overlay {
-    -fx-background-radius: 24;
-    -fx-border-radius:24;
-}
 
 .media-metadata {
     -fx-background-color: transparent;
@@ -27,4 +17,14 @@
     -fx-spacing: 5;
     -fx-transition: opacity 0.3s ease;
         -fx-background-radius: 24;
+}
+#playButton:hover {
+    -fx-background-color: derive(#7341BE, -10%); /* Slightly darker on hover */
+
+}
+
+#btnInfo:hover {
+    -fx-background-color: rgba(115, 65, 190, 0.2); /* Faint background on hover */
+    -fx-border-color: derive(#7341BE, 20%); /* Slightly lighter border */
+
 }

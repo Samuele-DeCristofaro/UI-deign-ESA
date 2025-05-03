@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -56,12 +55,13 @@ public class WindowCardController {
             }
         });
     }
-    public void setContent(int id,String title,String subTitle, String rating, Image img){
-        _id= id;
-        titleLabel.setText(title);
-        descriptionLabel.setText(subTitle);
-        ratingLabel.setText(rating);
-        imgView.setImage(img);
+
+    public void setContent(Film film){
+        _id= film.getId();
+        titleLabel.setText(film.getTitle());
+        descriptionLabel.setText(film.getSubtitle());
+        ratingLabel.setText(String.valueOf(film.getRating()));
+        imgView.setImage(film.getImage());
     }
 
     public int getCardId() {

@@ -3,19 +3,3 @@
     /* Approximate rounded corners */
     -fx-background-radius: 12;
 }
-
-/* Style for the darker placeholder regions */
-.placeholder-dark {
-    -fx-background-color: #444444;
-    -fx-background-radius: 6; /* Corresponds to rounded-md */
-    /* Ensure regions can shrink if needed */
-    -fx-min-width: 10;
-}
-
-/* Style for the lighter placeholder regions */
-.placeholder-light {
-    -fx-background-color: #d9d9d9;
-    -fx-background-radius: 6; /* Corresponds to rounded-md */
-     /* Ensure regions can shrink if needed */
-    -fx-min-width: 10;
-}

@@ -1,5 +1,6 @@
 package com.esa.moviestar.home;
 
+import com.esa.moviestar.movie_view.Film;
 import com.esa.moviestar.movie_view.FilmCardController;
 import com.esa.moviestar.movie_view.WindowCardController;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 public class HomeController {
@@ -23,6 +25,7 @@ public class HomeController {
     private VBox scrollViewContainer;
     public ScrollView scrollView3;
     private Carousel carousel;
+    private final ResourceBundle resourceBundle =ResourceBundle.getBundle("com.esa.moviestar.images.svg-paths.general-svg");
     private final Color foreColor = Color.rgb(240, 240, 240);
     private final Color backgroundColor = Color.rgb(15, 15, 15);
 
@@ -30,14 +33,13 @@ public class HomeController {
         List<Node> listc0 = new Vector<>();
         try {
         for (int i = 0; i < 5; i++) {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/movie_view/WindowCard.fxml"));
-                Node body = loader.load();
-                WindowCardController windowCardController = loader.getController();
-                windowCardController.setContent(1, "ciao","ma sai che forse non è male come ti ho strutturato", "4.5", new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm()));
-                windowCardController.getPlayButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
-                windowCardController.getInfoButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
-                listc0.add(body);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/movie_view/WindowCard.fxml"),resourceBundle);
+            Node body = loader.load();
+            WindowCardController windowCardController = loader.getController();
+            windowCardController.setContent( new Film(1, "ciao","ma sai che forse non è male come ti ho strutturato", true , "",4.5,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm())));
+            windowCardController.getPlayButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
+            windowCardController.getInfoButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
+            listc0.add(body);
 
         }
             carousel = new Carousel();
@@ -50,10 +52,10 @@ public class HomeController {
         List<Node> listc2 = new Vector<>();
         try {
             for (int i = 0; i < 10; i++) {
-                FXMLLoader fxmlLoader= new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/movie_view/FilmCard_Vertical.fxml")));
+                FXMLLoader fxmlLoader= new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/movie_view/FilmCard_Vertical.fxml")),resourceBundle);
                 Node n = fxmlLoader.load();
                 FilmCardController filmCardController = fxmlLoader.getController();
-                filmCardController.setContent(i,"Il tmapiderma","un ragazzo punto da un ragno autistico","1:32","4.5",true,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/Gemini_Generated.jpeg")).toExternalForm()));
+                filmCardController.setContent(new Film(i,"Il tmapiderma","un ragazzo punto da un ragno autistico",true,"1:32",4.5,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/Gemini_Generated.jpeg")).toExternalForm())));
                 n.setOnMouseClicked(e->cardClicked(filmCardController.getCardId()));
                 listc2.add(n);
             }
@@ -65,11 +67,11 @@ public class HomeController {
 
         List<Node> listc3 = new Vector<>();
         for (int i = 0; i < 10; i++) {
-            FXMLLoader fxmlLoader= new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/movie_view/FilmCard_Horizontal.fxml")));
+            FXMLLoader fxmlLoader= new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/movie_view/FilmCard_Horizontal.fxml")),resourceBundle);
             Node n = fxmlLoader.load();
             FilmCardController filmCardController = fxmlLoader.getController();
-            filmCardController.setContent(1,"Il tmapiderma","un ragazzo punto da un ragno autistico","1:32","4.5",true,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm()));
-            n.setOnMouseClicked(e->cardClicked(1));
+            filmCardController.setContent(new Film(1,"Il tmapiderma","un ragazzo punto da un ragno autistico",false,"1:32",4.5,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm())));
+            n.setOnMouseClicked(e->cardClicked(filmCardController.getCardId()));
             listc3.add(n);
         }
         scrollView3 = new ScrollView("hello", Color.TRANSPARENT, foreColor,backgroundColor);

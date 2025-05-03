@@ -1,5 +1,6 @@
 package com.esa.moviestar.movie_view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,6 +13,8 @@ import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
+
+import java.util.ResourceBundle;
 
 
 public class FilmCardController {
@@ -35,63 +38,66 @@ public class FilmCardController {
     Label timeLabel;
     @FXML
     Label ratingLabel;
-    private final static String timeSVGString = "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z";
-    private final static String seriesSVGString = "M17,4c1.1,0,2,0.9,2,2v12c0,1.1-0.9,2-2,2V4z M2,20c0,1.1,0.9,2,2,2h9c1.1,0,2-0.9,2-2V4c0-1.1-0.9-2-2-2H4 C2.9,2,2,2.9,2,4V20z M21,18c0.83,0,1.5-0.67,1.5-1.5v-9C22.5,6.67,21.83,6,21,6V18z";
+    @FXML
+    ResourceBundle resources;
+
     public int _id;
     public void initialize() {}
-    public void setContent(int id,String title,String subTitle, String time, String rating, boolean is_a_series, Image img){
-        _id= id;
-        titleLabel.setText(title);
-        descriptionLabel.setText(subTitle);
-        timeLabel.setText(time);
-        ratingLabel.setText(rating);
-        imgView.setImage(img);
-        durationIcon.setContent(is_a_series? seriesSVGString :timeSVGString );
-        setupHoverEffect(cardContainer, metadataPane, contentPane, gradientOverlay,img);
+    public void setContent(Film film){
+        _id= film.getId();
+        titleLabel.setText(film.getTitle());
+        descriptionLabel.setText(film.getSubtitle());
+        timeLabel.setText(film.getTime());
+        ratingLabel.setText(String.valueOf(film.getRating()));
+        imgView.setImage(film.getImage());
+        durationIcon.setContent(resources.getString(film.isSeries()? "episodes":"clock"));
+        Platform.runLater(
+                this::setupHoverEffect
+        );
     }
 
-    private void setupHoverEffect(StackPane card, HBox metadata, VBox content, Region gradientOverlay,Image img) {
+    private void setupHoverEffect() {
         // Set initial positions and states
-        content.setOpacity(0);
-        String color = getMixedColorFromImage(img);
+        contentPane.setOpacity(0);
+        String color = getMixedColorFromImage(imgView.getImage());
         // Set initial gradient state - less opaque
         gradientOverlay.setStyle("-fx-background-color: linear-gradient(transparent 60%, " + color+" 100%);-fx-background-border:24px;");
 
         // Create a clip for the card to ensure animations stay within bounds
         Rectangle clip = new Rectangle();
-        clip.widthProperty().bind(card.widthProperty());
-        clip.heightProperty().bind(card.heightProperty());
+        clip.widthProperty().bind(cardContainer.widthProperty());
+        clip.heightProperty().bind(cardContainer.heightProperty());
         clip.setArcWidth(24);
         clip.setArcHeight(24);
-        card.setClip(clip);
+        cardContainer.setClip(clip);
 
         // Create transitions for hover animation
         Duration duration = Duration.millis(250);
 
-        TranslateTransition contentEnterTransition = new TranslateTransition(duration, content);
+        TranslateTransition contentEnterTransition = new TranslateTransition(duration, contentPane);
         contentEnterTransition.setToY(0); // Move up into view
 
-        FadeTransition metadataFadeOut = new FadeTransition(duration, metadata);
+        FadeTransition metadataFadeOut = new FadeTransition(duration, metadataPane);
         metadataFadeOut.setToValue(0);
 
-        FadeTransition contentFadeIn = new FadeTransition(duration, content);
+        FadeTransition contentFadeIn = new FadeTransition(duration, contentPane);
         contentFadeIn.setToValue(1);
 
         // Define transitions for mouse exit
-        TranslateTransition metadataReturnTransition = new TranslateTransition(duration, metadata);
+        TranslateTransition metadataReturnTransition = new TranslateTransition(duration, metadataPane);
         metadataReturnTransition.setToY(0); // Return to original position
 
-        TranslateTransition contentExitTransition = new TranslateTransition(duration, content);
+        TranslateTransition contentExitTransition = new TranslateTransition(duration, contentPane);
         contentExitTransition.setToY(50); // Move down out of view
 
-        FadeTransition metadataFadeIn = new FadeTransition(duration, metadata);
+        FadeTransition metadataFadeIn = new FadeTransition(duration, metadataPane);
         metadataFadeIn.setToValue(1);
 
-        FadeTransition contentFadeOut = new FadeTransition(duration, content);
+        FadeTransition contentFadeOut = new FadeTransition(duration, contentPane);
         contentFadeOut.setToValue(0);
 
         // Apply hover listener
-        card.hoverProperty().addListener((observable, oldValue, newValue) -> {
+        cardContainer.hoverProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 // Mouse entered - stop any running animations and play enter transition
                 contentEnterTransition.stop();
