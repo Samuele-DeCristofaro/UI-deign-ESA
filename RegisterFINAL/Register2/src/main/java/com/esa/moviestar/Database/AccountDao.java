@@ -13,10 +13,11 @@ public class AccountDao {
     private static Connection connection;
 
 
-    public AccountDao(Connection connection){
+    public AccountDao(){
         try{
-            this.connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db"); //  Ora ottiene davvero la connessione
-        } catch (SQLException e) {
+            this.connection = DataBaseManager.getConnection();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -77,6 +78,19 @@ public class AccountDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Errore nel cercare l'utente", e);
+        }
+    }
+    public boolean updatePassword(String email, String nuovaPassword) throws SQLException {
+        String query = "UPDATE account SET password = ? WHERE email = ?;";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nuovaPassword);
+            stmt.setString(2, email);
+            int righeModificate = stmt.executeUpdate();
+            return righeModificate > 0;  // ritorna true se almeno una riga è stata modificata
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Errore nell'aggiornamento della password per l'email: " + email, e);
         }
     }
 

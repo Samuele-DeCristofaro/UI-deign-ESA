@@ -196,8 +196,7 @@ public class Access {
     private void invioCredenziali() throws SQLException, IOException, MessagingException {
         String email = emailField.getText();
 
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
-        AccountDao dao = new AccountDao(connection);
+        AccountDao dao = new AccountDao();
 
         if (dao.cercaAccount(email)==null) {
             warningText.setText("Nessun account trovato per questa email.");
@@ -216,7 +215,7 @@ public class Access {
             String verificationCode = sb.toString();
 
             // Invia email con codice di verifica
-            // emailService.sendEmail(email, "Code to reset password", verificationCode);
+            emailService.sendEmail(email, "Code to reset password", verificationCode);
 
             // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
@@ -248,10 +247,8 @@ public class Access {
         if (!check_access(email, password)){
             return;
         }
-
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
-        AccountDao dao = new AccountDao(connection);
         try {
+            AccountDao dao = new AccountDao();
             AnimationUtils.pulse(access);
 
             if (dao.cercaAccount(email)!=null) {
@@ -274,6 +271,9 @@ public class Access {
                 warningText.setText("Account inesistente");
                 AnimationUtils.shake(warningText);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            warningText.setText("Errore di connessione al database: " + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
             warningText.setText("Errore di caricamento: " + e.getMessage());

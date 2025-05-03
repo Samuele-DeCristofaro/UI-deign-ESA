@@ -235,7 +235,7 @@ public class Register {
      */
 
     public String get_regex(){
-        return email_regex;
+        return password_regex;
     }
 
     private void saveUser() {
@@ -277,9 +277,8 @@ public class Register {
 
         // Attempt to add the user to the database
         try {
-            Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
             Account account = new Account(email,password);
-            AccountDao dao = new AccountDao(connection);
+            AccountDao dao = new AccountDao();
             if (dao.inserisciAccount(account)) {
                 welcomeText.setText("Utente registrato con successo!");
                 AnimationUtils.pulse(welcomeText);

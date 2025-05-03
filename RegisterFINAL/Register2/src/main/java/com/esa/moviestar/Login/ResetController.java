@@ -86,7 +86,7 @@ public class ResetController {
     // Metodo per configurare il pulsante di reset con i relativi dati
     public void setupResetButton() {
         if (resetButton != null) {
-            //resetButton.setOnAction(event -> validatePasswordReset());
+            resetButton.setOnAction(event -> validatePasswordReset());
         }
     }
 
@@ -123,9 +123,8 @@ public class ResetController {
             AnimationUtils.shake(statusMessage);
             return;
         }
-    }
 
-    /*    try {
+        try {
             // Aggiorna la password nel database
             cambiaPassword(userEmail, newPassword);
 
@@ -143,11 +142,10 @@ public class ResetController {
         }
     }
 
-    /*private void cambiaPassword(String email, String newPassword) throws SQLException {
-        Connection connection = DataBaseManager.getConnection("jdbc:sqlite:C:\\Users\\ssamu\\IdeaProjects\\UI-deign-ESA\\RegisterFINAL\\Register2\\src\\main\\resources\\com\\esa\\moviestar\\DatabaseProjectUID.db");
-        AccountDao dao = new AccountDao(connection);
+    private void cambiaPassword(String email, String newPassword) throws SQLException {
+        AccountDao dao = new AccountDao();
         dao.updatePassword(email, newPassword);
-    }*/
+    }
 
     private void updateStatus(String message) {
         if (statusMessage != null) {
@@ -160,7 +158,7 @@ public class ResetController {
     private void navigateToLogin() {
         try {
             // Carica la schermata di login
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view.fxml"));
             Parent loginContent = loader.load();
             loginContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
 
