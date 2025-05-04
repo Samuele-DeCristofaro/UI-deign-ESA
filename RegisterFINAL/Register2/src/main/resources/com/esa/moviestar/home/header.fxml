@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -8,7 +9,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="rootHeader" prefHeight="88.0" prefWidth="1362.0" stylesheets="@../styles/Header.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.home.HeaderController">
+<?import javafx.scene.Group?>
+<StackPane fx:id="rootHeader" prefHeight="88.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.home.HeaderController">
     <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="64.0" BorderPane.alignment="CENTER" StackPane.alignment="CENTER_LEFT">
         <StackPane.margin>
             <Insets bottom="8.0" top="8.0" />
@@ -75,9 +77,10 @@
             </HBox>
         </HBox>
         <HBox fx:id="titleImageContainer" alignment="CENTER" HBox.hgrow="ALWAYS">
-            <ImageView fx:id="moviestarImage" fitHeight="178.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-                <Image url="@../images/imgtitle.png" />
-            </ImageView>
+            <Group>
+                <SVGPath content="%icon-moviestar-bg" styleClass="surface-solid"/>
+                <SVGPath content="%icon-moviestar-fg" fill="WHITE" styleClass="on-primary"/>
+            </Group>
         </HBox>
         <HBox HBox.hgrow="ALWAYS">
             <HBox alignment="CENTER_RIGHT" prefHeight="${navContainer.width}" prefWidth="512.0" HBox.hgrow="ALWAYS">
@@ -94,4 +97,8 @@
         <String fx:value="root-header" />
         <String fx:value="surface-opaque" />
     </styleClass>
+   <stylesheets>
+      <URL value="@../styles/Header.css" />
+      <URL value="@../styles/General.css" />
+   </stylesheets>
 </StackPane>

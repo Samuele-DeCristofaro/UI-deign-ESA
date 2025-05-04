@@ -23,7 +23,7 @@
 
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #1F1F1F;
+    -fx-background-color: #262626;
     -fx-background-radius: 5em;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .bg-color{
-    -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 20% , center 50% 50% , radius 55% , #633bc5, #101010);
+    -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 20% , center 50% 50% , radius 55% , #7341BE, #101010);
 }
 .surface-gradient{
     -fx-background-color:  radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , rgba(0,0,0,0.5), #101010);
@@ -63,10 +63,13 @@
     -fx-background-color: #101010;
 }
 .surface-dim{
-    -fx-background-color: #1f1f1f;
+    -fx-background-color: #262626;
 }
 .surface-dim-border{
-    -fx-border-color: #1f1f1f;
+    -fx-border-color: #262626;
+}
+.surface-dim-opaque{
+    -fx-background-color:  rgba(37,37,37,0.97);
 }
 .surface-transparent {
     -fx-background-color: transparent;

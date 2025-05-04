@@ -154,7 +154,7 @@ public class PopupMenu {
             return;
         }
         double anchorX = anchor.localToScreen(-width+anchor.getLayoutBounds().getWidth(), 0).getX();//menuboxwidth + la larghezza dell'imageview
-        double anchorY = anchor.localToScreen(0, 0).getY();
+        double anchorY = anchor.localToScreen(0, 8).getY();
         double posY = anchorY + anchor.getBoundsInLocal().getHeight();
         popup.show(anchor.getScene().getWindow(), anchorX, posY);
     }
