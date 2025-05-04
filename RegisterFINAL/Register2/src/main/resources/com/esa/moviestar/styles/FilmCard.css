@@ -1,8 +1,6 @@
 .media-card:hover {
     -fx-transition: all 0.3s ease;
 }
-
-
 .media-metadata {
     -fx-background-color: transparent;
     -fx-padding: 8;
@@ -17,10 +15,6 @@
     -fx-spacing: 5;
     -fx-transition: opacity 0.3s ease;
         -fx-background-radius: 24;
-}
-#playButton:hover {
-    -fx-background-color: derive(#7341BE, -10%); /* Slightly darker on hover */
-
 }
 
 #btnInfo:hover {

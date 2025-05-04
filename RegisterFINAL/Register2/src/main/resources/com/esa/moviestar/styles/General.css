@@ -30,6 +30,12 @@
 .primary {
     -fx-background-color: #7341BE;
 }
+.primary:hover{
+    -fx-background-color: #593294;
+}
+.primary:pressed{
+    -fx-background-color: #432570;
+}
 .primary-border{
     -fx-border-color: #7341BE;
 }
@@ -74,7 +80,12 @@
 .surface-transparent {
     -fx-background-color: transparent;
 }
-
+.surface-transparent:hover {
+    -fx-background-color: #262626;
+}
+.surface-transparent:pressed {
+    -fx-background-color: #101010;
+}
 .small-item{
     -fx-border-radius: 16px;
     -fx-background-radius:16px;

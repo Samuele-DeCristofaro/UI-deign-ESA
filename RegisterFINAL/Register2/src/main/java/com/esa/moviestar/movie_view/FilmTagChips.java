@@ -21,10 +21,11 @@ public class FilmTagChips extends HBox {
         this.getStyleClass().add("film-tag-chip");
         Text txt = new Text(text);
         txt.getStyleClass().addAll("on-primary","small-text");
-            Group svgIcon = new Group( new SVGPath(){{setContent("M3 0 21 0C23.5 0 24 .5 24 3L24 13C24 15.5 23.5 16 21 16L3 16C.5 16 0 15.5 0 13L0 3C0 .5.5 0 3 0");}});
+        if(groupMap.containsKey(text)) {
+            Group svgIcon = groupMap.get(text);
             this.getStyleClass().add("chips");
             this.getChildren().add(svgIcon);
-
+        }
         this.getChildren().add(txt);
     }
 }
