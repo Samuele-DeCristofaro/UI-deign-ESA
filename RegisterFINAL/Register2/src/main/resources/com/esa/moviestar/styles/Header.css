@@ -1,7 +1,5 @@
 /* Root header styles */
 .root-header {
-    -fx-background-radius: 0 0 20 20;
-    -fx-background-color: rgba(15,15,15,0.97);
     -fx-background-radius: 0 0 32 32;
     -fx-padding: 0 8 0 8;
 }
@@ -16,10 +14,9 @@
 /* Common button styling */
 .nav-button {
      -fx-background-color: transparent;
-     -fx-background-radius: 24;
-     -fx-border-radius: 24;
      -fx-border-color: #3f3f3f;
 }
+
 .nav-button:hover{
     -fx-background-color: #3f3f3f;
 }
@@ -47,7 +44,6 @@
 /* Search field */
 .search-field {
     -fx-prompt-text-fill: #F0ECFD;
-    -fx-text-fill: #F0ECFD;
     -fx-background-color: transparent;
 }
 
@@ -57,14 +53,4 @@
     -fx-background-radius: 24;
     -fx-border-radius: 24;
     -fx-border-color: #3f3f3f;
-}
-
-/* Text styling */
-.nav-text {
-    -fx-fill: #F0ECFD;
-}
-
-/* Icon styling */
-.icon {
-    -fx-fill: #F0ECFD;
 }

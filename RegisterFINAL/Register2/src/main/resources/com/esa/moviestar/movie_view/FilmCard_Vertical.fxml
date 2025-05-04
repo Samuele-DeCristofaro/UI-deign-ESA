@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -16,43 +17,57 @@
     <Region fx:id="gradientOverlay" styleClass="gradient-overlay" />
 
     <!-- Metadata pane (initially visible) -->
-    <HBox fx:id="metadataPane" spacing="10" styleClass="media-metadata" StackPane.alignment="BOTTOM_LEFT">
-        <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
-        </padding>
+    <HBox fx:id="metadataPane" alignment="BOTTOM_CENTER" spacing="10" styleClass="media-metadata" StackPane.alignment="BOTTOM_LEFT">
 
         <!-- Time/Episodes metadata -->
-        <HBox fx:id="timeMetadata" alignment="BOTTOM_LEFT" spacing="5">
-            <SVGPath fx:id="durationIcon" fill="WHITE">
-            <HBox.margin>
-               <Insets bottom="8.0" left="8.0" right="4.0" top="8.0" />
-            </HBox.margin></SVGPath>
-            <Label fx:id="timeLabel" alignment="BOTTOM_LEFT" style="-fx-font-size: 20px;" textFill="WHITE" />
+        <HBox fx:id="timeMetadata" alignment="CENTER_LEFT" maxHeight="32.0" spacing="5">
+            <SVGPath fx:id="durationIcon" styleClass="on-primary">
+                <HBox.margin>
+                    <Insets bottom="8.0" left="8.0" right="4.0" top="8.0" />
+                </HBox.margin></SVGPath>
+            <Label fx:id="timeLabel" alignment="BOTTOM_LEFT">
+                <styleClass>
+                    <String fx:value="on-primary" />
+                    <String fx:value="medium-text" />
+                    <String fx:value="bold-text" />
+                </styleClass></Label>
+
         </HBox>
 
         <!-- Spacer -->
         <Region HBox.hgrow="ALWAYS" />
 
         <!-- Rating metadata -->
-        <HBox fx:id="ratingMetadata" alignment="BOTTOM_RIGHT" spacing="5">
-            <Label fx:id="ratingLabel" alignment="BOTTOM_LEFT" style="-fx-font-size: 20px;" textFill="WHITE" />
-            <SVGPath content="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#ffc107">
-            <HBox.margin>
-               <Insets bottom="8.0" left="4.0" right="8.0" top="8.0" />
-            </HBox.margin></SVGPath>
+        <HBox fx:id="ratingMetadata" alignment="CENTER_RIGHT" maxHeight="32.0" spacing="5">
+            <Label fx:id="ratingLabel" alignment="BOTTOM_LEFT" styleClass="on-primary">
+                <styleClass>
+                    <String fx:value="medium-text" />
+                    <String fx:value="on-primary" />
+                    <String fx:value="bold-text" />
+                </styleClass></Label>
+            <SVGPath content="%star" styleClass="texture-gold">
+                <HBox.margin>
+                    <Insets bottom="8.0" left="4.0" right="8.0" top="8.0" />
+                </HBox.margin></SVGPath>
         </HBox>
     </HBox>
 
     <!-- Content pane (initially hidden) -->
     <VBox fx:id="contentPane" alignment="BOTTOM_LEFT" opacity="0" spacing="5" styleClass="media-content" StackPane.alignment="BOTTOM_LEFT">
-        <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
-        </padding>
 
-        <Label fx:id="titleLabel" style="-fx-font-weight: bold; -fx-font-size: 24px;" textFill="WHITE" wrapText="true" />
-        <Label fx:id="descriptionLabel" style="-fx-font-size: 16px;" textFill="WHITE" wrapText="true">
-         <padding>
-            <Insets right="30.0" />
-         </padding></Label>
+        <Label fx:id="titleLabel" wrapText="true">
+            <styleClass>
+                <String fx:value="on-primary" />
+                <String fx:value="large-text" />
+                <String fx:value="bold-text" />
+            </styleClass></Label>
+        <Label fx:id="descriptionLabel" wrapText="true">
+            <padding>
+                <Insets right="30.0" />
+            </padding>
+            <styleClass>
+                <String fx:value="on-primary" />
+                <String fx:value="medium-text" />
+            </styleClass></Label>
     </VBox>
 </StackPane>

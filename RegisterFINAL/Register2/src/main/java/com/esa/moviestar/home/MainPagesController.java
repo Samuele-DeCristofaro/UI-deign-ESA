@@ -1,19 +1,20 @@
 package com.esa.moviestar.home;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
+
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class MainPagesController {
     @FXML
     AnchorPane body;
     @FXML
     private StackPane headerContainer;
-
+    private final ResourceBundle resourceBundle =ResourceBundle.getBundle("com.esa.moviestar.images.svg-paths.general-svg");
     private HeaderController headerController;
     private Node homeBody;
     private Node s;
@@ -29,7 +30,7 @@ public class MainPagesController {
 
     private void loadHeader(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("header.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("header.fxml"),resourceBundle);
             Node headerNode = loader.load();
             headerContainer.getChildren().add(headerNode);
             headerController = loader.getController();
@@ -66,7 +67,7 @@ public class MainPagesController {
                 body.getChildren().clear();
                 body.getChildren().add(homeBody);
             });
-           // homeBodyController.carousel.start();
+            // homeBodyController.carousel.start();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
