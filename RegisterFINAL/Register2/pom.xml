@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,57 +11,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
-    <build>
-        <resources>
-            <!-- Include normalmente tutte le risorse da src/main/resources -->
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-
-            <!-- Include anche i file .db dalla cartella src/main/db -->
-            <!-- E li copia nella cartella di output (target/classes), che è il classpath -->
-            <resource>
-                <directory>src/main/db</directory>
-                <targetPath>${project.build.outputDirectory}</targetPath>
-                <includes>
-                    <include>**/*.db</include> <!-- Solo i file con estensione .db -->
-                </includes>
-            </resource>
-        </resources>
-    </build>
+        <javafx.version>21</javafx.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>21</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>21</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
-            <!-- Inizia la definizione di una dipendenza Maven -->
-
             <groupId>org.xerial</groupId>
-            <!--
-                Identifica il “gruppo” o l’organizzazione che pubblica la libreria.
-                In questo caso “org.xerial” è il gruppo che mantiene il driver JDBC per SQLite.
-            -->
-
             <artifactId>sqlite-jdbc</artifactId>
-            <!--
-                È il nome specifico dell’artefatto (la libreria) da includere.
-                “sqlite-jdbc” è il driver JDBC che permette a Java di leggere e scrivere su un database SQLite.
-            -->
-
             <version>3.41.2.2</version>
-            <!--
-                Specifica la versione esatta dell’artefatto da scaricare.
-                La versione 3.36.0.1 garantisce compatibilità con funzionalità di SQLite e del driver di quell’epoca.
-            -->
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -84,6 +50,19 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/db</directory>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+                <includes>
+                    <include>**/*.db</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -94,26 +73,18 @@
                     <target>21</target>
                 </configuration>
             </plugin>
+
+            <!-- SERVE PER FAR FUNZIONARE IL PROGRAMMA A EUGENIO NON ELIMINARE MA COMMENTA -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>com.example.register2/com.esa.moviestar.HelloApplication</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <mainClass>com.esa.moviestar.Main</mainClass>
+                </configuration>
             </plugin>
+            <!-- SERVE PER FAR FUNZIONARE IL PROGRAMMA A EUGENIO NON ELIMINARE MA COMMENTA -->
+
         </plugins>
     </build>
 </project>
