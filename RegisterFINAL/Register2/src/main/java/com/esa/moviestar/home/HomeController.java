@@ -2,6 +2,7 @@ package com.esa.moviestar.home;
 
 import com.esa.moviestar.movie_view.Film;
 import com.esa.moviestar.movie_view.FilmCardController;
+import com.esa.moviestar.movie_view.FilmTagChips;
 import com.esa.moviestar.movie_view.WindowCardController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,7 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/movie_view/WindowCard.fxml"),resourceBundle);
             Node body = loader.load();
             WindowCardController windowCardController = loader.getController();
-            windowCardController.setContent( new Film(1, "ciao","ma sai che forse non è male come ti ho strutturato", true , "",4.5,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm())));
+            windowCardController.setContent( new Film(i, "ciao","ma sai che forse non è male come ti ho strutturato", true , "",4.5,new Image(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/images/untitled.png")).toExternalForm())));
             windowCardController.getPlayButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
             windowCardController.getInfoButton().setOnMouseClicked(e->cardClicked(windowCardController.getCardId()));
             listc0.add(body);
@@ -78,7 +79,6 @@ public class HomeController {
         scrollView3.setContent(listc3);
             scrollView3.setSpacing(16);
         scrollView3.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/esa/moviestar/styles/ScrollView.css")).toExternalForm());
-
             scrollViewContainer.getChildren().addAll(scrollView2,scrollView3);//scrollView,,,,scrollView4,scrollView5);
     }catch (IOException e){
             System.err.println("oh fuck");
