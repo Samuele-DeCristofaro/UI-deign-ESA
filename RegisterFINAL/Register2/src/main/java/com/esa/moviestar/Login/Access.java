@@ -3,6 +3,7 @@ package com.esa.moviestar.Login;
 import com.esa.moviestar.Database.AccountDao;
 import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.UserDatabase;
+import com.esa.moviestar.model.Account;
 import jakarta.mail.MessagingException;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Random;
 
 public class Access {
@@ -177,7 +179,7 @@ public class Access {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/registrazione.fxml"));
             Parent registerContent = loader.load();
             registerContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
-            ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione più efficiente
+            ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione piÃ¹ efficiente
         } catch (IOException e) {
             e.printStackTrace();
             warningText.setText("Errore di caricamento: " + e.getMessage());
@@ -250,8 +252,16 @@ public class Access {
         try {
             AccountDao dao = new AccountDao();
             AnimationUtils.pulse(access);
+            Account temp_acc = dao.cercaAccount(email);
+            if (temp_acc == null){
+                emailField.setText("");
+                passwordField.setText("");
+                warningText.setText("Account inesistente");
+                AnimationUtils.shake(warningText);
+                return;
+            }
 
-            if (dao.cercaAccount(email)!=null) {
+            if (Objects.equals(temp_acc.getPassword(), password)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"));
                 Parent homeContent = loader.load();
                 homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
@@ -261,14 +271,14 @@ public class Access {
 
                 PauseTransition pause = new PauseTransition(Duration.millis(500));
                 pause.setOnFinished(e -> {
-                    ContenitorePadre.getChildren().setAll(homeContent); // Usa setAll per una sostituzione più efficiente
+                    ContenitorePadre.getChildren().setAll(homeContent); // Usa setAll per una sostituzione piÃ¹ efficiente
                     AnimationUtils.fadeIn(homeContent, 500);
                 });
                 pause.play();
             } else {
                 emailField.setText("");
                 passwordField.setText("");
-                warningText.setText("Account inesistente");
+                warningText.setText("Password errata");
                 AnimationUtils.shake(warningText);
             }
         } catch (SQLException e) {

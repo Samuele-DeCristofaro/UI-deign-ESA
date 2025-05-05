@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="ContenitorePadre"  styleClass="MainPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Login.Access">
+<StackPane fx:id="ContenitorePadre" stylesheets="@styles/General.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Login.Access">
     <HBox prefHeight="250.0" prefWidth="200.0" styleClass="Hbox-Padre" HBox.hgrow="ALWAYS" StackPane.alignment="TOP_LEFT">
         <children>
             <ImageView fx:id="titleImage" fitHeight="194.0" fitWidth="700.0" preserveRatio="true" smooth="false">
@@ -17,31 +18,51 @@
             </ImageView>
         </children>
     </HBox>
-    <VBox fx:id="loginBox" alignment="CENTER" fillWidth="false" styleClass="vbox-background" StackPane.alignment="CENTER">
+    <VBox fx:id="loginBox" alignment="CENTER" fillWidth="false" StackPane.alignment="CENTER">
         <Label fx:id="welcomeText" alignment="CENTER" styleClass="welcome-text" text="BENVENUTO" />
-        <TextField fx:id="emailField">
+        <TextField fx:id="emailField" styleClass="small-item">
          <StackPane.margin>
             <Insets />
          </StackPane.margin></TextField>
-        <PasswordField fx:id="passwordField">
+        <PasswordField fx:id="passwordField" styleClass="small-item">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin></PasswordField>
-        <Button fx:id="access" alignment="CENTER" styleClass="button-text" text="Accedi">
+        <Button fx:id="access" alignment="CENTER" text="Accedi">
          <StackPane.margin>
             <Insets bottom="15.0" />
-         </StackPane.margin></Button>
-        <Button fx:id="register" alignment="CENTER" styleClass="register-text" text="Non hai un account? Registrati">
+         </StackPane.margin>
+         <styleClass>
+            <String fx:value="button-text" />
+            <String fx:value="small-item" />
+         </styleClass></Button>
+        <Button fx:id="register" alignment="CENTER" text="Non hai un account? Registrati">
             <font>
                 <Font size="7.0" />
             </font>
+         <styleClass>
+            <String fx:value="register-text" />
+            <String fx:value="small-item" />
+         </styleClass>
         </Button>
-        <Button fx:id="recuperoPassword" alignment="CENTER" styleClass="register-text" text="Password dimenticata? Recuperala">
+        <Button fx:id="recuperoPassword" alignment="CENTER" text="Password dimenticata? Recuperala">
             <font>
                 <Font size="7.0" />
             </font>
+         <styleClass>
+            <String fx:value="register-text" />
+            <String fx:value="small-item" />
+         </styleClass>
         </Button>
 
         <Label fx:id="warningText" alignment="CENTER" styleClass="warningText" />
+      <styleClass>
+         <String fx:value="vbox-background" />
+         <String fx:value="large-item" />
+      </styleClass>
     </VBox>
+   <styleClass>
+      <String fx:value="MainPane" />
+      <String fx:value="bg-color" />
+   </styleClass>
 </StackPane>
