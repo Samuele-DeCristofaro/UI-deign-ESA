@@ -1,7 +1,6 @@
 package com.esa.moviestar.Login;
 
 import com.esa.moviestar.Database.AccountDao;
-import com.esa.moviestar.bin.UserDatabase;
 import com.esa.moviestar.model.Account;
 import jakarta.mail.MessagingException;
 import javafx.animation.PauseTransition;
@@ -59,12 +58,12 @@ public class Access {
     private final double COMPACT_MODE_THRESHOLD = 500.0;
     private final double IMAGE_VISIBILITY_THRESHOLD = 600.0;
 
-    private UserDatabase userDatabase;
 
     public void initialize() {
-        userDatabase = new UserDatabase();
         emailService = new EmailService();
         emailField.setPromptText("Email");
+        ContenitorePadre.setMinWidth(1080);
+        ContenitorePadre.setMinHeight(700);
         passwordField.setPromptText("Password");
         warningText.setText("");
         emailField.setMinWidth(200);  // Larghezza minima
@@ -166,8 +165,8 @@ public class Access {
                 // Margini dinamici
                 double verticalMargin = 10 * scale;
                 VBox.setMargin(welcomeText, new Insets(0, 0, verticalMargin * 3, 0));
-                VBox.setMargin(emailField, new Insets(0, 0, verticalMargin * 2, 0));
-                VBox.setMargin(passwordField, new Insets(0, 0, verticalMargin * 2, 0));
+                VBox.setMargin(emailField, new Insets(0, 0, (verticalMargin * 2) + 10, 0));
+                VBox.setMargin(passwordField, new Insets(0, 0, (verticalMargin * 2) + 10, 0));
             }
         }
     }
@@ -177,7 +176,7 @@ public class Access {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/registrazione.fxml"));
             Parent registerContent = loader.load();
             registerContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
-            ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione piÃ¹ efficiente
+            ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione più efficiente
         } catch (IOException e) {
             e.printStackTrace();
             warningText.setText("Errore di caricamento: " + e.getMessage());

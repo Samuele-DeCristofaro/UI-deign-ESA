@@ -4,6 +4,8 @@ import com.esa.moviestar.Database.AccountDao;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -33,6 +35,9 @@ public class ResetController {
     private Button resetButton;
 
     @FXML
+    private Button backToLoginButton;
+
+    @FXML
     private VBox mainContainer;
 
     @FXML
@@ -44,6 +49,14 @@ public class ResetController {
     // Attributi per il reset della password
     private String userEmail;
     private String verificationCode;
+
+    // Valori di riferimento per il layout responsivo
+    private final double REFERENCE_WIDTH = 1720.0;
+    private final double REFERENCE_HEIGHT = 980.0;
+    private final double REFERENCE_CONTAINER_WIDTH = 400.0;
+    private final double REFERENCE_CONTAINER_HEIGHT = 459.0;
+    private final double COMPACT_MODE_THRESHOLD = 500.0;
+    private final double MIN_VBOX_VISIBILITY_THRESHOLD = 400.0;
 
     public void initialize() {
         // Make sure statusMessage is empty at start
@@ -64,11 +77,124 @@ public class ResetController {
             confirmPasswordField.setPromptText("Conferma Nuova Password");
         }
 
+        // Setup resetButton
+        if (resetButton != null) {
+            resetButton.setOnAction(event -> validatePasswordReset());
+        }
+
+        // Setup backToLoginButton
+        if (backToLoginButton != null) {
+            backToLoginButton.setOnAction(event -> navigateToLogin());
+        }
+
         // Add subtle animation to the elements when loaded
         if (resetButton != null && newPasswordField != null &&
-                confirmPasswordField != null && codeField != null) {
-            Node[] formElements = {codeField, newPasswordField, confirmPasswordField, resetButton};
+                confirmPasswordField != null && codeField != null && backToLoginButton != null) {
+            Node[] formElements = {backToLoginButton, codeField, newPasswordField, confirmPasswordField, resetButton};
             AnimationUtils.animateSimultaneously(formElements, 1);
+        }
+
+        // Setup responsive layout
+        setupResponsiveLayout();
+    }
+
+    private void setupResponsiveLayout() {
+        if (parentContainer != null) {
+            parentContainer.sceneProperty().addListener((obs, oldScene, newScene) -> {
+                if (newScene != null) {
+                    newScene.widthProperty().addListener((observable, oldValue, newValue) ->
+                            adjustLayout(newValue.doubleValue(), newScene.getHeight()));
+                    newScene.heightProperty().addListener((observable, oldValue, newValue) ->
+                            adjustLayout(newScene.getWidth(), newValue.doubleValue()));
+                    adjustLayout(newScene.getWidth(), newScene.getHeight()); // Initial adjustment
+                }
+            });
+        }
+    }
+
+    private void adjustLayout(double width, double height) {
+        // Scale factor based on the SMALLER dimension
+        double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+
+        // Handle main container
+        if (mainContainer != null) {
+            boolean showContainer = width > MIN_VBOX_VISIBILITY_THRESHOLD;
+            mainContainer.setVisible(showContainer);
+            mainContainer.setManaged(showContainer);
+
+            if (showContainer) {
+                boolean compactMode = width < COMPACT_MODE_THRESHOLD;
+
+                double containerWidth = compactMode ? 280 : REFERENCE_CONTAINER_WIDTH * scale;
+                double containerHeight = compactMode ? 300 : REFERENCE_CONTAINER_HEIGHT * scale;
+
+                mainContainer.setPrefWidth(containerWidth);
+                mainContainer.setPrefHeight(containerHeight);
+                mainContainer.setMaxWidth(containerWidth);
+                mainContainer.setMaxHeight(containerHeight);
+
+                // Dynamic padding and spacing
+                double padding = Math.max(10, 20 * scale);
+                double spacing = Math.max(5, 10 * scale);
+                mainContainer.setPadding(new Insets(padding));
+                mainContainer.setSpacing(spacing);
+
+                // Positioning
+                StackPane.setAlignment(mainContainer, compactMode ? Pos.CENTER : Pos.CENTER);
+                StackPane.setMargin(mainContainer, compactMode ? new Insets(0) : new Insets(0));
+
+                // Dynamic font sizes
+                double baseFontSize = 15 * scale;
+                double buttonScale = Math.max(scale, 0.7); // Never below 70% of original size
+                double statusTextScale = Math.max(scale, 0.7);
+
+                if (resetButton != null) {
+                    // Smaller font size for button
+                    resetButton.setStyle("-fx-font-size: " + Math.min(18 * buttonScale, 18) + "px;");
+                }
+
+                if (backToLoginButton != null) {
+                    backToLoginButton.setStyle("-fx-font-size: " + Math.min(14 * buttonScale, 14) + "px; -fx-alignment: CENTER_LEFT;");
+                    backToLoginButton.setAlignment(Pos.CENTER_LEFT);
+                }
+
+                if (statusMessage != null) {
+                    statusMessage.setStyle("-fx-font-size: " + (baseFontSize) + "px;");
+                }
+
+                // Set proportional width that adapts to container
+                double fieldWidth = Math.min(containerWidth - padding * 2, containerWidth * 0.9);
+                if (codeField != null) {
+                    codeField.setPrefWidth(fieldWidth);
+                    codeField.setMaxWidth(fieldWidth);
+                }
+                if (newPasswordField != null) {
+                    newPasswordField.setPrefWidth(fieldWidth);
+                    newPasswordField.setMaxWidth(fieldWidth);
+                }
+                if (confirmPasswordField != null) {
+                    confirmPasswordField.setPrefWidth(fieldWidth);
+                    confirmPasswordField.setMaxWidth(fieldWidth);
+                }
+
+                // Dynamic margins
+                double verticalMargin = 10 * scale;
+                if (backToLoginButton != null) {
+                    VBox.setMargin(backToLoginButton, new Insets(0, 0, verticalMargin, 0));
+                }
+                if (codeField != null) {
+                    VBox.setMargin(codeField, new Insets(0, 0, verticalMargin, 0));
+                }
+                if (newPasswordField != null) {
+                    VBox.setMargin(newPasswordField, new Insets(verticalMargin, 0,0, 0));
+                }
+                if (confirmPasswordField != null) {
+                    VBox.setMargin(confirmPasswordField, new Insets(0, 0, 0, 0));
+                }
+                if (resetButton != null) {
+                    VBox.setMargin(resetButton, new Insets(verticalMargin, 0, 0, 0));
+                }
+            }
         }
     }
 
@@ -162,7 +288,7 @@ public class ResetController {
 
             if (parentContainer != null) {
                 // Ottieni il contenuto attuale per l'animazione
-                Node currentContent = mainContainer;
+                Node currentContent = parentContainer.getChildren().getFirst();
                 AnimationUtils.fadeOut(currentContent, 500);
 
                 PauseTransition pause = new PauseTransition(Duration.millis(500));

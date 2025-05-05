@@ -1,16 +1,6 @@
 /* Root pane with radial gradient background */
 .root-pane {
     -fx-background-color: radial-gradient(focus-angle 254deg, focus-distance 20%, center 50% 50%, radius 55%, #7341BE, #101010);
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-fill-width: true;
-    -fx-fill-height: true;
-}
-
-/* Main VBox with subtle overlay */
-.main-vbox {
-    -fx-background-color: radial-gradient(focus-angle 54deg, focus-distance 10%, center 50% 50%, radius 250%, transparent, rgba(255, 255, 255, 0.1));
-    -fx-alignment: center;
 }
 
 /* Register box with semi-transparent background */
@@ -23,32 +13,14 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
     -fx-max-width: 450px;
     -fx-max-height: 500px;
-    -fx-padding: 20px;
-    -fx-spacing: 15px;
     -fx-alignment: center;
 }
 
 /* Welcome text style */
 .welcome-text {
     -fx-text-fill: #F0ECFD;
-    -fx-font-size: 32px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-alignment: center;
-}
-
-/* Warning texts */
-.warnings-text1 {
-    -fx-text-fill: #F0ECFD;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-width: 200px;
-}
-
-.warnings-text2 {
-    -fx-text-fill: #F0ECFD;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-alignment: center-left;
 }
 
 /* Warning message style */
@@ -57,7 +29,6 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-alignment: center;
-    -fx-opacity: 0.9;
 }
 
 /* Button style */
@@ -68,53 +39,41 @@
     -fx-border-color: black;
     -fx-border-radius: 24px;
     -fx-background-radius: 24px;
-    -fx-pref-height: 40px;
     -fx-min-width: 200px;
-    -fx-alignment: center;
     -fx-background-color: rgba(100, 100, 100, 0.7);
     -fx-cursor: hand;
+}
+
+/* Back button style */
+.back-button {
+    -fx-text-fill: #F0ECFD;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Back button hover effect - only underline */
+.back-button:hover {
+    -fx-underline: true;
+    -fx-text-fill: white;
 }
 
 /* Button hover effect */
 .button-text:hover {
     -fx-background-color: linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(50, 50, 50, 0.6));
-    -fx-text-fill: black;
-}
-
-/* Button pressed effect */
-.button-text:pressed {
-    -fx-background-color: linear-gradient(to bottom right, rgba(60, 60, 60, 0.9), rgba(0, 0, 0, 0.7));
     -fx-text-fill: white;
 }
 
 /* Text field and password field style */
-TextField, PasswordField, .text-field, .password-field {
+.text-field, .password-field {
     -fx-background-color: rgba(100, 100, 100, 0.7);
     -fx-text-fill: #F0ECFD;
-    -fx-font-size: 16px;
     -fx-border-radius: 16px;
     -fx-border-width: 2px;
     -fx-border-color: black;
     -fx-background-radius: 16px;
     -fx-prompt-text-fill: #9E9E9E;
     -fx-padding: 8px 12px;
-}
-
-/* Text field and password field focus effect */
-TextField:focused, PasswordField:focused, .text-field:focused, .password-field:focused {
-    -fx-background-color: linear-gradient(to bottom right, rgba(120, 120, 120, 0.8), rgba(60, 60, 60, 0.7));
-    -fx-border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Register link style */
-.register-text {
-    -fx-background-color: transparent;
-    -fx-text-fill: #F0ECFD;
-    -fx-font-size: 15px;
-    -fx-alignment: center;
-}
-
-.register-text:hover {
-    -fx-underline: true;
-    -fx-text-fill: #AB8EE0;
 }

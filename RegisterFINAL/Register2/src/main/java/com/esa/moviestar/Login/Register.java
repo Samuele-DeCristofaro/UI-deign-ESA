@@ -76,7 +76,8 @@ public class Register {
         // Set default prompts for email and password fields
         emailField.setPromptText("Email");
         passwordField.setPromptText("Password");
-
+        ContenitorePadre.setMinWidth(1080);
+        ContenitorePadre.setMinHeight(700);
         // Set event handler for the register button
         register.setOnAction(event -> saveUser());
 
@@ -208,7 +209,7 @@ public class Register {
                 VBox.setMargin(warning2, new Insets(0, 0, verticalMargin, 0));
                 VBox.setMargin(warningSpecial, new Insets(0, 0, verticalMargin * 2, 0));
                 VBox.setMargin(register, new Insets(0, 0, verticalMargin * 3, 0));
-                VBox.setMargin(backToLogin, new Insets(verticalMargin, 0, 0, 0));
+                VBox.setMargin(backToLogin, new Insets(0, 0, 0, 0));
             }
         }
     }
