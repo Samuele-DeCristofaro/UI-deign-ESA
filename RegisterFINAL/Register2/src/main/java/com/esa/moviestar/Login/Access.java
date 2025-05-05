@@ -1,7 +1,6 @@
 package com.esa.moviestar.Login;
 
 import com.esa.moviestar.Database.AccountDao;
-import com.esa.moviestar.Database.DataBaseManager;
 import com.esa.moviestar.bin.UserDatabase;
 import com.esa.moviestar.model.Account;
 import jakarta.mail.MessagingException;
@@ -20,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Random;
@@ -178,7 +176,7 @@ public class Access {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/registrazione.fxml"));
             Parent registerContent = loader.load();
-            registerContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
+            registerContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
             ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione piÃ¹ efficiente
         } catch (IOException e) {
             e.printStackTrace();
@@ -217,7 +215,7 @@ public class Access {
             String verificationCode = sb.toString();
 
             // Invia email con codice di verifica
-            emailService.sendEmail(email, "Code to reset password", verificationCode);
+            //emailService.sendEmail(email, "Code to reset password", verificationCode);
 
             // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));

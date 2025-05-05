@@ -15,11 +15,13 @@ import javafx.scene.layout.VBox;
 
 public class ModifyCreateController {
     @FXML
-    VBox pageContainer;
+    HBox pageContainer;
+    @FXML
+    VBox svgContainer;
     @FXML
     Label titlePage;
     @FXML
-    HBox elementContainer;
+    VBox elementContainer;
     @FXML
     Pane imagPane;
     @FXML
@@ -44,9 +46,7 @@ public class ModifyCreateController {
 
     public void initialize() {
 
-        //pageContainer.setBackground();
 
-        titlePage.setText("MOVIESTAR"); // titolo centrale (anche evitabile)
 
         imagPane.setMaxSize(300,300);  //Immagine principale
 
@@ -62,7 +62,7 @@ public class ModifyCreateController {
 
         pageContainer.setSpacing(100); //utilizzo per avere spazio tra ogni elemento
 
-        pageContainer.setStyle("-fx-background-color:grey;"); //setto lo stile della pagina
+
 
         //metto lo spazio tra ogni scroll di immagini
         imageScroll1.setSpacing(40.0);
@@ -70,9 +70,6 @@ public class ModifyCreateController {
         imageScroll3.setSpacing(40.0);
 
         //metto lo stile per ogni scroll di immagini
-        imageScroll1.setStyle("-fx-background-color:grey;");
-        imageScroll2.setStyle("-fx-background-color:grey;");
-        imageScroll3.setStyle("-fx-background-color:grey;");
 
         scrollContainer.setSpacing(40);
 

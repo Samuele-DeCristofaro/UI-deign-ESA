@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox fx:id="pageContainer" alignment="CENTER" prefHeight="578.0" prefWidth="745.0" spacing="30" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Profile.ModifyCreateController">
+<VBox fx:id="svgContainer" alignment="CENTER" styleClass="bg-color" stylesheets="@styles/General.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Profile.ModifyCreateController">
     <children>
-        <Label fx:id="titlePage" alignment="TOP_CENTER" text="MOVIESTAR" />
-        <HBox fx:id="elementContainer" alignment="CENTER">
+        <Group scaleX="1.9" scaleY="1.9">
+            <SVGPath content="%icon-moviestar-bg" />
+            <SVGPath content="%icon-moviestar-fg" fill="white" />
+            <VBox.margin>
+                <Insets top="50.0" />
+            </VBox.margin>
+        </Group>
+        <HBox fx:id="pageContainer" alignment="CENTER" prefHeight="578.0" prefWidth="745.0" style="-fx-effect: dropshadow(gaussian, rgba(64, 64, 64, 0.6), 16, 0.3, 4, 4);" VBox.vgrow="ALWAYS">
             <children>
-                <Pane fx:id="imagPane" prefHeight="195.0" prefWidth="263.0">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Pane>
-            <Region prefHeight="120.0" prefWidth="93.0" HBox.hgrow="NEVER" />
-                <VBox alignment="CENTER_LEFT" spacing="20">
+                <VBox fx:id="elementContainer" alignment="CENTER">
                     <children>
-                        <Label fx:id="creationTitle" prefHeight="18.0" prefWidth="169.0" text="Crea il nome utente:" />
-                        <TextField fx:id="textName" prefHeight="26.0" prefWidth="208.0" promptText="nome:" />
-                        <HBox fx:id="buttonContainer" alignment="CENTER_LEFT" spacing="60.0">
+                        <Pane fx:id="imagPane" prefHeight="195.0" prefWidth="263.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Pane>
+                        <Region prefHeight="34.0" prefWidth="263.0" HBox.hgrow="NEVER" />
+                        <VBox alignment="CENTER_LEFT" spacing="20">
                             <children>
-                                <Button fx:id="saveButton" text="Conferma" />
-                            <Button fx:id="cancelButton" text="Conferma" />
-                            </children>
-                        </HBox>
+                                <Label fx:id="creationTitle" prefHeight="18.0" prefWidth="169.0" stylesheets="@styles/General.css" text="Crea il nome utente:">
+                                    <styleClass>
+                                        <String fx:value="medium-text" />
+                                        <String fx:value="on-primary" />
+                                    </styleClass></Label>
+                                <TextField fx:id="textName" prefHeight="26.0" prefWidth="208.0" promptText="nome:" />
+                                <HBox fx:id="buttonContainer" alignment="CENTER" spacing="60.0">
+                                    <children>
+                                        <Button fx:id="saveButton" text="Conferma" />
+                                        <Button fx:id="cancelButton" text="Conferma" />
+                                    </children>
+                                </HBox>
 
+                            </children>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </VBox>
                     </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <padding>
+                        <Insets right="30.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="20.0" />
+                    </HBox.margin>
+                </VBox>
+                <Region prefHeight="578.0" prefWidth="131.0" />
+                <VBox fx:id="scrollContainer" alignment="CENTER">
+                    <children>
+                        <Label fx:id="avatarTextChoiche" alignment="CENTER" stylesheets="@styles/General.css" text="Scegli il tuo Avatar">
+                            <styleClass>
+                                <String fx:value="medium-text" />
+                                <String fx:value="on-primary" />
+                            </styleClass></Label>
+                        <HBox fx:id="imageScroll1" alignment="CENTER" spacing="40" />
+                        <HBox fx:id="imageScroll2" alignment="CENTER" spacing="40" />
+                        <HBox fx:id="imageScroll3" alignment="CENTER" spacing="40" />
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
                 </VBox>
             </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
+            <VBox.margin>
+                <Insets bottom="64.0" left="64.0" right="64.0" top="64.0" />
+            </VBox.margin>
+            <styleClass>
+                <String fx:value="very-large-item" />
+                <String fx:value="surface-gradient" />
+            </styleClass>
         </HBox>
-        <VBox fx:id="scrollContainer" alignment="CENTER" spacing="40">
-            <children>
-                <Label fx:id="avatarTextChoiche" alignment="CENTER" text="Scegli il tuo Avatar" />
-                <HBox fx:id="imageScroll1" alignment="CENTER" spacing="40" />
-                <HBox fx:id="imageScroll2" alignment="CENTER" spacing="40" />
-                <HBox fx:id="imageScroll3" alignment="CENTER" spacing="40" />
-            </children>
-        </VBox>
     </children>
 </VBox>

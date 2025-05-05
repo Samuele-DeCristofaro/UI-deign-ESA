@@ -1,7 +1,6 @@
 package com.esa.moviestar.Login;
 
 import com.esa.moviestar.Database.AccountDao;
-import com.esa.moviestar.Database.DataBaseManager;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
