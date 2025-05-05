@@ -25,9 +25,14 @@
                                 <Insets />
                             </HBox.margin>
                         </Pane>
-                        <Region prefHeight="34.0" prefWidth="263.0" HBox.hgrow="NEVER" />
+                        <Region prefHeight="12.0" prefWidth="0.0" HBox.hgrow="NEVER" />
                         <VBox alignment="CENTER_LEFT" spacing="20">
                             <children>
+                        <Label fx:id="errorText" alignment="CENTER" styleClass="warningText">
+                           <styleClass>
+                              <String fx:value="vbox-background" />
+                              <String fx:value="large-item" />
+                           </styleClass></Label>
                                 <Label fx:id="creationTitle" prefHeight="18.0" prefWidth="169.0" stylesheets="@styles/General.css" text="Crea il nome utente:">
                                     <styleClass>
                                         <String fx:value="medium-text" />
@@ -54,10 +59,10 @@
                         <Insets right="30.0" />
                     </padding>
                     <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="40.0" right="30.0" />
                     </HBox.margin>
                 </VBox>
-                <Region prefHeight="578.0" prefWidth="131.0" />
+                <Region prefHeight="578.0" prefWidth="58.0" />
                 <VBox fx:id="scrollContainer" alignment="CENTER">
                     <children>
                         <Label fx:id="avatarTextChoiche" alignment="CENTER" stylesheets="@styles/General.css" text="Scegli il tuo Avatar">
