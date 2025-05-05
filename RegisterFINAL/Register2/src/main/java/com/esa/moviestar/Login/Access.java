@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 public class Access {
 
@@ -46,6 +47,8 @@ public class Access {
     private Button recuperoPassword;
 
     private EmailService emailService;
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("com.esa.moviestar.images.svg-paths.general-svg");
+
 
     // Valori di riferimento
     private final double REFERENCE_WIDTH = 1720.0; // Usa la larghezza definita nel FXML
@@ -259,9 +262,9 @@ public class Access {
             }
 
             if (Objects.equals(temp_acc.getPassword(), password)) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"), resourceBundle);
                 Parent homeContent = loader.load();
-                homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
+                //homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
 
                 Node currentContent = ContenitorePadre.getChildren().get(0);
                 AnimationUtils.fadeOut(currentContent, 500);

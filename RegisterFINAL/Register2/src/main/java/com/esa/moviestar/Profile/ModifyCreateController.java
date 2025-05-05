@@ -1,6 +1,8 @@
 package com.esa.moviestar.Profile;
 
 import java.io.IOException;
+
+import com.esa.moviestar.Login.AnimationUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,8 +20,6 @@ public class ModifyCreateController {
     HBox pageContainer;
     @FXML
     VBox svgContainer;
-    @FXML
-    Label titlePage;
     @FXML
     VBox elementContainer;
     @FXML
@@ -42,12 +42,14 @@ public class ModifyCreateController {
     Button cancelButton;
     @FXML
     Label warningText;
+    @FXML
+    private Label errorText;
 
 
     public void initialize() {
 
 
-
+        errorText.setText("");
         imagPane.setMaxSize(300,300);  //Immagine principale
 
         imagPane.setStyle("-fx-background-color:red;");//modifica di stile dell'immagine principale
@@ -79,14 +81,14 @@ public class ModifyCreateController {
 
         cancelButton.setOnMouseClicked(e -> {//Se cliccato è un evento irreversibile e ritorna alla pagina iniziale di scelta dei profili
             System.out.println("Annullato");
+
         });
         saveButton.setOnMouseClicked(event -> {  //Se clicco sul bottone di salvataggio / dovrà poi ritornare alla pagina di scelta dei profili con il profilo creato
 
             if (!textName.getText().isEmpty() && !textName.getText().contains(" ")) {  //se ho messo un nome nel textfield e l'ho salvato allora ritorno alla pagina principale dei profili / oppure potrei far direttamente loggare / (modifiche da fare : controllare che abbia scelto anche un immagine, oppure se non l'ha scelta dare quella di default)
-
                 //questo metodo cosi fa ritornare alla pagina dei profili, aggiungere poi il fatto che io abbia creato il panel nuovo con tutte le modifiche
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view-profile.fxml"));
                     Parent profileContent = loader.load();
                     pageContainer.getChildren().clear();
                     pageContainer.getChildren().add(profileContent);
@@ -96,7 +98,8 @@ public class ModifyCreateController {
                 }
                 System.out.println("Ritorni alla pagina dei profili");
             } else {
-                System.out.println("Nessun nome inserito"); //se non ho inserito nessun nome mi da errore perchè per forza va settato un nome , oppure potrei dare il nome di default tipo utente 1
+                errorText.setText("Nessun nome inserito"); //se non ho inserito nessun nome mi da errore perchè per forza va settato un nome , oppure potrei dare il nome di default tipo utente 1
+                AnimationUtils.shake(errorText);
             }
 
         });
