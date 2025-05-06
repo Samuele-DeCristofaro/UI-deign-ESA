@@ -152,7 +152,7 @@ public class Access {
                 double registerScale = Math.max(baseFontSize  , 0.7);
 
                 welcomeText.setStyle("-fx-font-size: " + ((15 * welcomeTextScale * 2) + 2) + "px;");
-                access.setStyle("-fx-font-size: " + ((15 * accessButtonScale * 2) + 2) + "px;");
+                access.setStyle("-fx-font-size: " + (15 * accessButtonScale * 2) + "px;");
 
                 warningText.setStyle("-fx-font-size: " + (warningTextScale) + "px;");
                 register.setStyle("-fx-font-size: " + (registerScale) + "px;");
@@ -178,7 +178,6 @@ public class Access {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/registrazione.fxml"));
             Parent registerContent = loader.load();
-            registerContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
             ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione più efficiente
         } catch (IOException e) {
             e.printStackTrace();
@@ -222,8 +221,6 @@ public class Access {
             // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
             Parent resetContent = loader.load();
-            resetContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/reset.css").toExternalForm());
-
             // Ottieni il controller e prepara i dati necessari
             ResetController resetController = loader.getController();
             resetController.setUserEmail(email);
@@ -264,8 +261,6 @@ public class Access {
             if (Objects.equals(temp_acc.getPassword(), password)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"), resourceBundle);
                 Parent homeContent = loader.load();
-                //homeContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/register2.css").toExternalForm());
-
                 Node currentContent = ContenitorePadre.getChildren().get(0);
                 AnimationUtils.fadeOut(currentContent, 500);
 

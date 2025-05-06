@@ -221,7 +221,6 @@ public class Register {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view.fxml"));
             Parent loginContent = loader.load();
-            loginContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
 
             ContenitorePadre.getChildren().clear();
             ContenitorePadre.getChildren().add(loginContent);

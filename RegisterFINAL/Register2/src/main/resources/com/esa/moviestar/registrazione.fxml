@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="ContenitorePadre" prefHeight="980" prefWidth="1720" styleClass="root-pane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Login.Register">
+<StackPane fx:id="ContenitorePadre" prefHeight="980"  stylesheets="@access.css" prefWidth="1720" styleClass="MainPane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Login.Register">
     <children>
-        <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="bg-color" stylesheets="@styles/General.css">
+        <VBox alignment="TOP_CENTER" spacing="20.0" >
             <!-- Immagine in alto -->
             <ImageView fx:id="titleImage" fitHeight="194.0" fitWidth="700.0" nodeOrientation="INHERIT" preserveRatio="true">
                 <Image url="@TITLE2.png" />
