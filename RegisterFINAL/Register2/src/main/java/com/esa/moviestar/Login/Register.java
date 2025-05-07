@@ -1,9 +1,6 @@
 package com.esa.moviestar.Login;
 
 import com.esa.moviestar.Database.AccountDao;
-import com.esa.moviestar.Database.DataBaseManager;
-import com.esa.moviestar.bin.User;
-import com.esa.moviestar.bin.UserDatabase;
 import com.esa.moviestar.model.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
