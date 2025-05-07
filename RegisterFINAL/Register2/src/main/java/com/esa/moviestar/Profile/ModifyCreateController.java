@@ -56,7 +56,7 @@ public class ModifyCreateController {
 
         creationTitle.setText("Crea il nome utente:"); //label per sopra il textfield per farci capire che stiamo creando un nuovo utente
 
-        textName.setPromptText("inserisci nome ");// text field dove inserire il nome, (con all'interno trasparente la scritta "inserisci nome")
+        textName.setPromptText("Nome");// text field dove inserire il nome, (con all'interno trasparente la scritta "inserisci nome")
 
 
 
@@ -67,13 +67,13 @@ public class ModifyCreateController {
 
 
         //metto lo spazio tra ogni scroll di immagini
-        imageScroll1.setSpacing(40.0);
-        imageScroll2.setSpacing(40.0);
-        imageScroll3.setSpacing(40.0);
+        imageScroll1.setSpacing(20);
+        imageScroll2.setSpacing(20);
+        imageScroll3.setSpacing(20);
 
         //metto lo stile per ogni scroll di immagini
 
-        scrollContainer.setSpacing(40);
+        scrollContainer.setSpacing(30);
 
         saveButton.setText("Salva"); //setting del bottone di salvataggio
 
