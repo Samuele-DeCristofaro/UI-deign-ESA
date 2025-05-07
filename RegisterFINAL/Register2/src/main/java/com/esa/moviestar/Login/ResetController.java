@@ -53,8 +53,8 @@ public class ResetController {
     // Valori di riferimento per il layout responsivo
     private final double REFERENCE_WIDTH = 1720.0;
     private final double REFERENCE_HEIGHT = 980.0;
-    private final double REFERENCE_CONTAINER_WIDTH = 400.0;
-    private final double REFERENCE_CONTAINER_HEIGHT = 459.0;
+    private final double REFERENCE_CONTAINER_WIDTH = 500.0;
+    private final double REFERENCE_CONTAINER_HEIGHT = 559.0;
     private final double COMPACT_MODE_THRESHOLD = 500.0;
     private final double MIN_VBOX_VISIBILITY_THRESHOLD = 400.0;
 
@@ -114,7 +114,7 @@ public class ResetController {
 
     private void adjustLayout(double width, double height) {
         // Scale factor based on the SMALLER dimension
-        double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double scale = (Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT)) ;
 
         // Handle main container
         if (mainContainer != null) {
@@ -150,7 +150,7 @@ public class ResetController {
 
                 if (resetButton != null) {
                     // Smaller font size for button
-                    resetButton.setStyle("-fx-font-size: " + Math.min(18 * buttonScale, 18) + "px;");
+                    resetButton.setStyle("-fx-font-size: " + (Math.min(18 * buttonScale, 18)+5) + "px;");
                 }
 
                 if (backToLoginButton != null) {
@@ -163,7 +163,7 @@ public class ResetController {
                 }
 
                 // Set proportional width that adapts to container
-                double fieldWidth = Math.min(containerWidth - padding * 2, containerWidth * 0.9);
+                double fieldWidth = (Math.min(containerWidth - padding * 2, containerWidth * 0.9) - 15);
                 if (codeField != null) {
                     codeField.setPrefWidth(fieldWidth);
                     codeField.setMaxWidth(fieldWidth);
@@ -179,11 +179,9 @@ public class ResetController {
 
                 // Dynamic margins
                 double verticalMargin = 10 * scale;
-                if (backToLoginButton != null) {
-                    VBox.setMargin(backToLoginButton, new Insets(0, 0, verticalMargin, 0));
-                }
+
                 if (codeField != null) {
-                    VBox.setMargin(codeField, new Insets(0, 0, verticalMargin, 0));
+                    VBox.setMargin(codeField, new Insets((verticalMargin + 25), 0, verticalMargin, 0));
                 }
                 if (newPasswordField != null) {
                     VBox.setMargin(newPasswordField, new Insets(verticalMargin, 0,0, 0));
@@ -192,8 +190,12 @@ public class ResetController {
                     VBox.setMargin(confirmPasswordField, new Insets(0, 0, 0, 0));
                 }
                 if (resetButton != null) {
-                    VBox.setMargin(resetButton, new Insets(verticalMargin, 0, 0, 0));
+                    VBox.setMargin(resetButton, new Insets((verticalMargin + 10), 0, 0, 0));
                 }
+                if (backToLoginButton != null) {
+                    VBox.setMargin(backToLoginButton, new Insets((verticalMargin), 0, verticalMargin - 30, 0));
+                }
+
             }
         }
     }
@@ -284,8 +286,6 @@ public class ResetController {
             // Carica la schermata di login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view.fxml"));
             Parent loginContent = loader.load();
-            loginContent.getStylesheets().add(getClass().getResource("/com/esa/moviestar/access.css").toExternalForm());
-
             if (parentContainer != null) {
                 // Ottieni il contenuto attuale per l'animazione
                 Node currentContent = parentContainer.getChildren().getFirst();

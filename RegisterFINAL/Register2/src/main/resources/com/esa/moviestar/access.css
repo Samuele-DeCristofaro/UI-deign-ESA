@@ -28,9 +28,10 @@
 }
 
 /* VBox general styling */
-VBox {
+.VBox-style {
     -fx-background-radius: 24px;
     -fx-border-radius: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
 }
 
 /* Transparent VBox with rounded corners */
@@ -186,4 +187,27 @@ TextField, PasswordField {
 .text-field:focused, .password-field:focused, TextField:focused, PasswordField:focused {
     -fx-background-color: linear-gradient(to bottom right, #262626, #101010);
     -fx-border-color: #7341BE;
+}
+.register-box2 {
+    -fx-background-color: rgba(37, 37, 37, 0.97);
+    -fx-border-color: #262626;
+    -fx-border-width: 2px;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
+    -fx-alignment: center;
+}
+.back-button {
+    -fx-text-fill: #F0ECFD;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Back button hover effect - only underline */
+.back-button:hover {
+    -fx-underline: true;
+    -fx-text-fill: white;
 }

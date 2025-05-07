@@ -10,12 +10,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -178,7 +180,16 @@ public class Access {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/registrazione.fxml"));
             Parent registerContent = loader.load();
-            ContenitorePadre.getChildren().setAll(registerContent); // Usa setAll per una sostituzione più efficiente
+
+            // Ottieni la scena corrente
+            Scene currentScene = ContenitorePadre.getScene();
+
+            // Crea una nuova scena con il nuovo contenuto
+            Scene newScene = new Scene(registerContent, currentScene.getWidth(), currentScene.getHeight());
+
+            // Ottieni lo Stage corrente e imposta la nuova scena
+            Stage stage = (Stage) ContenitorePadre.getScene().getWindow();
+            stage.setScene(newScene);
         } catch (IOException e) {
             e.printStackTrace();
             warningText.setText("Errore di caricamento: " + e.getMessage());
@@ -221,22 +232,31 @@ public class Access {
             // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
             Parent resetContent = loader.load();
-            // Ottieni il controller e prepara i dati necessari
-            ResetController resetController = loader.getController();
-            resetController.setUserEmail(email);
-            resetController.setVerificationCode(verificationCode);
-            resetController.setupResetButton();
 
             // Animazione per la transizione
             Node currentContent = ContenitorePadre.getChildren().getFirst();
             AnimationUtils.fadeOut(currentContent, 300);
 
+            // Ottieni la scena corrente
+            Scene currentScene = ContenitorePadre.getScene();
+
+            // Crea una nuova scena con il nuovo contenuto
+            Scene newScene = new Scene(resetContent, currentScene.getWidth(), currentScene.getHeight());
+
             PauseTransition pause = new PauseTransition(Duration.millis(300));
             pause.setOnFinished(e -> {
-                ContenitorePadre.getChildren().setAll(resetContent);
+                // Ottieni lo Stage corrente e imposta la nuova scena
+                Stage stage = (Stage) ContenitorePadre.getScene().getWindow();
+                stage.setScene(newScene);
                 AnimationUtils.fadeIn(resetContent, 300);
             });
             pause.play();
+
+            // Ottieni il controller e prepara i dati necessari
+            ResetController resetController = loader.getController();
+            resetController.setUserEmail(email);
+            resetController.setVerificationCode(verificationCode);
+            resetController.setupResetButton();
         }
     }
 
@@ -259,17 +279,19 @@ public class Access {
             }
 
             if (Objects.equals(temp_acc.getPassword(), password)) {
+                // Carica il nuovo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/modify-create-view.fxml"), resourceBundle);
                 Parent homeContent = loader.load();
-                Node currentContent = ContenitorePadre.getChildren().get(0);
-                AnimationUtils.fadeOut(currentContent, 500);
 
-                PauseTransition pause = new PauseTransition(Duration.millis(500));
-                pause.setOnFinished(e -> {
-                    ContenitorePadre.getChildren().setAll(homeContent); // Usa setAll per una sostituzione piÃ¹ efficiente
-                    AnimationUtils.fadeIn(homeContent, 500);
-                });
-                pause.play();
+                // Ottieni la scena corrente
+                Scene currentScene = ContenitorePadre.getScene();
+
+                // Crea una nuova scena con il nuovo contenuto
+                Scene newScene = new Scene(homeContent, currentScene.getWidth(), currentScene.getHeight());
+
+                // Ottieni lo Stage corrente e imposta la nuova scena
+                Stage stage = (Stage) ContenitorePadre.getScene().getWindow();
+                stage.setScene(newScene);
             } else {
                 emailField.setText("");
                 passwordField.setText("");
