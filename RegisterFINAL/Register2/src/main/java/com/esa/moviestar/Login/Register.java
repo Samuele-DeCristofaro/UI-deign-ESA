@@ -44,6 +44,8 @@ public class Register {
     private VBox registerBox;
     @FXML
     private ImageView titleImage;
+    @FXML
+    private VBox ContenitoreImmagine;
 
     // Database access
     //private UserDatabase userDatabase;
@@ -105,7 +107,8 @@ public class Register {
 
     private void adjustLayout(double width, double height) {
         // Fattore di scala basato sulla dimensione MINORE
-        double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double rawScale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double scale = 1 - (1 - rawScale) * 0.5; // Applica smorzamento del 50%
 
         // Gestione dell'immagine (invariato)
         if (titleImage != null) {
@@ -115,6 +118,8 @@ public class Register {
             if (showImage) {
                 titleImage.setFitWidth(REFERENCE_IMAGE_WIDTH * scale);
                 titleImage.setFitHeight(REFERENCE_IMAGE_HEIGHT * scale);
+                VBox.setMargin(titleImage, new Insets(((scale + 10) * 0.85),0,0,0));
+
             }
         }
 
@@ -185,13 +190,11 @@ public class Register {
                 emailField.setMaxWidth(fieldWidth);
                 passwordField.setMaxWidth(fieldWidth);
 
-                // --- NUOVA LOGICA PER LA LARGHEZZA DEL BOTTONE REGISTER ---
                 double buttonWidth = Math.min(availableWidth, registerWidth * 0.6);
                 buttonWidth = Math.max(buttonWidth, 100);
 
                 register.setPrefWidth(buttonWidth);
                 register.setMaxWidth(buttonWidth);
-                // --- FINE NUOVA LOGICA PER LA LARGHEZZA DEL BOTTONE REGISTER ---
 
                 backToLogin.setMaxWidth(availableWidth);
                 backToLogin.setWrapText(true);

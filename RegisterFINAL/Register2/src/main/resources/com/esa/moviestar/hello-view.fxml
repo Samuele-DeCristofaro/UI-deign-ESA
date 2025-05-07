@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <StackPane fx:id="ContenitorePadre" styleClass="MainPane" stylesheets="@access.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Login.Access">
-    <HBox prefHeight="250.0" prefWidth="200.0" styleClass="Hbox-Padre" HBox.hgrow="ALWAYS" StackPane.alignment="TOP_LEFT">
+    <HBox fx:id="ContenitoreImmagine" prefHeight="250.0" prefWidth="200.0" styleClass="Hbox-Padre" HBox.hgrow="ALWAYS" StackPane.alignment="TOP_LEFT">
         <children>
             <ImageView fx:id="titleImage" fitHeight="194.0" fitWidth="700.0" preserveRatio="true" smooth="false">
                 <Image url="@TITLE2.png" />

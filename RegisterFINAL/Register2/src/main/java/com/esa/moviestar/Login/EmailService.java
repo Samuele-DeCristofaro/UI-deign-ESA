@@ -17,11 +17,11 @@ public class EmailService {
 
         emailProperties.put("mail.smtp.host", "smtp.gmail.com");
 
-        emailProperties.put("mail.smtp.port", "465");
+        emailProperties.put("mail.smtp.port", "587");
 
         emailProperties.put("mail.smtp.auth", "true");
 
-        emailProperties.put("mail.smtp.ssl.enable", "true");
+        emailProperties.put("mail.smtp.starttls.enable", "true");
 
         this.mailSession = Session.getInstance(emailProperties, new Authenticator() {
             @Override
@@ -33,24 +33,24 @@ public class EmailService {
     public void sendEmail(String recipientEmail, String subject, String body) throws MessagingException {
         try {
             MimeMessage message = new MimeMessage(this.mailSession);
-
             message.setFrom(new InternetAddress(this.senderEmail));
-
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+            message.setSubject(subject, "UTF-8");
 
-            message.setSubject(subject);
+            // Set proper headers
+            message.setHeader("Content-Type", "text/plain; charset=UTF-8");
+            message.setSentDate(new java.util.Date());
+            message.setReplyTo(InternetAddress.parse(this.senderEmail));
 
-
-            message.setText(body);
+            // Set body with UTF-8
+            message.setContent(body, "text/plain; charset=UTF-8");
 
             Transport.send(message);
-
-            System.out.println("Email inviata con successo a " + recipientEmail);
-
+            System.out.println("Email sent successfully to " + recipientEmail);
         } catch (MessagingException e) {
-            System.err.println("Errore durante l'invio dell'email a " + recipientEmail + ": " + e.getMessage());
-            // Rilancia l'eccezione per gestirla a un livello superiore
+            System.err.println("Failed to send email: " + e.getMessage());
             throw e;
         }
     }
+
 }

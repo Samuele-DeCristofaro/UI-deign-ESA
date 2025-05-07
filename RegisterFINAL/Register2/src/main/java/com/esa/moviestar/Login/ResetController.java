@@ -8,12 +8,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -114,7 +116,8 @@ public class ResetController {
 
     private void adjustLayout(double width, double height) {
         // Scale factor based on the SMALLER dimension
-        double scale = (Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT)) ;
+        double rawScale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double scale = 1 - (1 - rawScale) * 0.5; // Applica smorzamento del 50%
 
         // Handle main container
         if (mainContainer != null) {
@@ -259,7 +262,7 @@ public class ResetController {
             AnimationUtils.pulse(resetButton);
 
             // Torna alla schermata di login dopo un breve ritardo
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
             pause.setOnFinished(e -> navigateToLogin());
             pause.play();
         } catch (SQLException e) {
@@ -286,19 +289,17 @@ public class ResetController {
             // Carica la schermata di login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view.fxml"));
             Parent loginContent = loader.load();
-            if (parentContainer != null) {
-                // Ottieni il contenuto attuale per l'animazione
-                Node currentContent = parentContainer.getChildren().getFirst();
-                AnimationUtils.fadeOut(currentContent, 500);
+            Scene currentScene = parentContainer.getScene();
 
-                PauseTransition pause = new PauseTransition(Duration.millis(500));
-                pause.setOnFinished(e -> {
-                    parentContainer.getChildren().setAll(loginContent);
-                    AnimationUtils.fadeIn(loginContent, 500);
-                });
-                pause.play();
-            }
-        } catch (IOException e) {
+            // Crea una nuova scena con il nuovo contenuto
+            Scene newScene = new Scene(loginContent, currentScene.getWidth(), currentScene.getHeight());
+
+            // Ottieni lo Stage corrente e imposta la nuova scena
+            Stage stage = (Stage) parentContainer.getScene().getWindow();
+            stage.setScene(newScene);
+
+        }
+        catch (IOException e) {
             e.printStackTrace();
             updateStatus("Errore durante il caricamento della pagina");
         }

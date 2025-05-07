@@ -47,6 +47,8 @@ public class Access {
     private VBox loginBox;
     @FXML
     private Button recuperoPassword;
+    @FXML
+    private HBox ContenitoreImmagine;
 
     private EmailService emailService;
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("com.esa.moviestar.images.svg-paths.general-svg");
@@ -107,7 +109,8 @@ public class Access {
 
     private void adjustLayout(double width, double height) {
         // Fattore di scala basato sulla dimensione MINORE
-        double scale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double rawScale = Math.min(width / REFERENCE_WIDTH, height / REFERENCE_HEIGHT);
+        double scale = 1 - (1 - rawScale) * 0.5; // Applica smorzamento del 50%
         // Gestione dell'immagine
         if (titleImage != null) {
             boolean showImage = width > IMAGE_VISIBILITY_THRESHOLD;
@@ -144,8 +147,7 @@ public class Access {
 
                 // Posizionamento
                 StackPane.setAlignment(loginBox, compactMode ? Pos.CENTER : Pos.CENTER_RIGHT);
-                StackPane.setMargin(loginBox, compactMode ? new Insets(0) : new Insets(0, Math.max(50, 200 * scale), 0, 0));
-
+                StackPane.setMargin(loginBox, compactMode ? new Insets(0) : new Insets(0, Math.max(50, (140 * scale)), 0, 0));
                 // Dimensioni font dinamiche
                 double baseFontSize = 15 * scale;
                 double welcomeTextScale = Math.max(scale, 0.7); // Non scende mai sotto il 70% della dimensione originale
@@ -226,8 +228,21 @@ public class Access {
             }
             String verificationCode = sb.toString();
 
-            // Invia email con codice di verifica
-            //emailService.sendEmail(email, "Code to reset password", verificationCode);
+            String subject = "Your MovieStar Password Reset Code";
+
+            String body = """
+            Hello,
+            
+            We received a request to reset your MovieStar account password.
+            
+            Your verification code is: 123456
+            
+            If you did not request this, please ignore this message.
+            
+            Thank you,
+            The MovieStar Team
+            """;
+            //emailService.sendEmail(email, subject, body.replace("123456", verificationCode));
 
             // Carica la vista di reset password
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/reset-password-view.fxml"));
@@ -235,7 +250,7 @@ public class Access {
 
             // Animazione per la transizione
             Node currentContent = ContenitorePadre.getChildren().getFirst();
-            AnimationUtils.fadeOut(currentContent, 300);
+            AnimationUtils.fadeOut(currentContent, 100);
 
             // Ottieni la scena corrente
             Scene currentScene = ContenitorePadre.getScene();
@@ -243,14 +258,9 @@ public class Access {
             // Crea una nuova scena con il nuovo contenuto
             Scene newScene = new Scene(resetContent, currentScene.getWidth(), currentScene.getHeight());
 
-            PauseTransition pause = new PauseTransition(Duration.millis(300));
-            pause.setOnFinished(e -> {
-                // Ottieni lo Stage corrente e imposta la nuova scena
-                Stage stage = (Stage) ContenitorePadre.getScene().getWindow();
-                stage.setScene(newScene);
-                AnimationUtils.fadeIn(resetContent, 300);
-            });
-            pause.play();
+            Stage stage = (Stage) ContenitorePadre.getScene().getWindow();
+            stage.setScene(newScene);
+
 
             // Ottieni il controller e prepara i dati necessari
             ResetController resetController = loader.getController();
