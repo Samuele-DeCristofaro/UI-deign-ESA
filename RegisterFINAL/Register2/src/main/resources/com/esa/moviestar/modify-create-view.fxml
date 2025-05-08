@@ -7,9 +7,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
@@ -25,17 +28,26 @@
                 <Insets top="50.0" />
             </VBox.margin>
         </Group>
-        <HBox fx:id="pageContainer" alignment="CENTER" prefHeight="578.0" prefWidth="745.0" VBox.vgrow="ALWAYS">
+        <GridPane fx:id="pageContainer" alignment="CENTER" prefHeight="577.0" prefWidth="746.0" VBox.vgrow="ALWAYS">
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="50.0" />
+            </columnConstraints>
+
             <children>
-                <VBox fx:id="elementContainer" alignment="CENTER">
+                <VBox fx:id="elementContainer" alignment="CENTER" prefHeight="362.0" prefWidth="294.0" GridPane.columnIndex="0">
                     <children>
                         <Pane fx:id="imagPane" prefHeight="195.0" prefWidth="263.0">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                         </Pane>
                         <Region prefHeight="0.0" prefWidth="238.0" HBox.hgrow="NEVER" />
-                        <VBox alignment="CENTER_LEFT" spacing="10.0">
+                        <VBox alignment="CENTER_LEFT" maxWidth="300.0" spacing="10.0">
                             <children>
                                 <Label fx:id="creationTitle" prefHeight="18.0" prefWidth="169.0" stylesheets="@styles/General.css" text="Crea il nome utente:">
                                     <styleClass>
@@ -88,9 +100,11 @@
                     <HBox.margin>
                         <Insets left="40.0" right="30.0" />
                     </HBox.margin>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
                 </VBox>
-                <Region prefHeight="578.0" prefWidth="58.0" />
-                <VBox fx:id="scrollContainer" alignment="CENTER">
+                <VBox fx:id="scrollContainer" alignment="CENTER" prefWidth="361.0" GridPane.columnIndex="1">
                     <children>
                         <Label fx:id="avatarTextChoiche" alignment="CENTER" stylesheets="@styles/General.css" text="Scegli il tuo Avatar">
                             <styleClass>
@@ -105,6 +119,9 @@
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
                 </VBox>
             </children>
             <VBox.margin>
@@ -114,6 +131,17 @@
                 <String fx:value="very-large-item" />
                 <String fx:value="surface-gradient" />
             </styleClass>
-        </HBox>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
     </children>
 </VBox>

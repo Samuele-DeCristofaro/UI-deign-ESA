@@ -1,8 +1,12 @@
 package com.esa.moviestar.Profile;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import com.esa.moviestar.Database.AccountDao;
+import com.esa.moviestar.Database.UtenteDao;
 import com.esa.moviestar.Login.AnimationUtils;
+import com.esa.moviestar.model.Utente;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -10,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -17,7 +22,7 @@ import javafx.scene.layout.VBox;
 
 public class ModifyCreateController {
     @FXML
-    HBox pageContainer;
+    GridPane pageContainer;
     @FXML
     VBox svgContainer;
     @FXML
@@ -44,7 +49,7 @@ public class ModifyCreateController {
     Label warningText;
     @FXML
     private Label errorText;
-
+    private Pane originalProfilePane;
 
     public void initialize() {
 
@@ -54,6 +59,12 @@ public class ModifyCreateController {
 
         imagPane.setStyle("-fx-background-color:red;");//modifica di stile dell'immagine principale
 
+        // Salva una copia dell'immagine iniziale come "originale"
+        originalProfilePane = new Pane();
+        originalProfilePane.setPrefSize(imagPane.getPrefWidth(), imagPane.getPrefHeight());
+        originalProfilePane.setStyle(imagPane.getStyle());
+
+
         creationTitle.setText("Crea il nome utente:"); //label per sopra il textfield per farci capire che stiamo creando un nuovo utente
 
         textName.setPromptText("Nome");// text field dove inserire il nome, (con all'interno trasparente la scritta "inserisci nome")
@@ -61,8 +72,6 @@ public class ModifyCreateController {
 
 
         elementContainer.setSpacing(30);
-
-        pageContainer.setSpacing(100); //utilizzo per avere spazio tra ogni elemento
 
 
 
@@ -79,28 +88,42 @@ public class ModifyCreateController {
 
         cancelButton.setText("Annulla"); //setting del bottone di annullamento
 
-        cancelButton.setOnMouseClicked(e -> {//Se cliccato è un evento irreversibile e ritorna alla pagina iniziale di scelta dei profili
-            System.out.println("Annullato");
+        cancelButton.setOnMouseClicked(e -> {//Se cliccato è un evento irreversibile
+            textName.setText(""); //elimina la stringa che scrivo da input se non mi piace
+            elementContainer.getChildren().set(0, originalProfilePane); // ripristina  l'immagine originale
+
 
         });
         saveButton.setOnMouseClicked(event -> {  //Se clicco sul bottone di salvataggio / dovrà poi ritornare alla pagina di scelta dei profili con il profilo creato
-
+            String name = textName.getText();
+            String gusto = "0";
+            int immagine = 1 ;
+            String email = "";
             if (!textName.getText().isEmpty() && !textName.getText().contains(" ")) {  //se ho messo un nome nel textfield e l'ho salvato allora ritorno alla pagina principale dei profili / oppure potrei far direttamente loggare / (modifiche da fare : controllare che abbia scelto anche un immagine, oppure se non l'ha scelta dare quella di default)
                 //questo metodo cosi fa ritornare alla pagina dei profili, aggiungere poi il fatto che io abbia creato il panel nuovo con tutte le modifiche
                 try {
+
+                    Utente utente = new Utente(name,immagine,gusto,email);
+                    UtenteDao dao = new UtenteDao();
+                    dao.inserisciUtente(utente);
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esa/moviestar/hello-view-profile.fxml"));
                     Parent profileContent = loader.load();
                     pageContainer.getChildren().clear();
                     pageContainer.getChildren().add(profileContent);
                 } catch (IOException e) {
                     warningText.setText("Errore durante il caricamento della pagina di modifica: " + e.getMessage());
-                    e.printStackTrace(); // oppure usa un logger
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
                 System.out.println("Ritorni alla pagina dei profili");
             } else {
                 errorText.setText("Nessun nome inserito"); //se non ho inserito nessun nome mi da errore perchè per forza va settato un nome , oppure potrei dare il nome di default tipo utente 1
                 AnimationUtils.shake(errorText);
             }
+
+
 
         });
 
@@ -133,14 +156,13 @@ public class ModifyCreateController {
             // prendo un'immagine che ce all'interno dello scrollImage
             Node scrollImage = imageScroll.getChildren().get(i);
 
+            Pane originalPane = (Pane) scrollImage;
+
+            // Crea un nuovo Pane che farà da clone dell'originale
+            Pane clonedPane = new Pane();
+
             // ogni volta che clicco un immagine all'interno di un imageScroll allora succede qualcosa
             scrollImage.setOnMouseClicked(event -> {
-
-                // Converte il nodo generico in un Pane specifico per poter accedere alle sue proprietà
-                Pane originalPane = (Pane) scrollImage;
-
-                // Crea un nuovo Pane che farà da clone dell'originale
-                Pane clonedPane = new Pane();
 
                 // Copia le dimensioni dal pane originale al clone
                 clonedPane.setPrefSize(imagPane.getPrefWidth(), imagPane.getPrefHeight());
@@ -157,7 +179,9 @@ public class ModifyCreateController {
                 // Aggiunge il clone dell'immagine selezionata come nuova immagine profilo
                 // La posizione 0 garantisce che sia sempre il primo elemento dell'elementContainer
                 elementContainer.getChildren().add(0, clonedPane);
+
             });
+
         }
     }
 }

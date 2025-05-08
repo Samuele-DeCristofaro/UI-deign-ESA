@@ -7,80 +7,67 @@ import java.sql.*;
 public class UtenteDao {
     private Connection connection;
 
-    public UtenteDao(){  //Costruttore
-        try{
+    public UtenteDao() {
+        try {
             this.connection = DataBaseManager.getConnection();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    //Operazioni Crud
-
-    //Metodo per inserire un Utente
+    // Inserimento di un nuovo utente
     public void inserisciUtente(Utente utente) throws SQLException {
-        String query = "INSERT INTO utente (codUtente,nome,dataNascita,codPiano,dataRegistrazione,email) VALUES (?,?,?,?,?,?);";
+        String query = "INSERT INTO Utente (Nome, Gusti, idImmagine, email) VALUES (?, ?, ?, ?);";
 
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
-            stmt.setInt(1,utente.getCodUtente());
-            stmt.setString(2,utente.getNome());
-            stmt.setString(3,utente.getDataNascita());
-            stmt.setInt(4,utente.getCodPiano());
-            stmt.setString(5,utente.getDataRegistrazione());
-            stmt.setString(6,utente.getEmail());
-            stmt.execute();
-
-        }catch(SQLException e){
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, utente.getNome());
+            stmt.setString(2, utente.getGusti());
+            stmt.setInt(3, utente.getIdImmagine());
+            stmt.setString(4, utente.getEmail());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Errore nell'inserire l'utente", e);
+            throw new SQLException("Errore nell'inserimento dell'utente", e);
         }
     }
 
-    //Metodo per rimuovere un Utente dal codUtente
+    // Rimozione utente tramite codice
     public void rimuoviUtente(int codUtente) throws SQLException {
-        String sql = "DELETE FROM utente WHERE codUtente = ?;";
+        String sql = "DELETE FROM Utente WHERE CodUtente = ?;";
 
-        try(PreparedStatement stmt = connection.prepareStatement(sql)){
-            stmt.setInt(1,codUtente);
-            int rowsAffected=stmt.executeUpdate();
-            if (rowsAffected==0) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, codUtente);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
                 throw new SQLException("Nessun utente trovato con codice utente = " + codUtente);
             }
-        }catch(SQLException e ){
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw  new SQLException("Errore nell'eliminazione dell'utente",e);
+            throw new SQLException("Errore nell'eliminazione dell'utente", e);
         }
-
     }
 
-    //Metodo per cercare un utente dal codiceUtente
+    // Ricerca utente tramite codice
+    public Utente cercaUtente(int codUtente) throws SQLException {
+        String query = "SELECT * FROM Utente WHERE CodUtente = ?;";
 
-    public Utente cercaUtente(int codUtente) throws SQLException{
-
-        String query = "SELECT * FROM utente WHERE codUtente=?;";
-
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
-            stmt.setInt(1,codUtente);
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, codUtente);
             ResultSet rs = stmt.executeQuery();
-            System.out.println("Risultato : ");
-            if(rs.next()){
-              return new Utente(
-                      rs.getInt("codUtente"),
-                      rs.getString("nome"),
-                      rs.getString("dataNascita"),
-                      rs.getInt("codPiano"),
-                      rs.getString("dataRegistrazione"),
-                      rs.getString("email")
-              );
-            }else {
+
+            if (rs.next()) {
+                return new Utente(
+                        rs.getString("Nome"),
+                        rs.getInt("idImmagine"),
+                        rs.getString("Gusti"),
+                        rs.getString("email")
+                );
+            } else {
                 return null;
             }
-        }catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("Errore nel cercare l'utente", e);
         }
     }
-
-
 }
