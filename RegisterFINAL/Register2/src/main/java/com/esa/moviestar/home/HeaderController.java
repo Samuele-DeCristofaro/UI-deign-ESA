@@ -61,7 +61,7 @@ public class HeaderController {
         });
         List<Profile> l = new ArrayList<>();
         for(int i = 0; i<3; i++ ){
-            Profile n = new Profile(i,"Giacomino");
+            Profile n = new Profile(i,"Giacomino","");
             l.add(n);
         }
         setupPopupMenu(l);
