@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox fx:id="svgContainer" alignment="CENTER" styleClass="bg-color" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esa.moviestar.Profile.ModifyCreateController">
+    <stylesheets>
+        <URL value="@styles/General.css" />
+    </stylesheets>
+    <children>
+        <Group scaleX="1.9" scaleY="1.9">
+            <SVGPath content="%icon-moviestar-bg" />
+            <SVGPath content="%icon-moviestar-fg" fill="white" />
+            <VBox.margin>
+                <Insets top="50.0" />
+            </VBox.margin>
+        </Group>
+        <GridPane fx:id="pageContainer" alignment="CENTER" prefHeight="577.0" prefWidth="746.0" VBox.vgrow="ALWAYS">
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="50.0" />
+            </columnConstraints>
+
+            <children>
+                <VBox fx:id="elementContainer" alignment="CENTER" prefHeight="362.0" prefWidth="294.0" GridPane.columnIndex="0">
+                    <children>
+                        <Pane fx:id="imagPane" prefHeight="195.0" prefWidth="263.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                        </Pane>
+                        <Region prefHeight="0.0" prefWidth="238.0" HBox.hgrow="NEVER" />
+                        <VBox alignment="CENTER_LEFT" maxWidth="300.0" spacing="10.0">
+                            <children>
+                                <Label fx:id="creationTitle" prefHeight="18.0" prefWidth="169.0" stylesheets="@styles/General.css" text="Crea il nome utente:">
+                                    <styleClass>
+                                        <String fx:value="medium-text" />
+                                        <String fx:value="on-primary" />
+                              <String fx:value="bold-text" />
+                                    </styleClass></Label>
+                                <TextField fx:id="textName" prefHeight="26.0" prefWidth="208.0" promptText="nome:" styleClass="register-box" stylesheets="@access.css" />
+                        <Label fx:id="errorText" alignment="CENTER" style="-fx-text-fill: #9E3536;" styleClass="warningText" stylesheets="@access.css">
+                           <styleClass>
+                              <String fx:value="vbox-background" />
+                              <String fx:value="large-item" />
+                           </styleClass>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets left="16.0" />
+                           </VBox.margin></Label>
+                                <HBox fx:id="buttonContainer" alignment="CENTER" spacing="60.0">
+                                    <children>
+                                        <Button fx:id="saveButton" prefHeight="34.0" prefWidth="92.0" text="Conferma">
+                                 <styleClass>
+                                    <String fx:value="primary" />
+                                    <String fx:value="on-primary" />
+                                    <String fx:value="small-item" />
+                                    <String fx:value="small-text" />
+                                 </styleClass></Button>
+                                        <Button fx:id="cancelButton" prefHeight="34.0" prefWidth="92.0" style="-fx-border-color: #9E3536; -fx-border-width: 2; -fx-text-fill: #9E3536;" text="Conferma">
+                                 <styleClass>
+                                    <String fx:value="small-item" />
+                                    <String fx:value="small-text" />
+                                    <String fx:value="surface-transparent" />
+                                 </styleClass></Button>
+                                    </children>
+                                </HBox>
+
+                            </children>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <padding>
+                        <Insets right="30.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets left="40.0" right="30.0" />
+                    </HBox.margin>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+                </VBox>
+                <VBox fx:id="scrollContainer" alignment="CENTER" prefWidth="361.0" GridPane.columnIndex="1">
+                    <children>
+                        <Label fx:id="avatarTextChoiche" alignment="CENTER" stylesheets="@styles/General.css" text="Scegli il tuo Avatar">
+                            <styleClass>
+                                <String fx:value="medium-text" />
+                                <String fx:value="on-primary" />
+                        <String fx:value="bold-text" />
+                            </styleClass></Label>
+                        <HBox fx:id="imageScroll1" alignment="CENTER" spacing="40" />
+                        <HBox fx:id="imageScroll2" alignment="CENTER" spacing="40" />
+                        <HBox fx:id="imageScroll3" alignment="CENTER" spacing="40" />
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+                </VBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="64.0" left="64.0" right="64.0" top="64.0" />
+            </VBox.margin>
+            <styleClass>
+                <String fx:value="very-large-item" />
+                <String fx:value="surface-gradient" />
+            </styleClass>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </children>
+</VBox>
