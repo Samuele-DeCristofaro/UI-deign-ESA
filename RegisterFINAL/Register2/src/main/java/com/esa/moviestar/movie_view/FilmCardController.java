@@ -1,5 +1,6 @@
 package com.esa.moviestar.movie_view;
 
+import com.esa.moviestar.model.Content;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,16 +42,16 @@ public class FilmCardController {
     @FXML
     ResourceBundle resources;
 
-    public int _id;
+    public long _id;
     public void initialize() {}
-    public void setContent(Film film){
+    public void setContent(Content film){
         _id= film.getId();
         titleLabel.setText(film.getTitle());
         descriptionLabel.setText(film.getSubtitle());
         timeLabel.setText(film.getTime());
         ratingLabel.setText(String.valueOf(film.getRating()));
-        imgView.setImage(film.getImage());
         durationIcon.setContent(resources.getString(film.isSeries()? "episodes":"clock"));
+        imgView.setImage(new Image(film.getImageUrl()));
         Platform.runLater(
                 this::setupHoverEffect
         );
@@ -174,7 +175,7 @@ public class FilmCardController {
         return "rgb("+ avgRed*255+", "+ avgGreen*255+", "+ avgBlue*255+")";
     }
 
-    public int getCardId() {
+    public long getCardId() {
         return _id;
     }
 }
