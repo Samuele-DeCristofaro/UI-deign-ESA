@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -38,14 +37,14 @@
             <children>
                 <VBox fx:id="elementContainer" alignment="CENTER" prefHeight="362.0" prefWidth="294.0" GridPane.columnIndex="0">
                     <children>
-                        <Pane fx:id="imagPane" prefHeight="195.0" prefWidth="263.0">
+                        <Group fx:id="defaultImagine" scaleX="2.0" scaleY="2.0" VBox.vgrow="ALWAYS">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                        </Pane>
+                        </Group>
                         <Region prefHeight="0.0" prefWidth="238.0" HBox.hgrow="NEVER" />
                         <VBox alignment="CENTER_LEFT" maxWidth="300.0" spacing="10.0">
                             <children>
@@ -55,7 +54,7 @@
                                         <String fx:value="on-primary" />
                               <String fx:value="bold-text" />
                                     </styleClass></Label>
-                                <TextField fx:id="textName" prefHeight="26.0" prefWidth="208.0" promptText="nome:" styleClass="register-box" stylesheets="@access.css" />
+                                <TextField fx:id="textName" prefHeight="46.0" prefWidth="245.0" styleClass="register-box" stylesheets="@access.css" />
                         <Label fx:id="errorText" alignment="CENTER" style="-fx-text-fill: #9E3536;" styleClass="warningText" stylesheets="@access.css">
                            <styleClass>
                               <String fx:value="vbox-background" />
@@ -108,13 +107,14 @@
                     <children>
                         <Label fx:id="avatarTextChoiche" alignment="CENTER" stylesheets="@styles/General.css" text="Scegli il tuo Avatar">
                             <styleClass>
-                                <String fx:value="medium-text" />
+                                <String fx:value="large-text" />
                                 <String fx:value="on-primary" />
                         <String fx:value="bold-text" />
                             </styleClass></Label>
                         <HBox fx:id="imageScroll1" alignment="CENTER" spacing="40" />
                         <HBox fx:id="imageScroll2" alignment="CENTER" spacing="40" />
                         <HBox fx:id="imageScroll3" alignment="CENTER" spacing="40" />
+                        <HBox fx:id="imageScroll4" alignment="CENTER" spacing="40" />
                     </children>
                     <HBox.margin>
                         <Insets />
@@ -122,6 +122,9 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <padding>
+                  <Insets bottom="50.0" />
+               </padding>
                 </VBox>
             </children>
             <VBox.margin>
@@ -129,9 +132,17 @@
             </VBox.margin>
             <styleClass>
                 <String fx:value="very-large-item" />
-                <String fx:value="surface-gradient" />
+                <String fx:value="surface-opaque" />
             </styleClass>
          <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
             <ColumnConstraints />
